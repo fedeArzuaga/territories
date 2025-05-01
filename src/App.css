@@ -20,7 +20,7 @@ html {
 }
 
 .leaflet-popup {
-    min-width: 200px;
+    min-width: 300px;
 }
 
 @media screen and (min-width: 960px) {
@@ -60,12 +60,6 @@ html {
     top: 10px !important;
     right: 10px !important;
     font-size: 1rem !important;
-}
-
-@media screen and (min-width: 1200px) {
-    .leaflet-popup {
-        min-width: 400px;
-    }
 }
 
 .loader-block {
