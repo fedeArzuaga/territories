@@ -1,0 +1,87 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+html {
+    font-family: "Noto Sans", serif;
+    font-size: 20px;
+}
+
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+
+#root {
+    position: relative;
+}
+
+.leaflet-container {
+    height: 100vh;
+    font-family: "Noto Sans", serif;
+}
+
+.leaflet-popup {
+    min-width: 400px;
+}
+
+.leaflet-popup-content {
+    width: 100% !important;
+    margin: 0;
+    padding: 20px;
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    h3 + p {
+        margin-top: 5px;
+        font-weight: 700;
+        color: #888;
+        font-size: 0.8rem;
+    }
+
+    .tm-polygon-details {
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .tm-polygon-details > li {
+        font-size: 0.8rem;
+    }
+
+}
+
+.leaflet-container .leaflet-popup-close-button {
+    top: 10px !important;
+    right: 10px !important;
+    font-size: 1rem !important;
+}
+
+@media screen and (min-width: 1200px) {
+    .leaflet-popup {
+        min-width: 400px;
+    }
+}
+
+.loader-block {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255,255,255,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+}
+
+@media screen and (min-width: 720px) {
+    .tm-ml-1 {
+        margin-left: 1rem;
+    }
+
+    .tm-mr-1 {
+        margin-right: 1rem;
+    }
+}
