@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 
 import 'leaflet/dist/leaflet.css'
 import { Loader } from "./components/Loader/Loader"
+import { setZoomBasedOnScreenWidth } from "./utils/setZoomBasedOnScreenWidth"
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
     return (
         <>  
             <div style={{height: 536}}>
-                <MapContainer center={[-34.815597, -56.304091]} zoom={14} scrollWheelZoom={true}>
+                <MapContainer center={[-34.815597, -56.304091]} zoom={ setZoomBasedOnScreenWidth() } scrollWheelZoom={true}>
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
