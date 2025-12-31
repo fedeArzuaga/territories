@@ -1,26 +1,111 @@
 @import "tailwindcss";
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+    --background: #eee;
+    --foreground: #171717;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --font-sans: var(--font-nunito-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* TODO: Implement Dark Mode in the near future */
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+} */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12px
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
   }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-nunito-sans) !important;
+}
+
+#main-map-container {
+    .leaflet-container {
+        font-family: var(--font-nunito-sans) !important;
+    }
+
+    .leaflet-popup-content-wrapper {
+        @apply w-[400px];
+    }
+
+    .leaflet-popup-content {
+        width: 100% !important;
+        margin: 0;
+        box-sizing: border-box;
+        @apply p-5
+    }
+
+    .leaflet-popup-content .tm-polygon-details li + li {
+      @apply mt-2
+    }
+
+    .leaflet-popup-content p {
+      @apply m-0
+    }
+
+    .leaflet-popup-content .tm-notes-title {
+      font-size: 1rem;
+    }
+
+    .leaflet-popup-content .tm-notes {
+      font-size: .8rem;
+    }
+
+    .leaflet-popup-content .tm-last-time-done {
+      font-size: 0.65rem;
+    }
+
+    .leaflet-container a.leaflet-popup-close-button {
+      width: auto;
+      height: auto;
+      font-size: 32px;
+      font-family: var(--font-sans);
+      color: #000;
+      margin-top: 1rem;
+      margin-right: 1rem;
+    }
+
+}
+
+#dashboard-sidebar {
+  #profile {
+    .tm-user-name {
+      font-size: .7rem;
+      @apply md:text-sm
+    }
+
+    .tm-user-role {
+      font-size: .6rem;
+      @apply md:text-xs
+    }
+  }
+}
+
+.tm-menu-item-icon svg {
+  @apply m-auto md:m-0
+}
+
+.tm-dashboard-link {
+  z-index: 9999999999999999;
 }

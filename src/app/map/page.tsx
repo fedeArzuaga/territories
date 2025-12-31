@@ -1,12 +1,23 @@
-
+import { Square } from "@/components/Square/Square";
+import { polygons } from "@/data/polygons";
+import { PolygonData } from "@/types/polygon";
 
 export const metadata = {
- title: 'Mapa del territorio',
- description: 'Este es el mapa del territorio de la congregación Los Bulevares',
-};
+    title: 'Mapa del territorio',
+    description: 'Este es el mapa del territorio de la congregación Los Bulevares',
+}
 
 export default function MapPage() {
     return (
-        <></>
+        <>
+            {
+                polygons.map( polygon => (
+                    <Square 
+                        key={`${polygon.territory}.${polygon.square}`}
+                        squareData={ polygon as PolygonData }
+                    />
+                ))
+            }
+        </>
     );
 }

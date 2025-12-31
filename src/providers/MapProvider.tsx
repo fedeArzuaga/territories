@@ -1,31 +1,34 @@
 'use client'
 
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
+
+// 1. Define the dynamic import at the top level
+const Map = dynamic(
+    () => import('../components/Map'),
+    {
+        loading: () => (
+            <div className="bg-gray-100 w-full h-screen flex items-center justify-center">
+                <p>A map is loading...</p>
+            </div>
+        ),
+        ssr: false
+    }
+);
 
 interface Props {
     children: React.ReactNode
 }
 
 export default function MapProvider({ children }: Props) {
-    const Map = useMemo(() => dynamic(
-        () => import('../components/Map'),
-        {
-            loading: () => <p>A map is loading</p>,
-            ssr: false
-        }
-    ), [])
-
+    // 2. Pass children directly as a prop or within the component tags
     return (
-        <>
-            <div className="bg-white-700 w-[100%] h-[100vh]">
-                <Map 
-                    posix={[-34.815597, -56.304091]} 
-                    zoom={ 14 }
-                >
-                    { children }
-                </Map>
-            </div>
-        </>
-    )
+        <div className="w-full h-screen">
+            <Map 
+                posix={[-34.815597, -56.304091]} 
+                zoom={14}
+            >
+                {children}
+            </Map>
+        </div>
+    );
 }

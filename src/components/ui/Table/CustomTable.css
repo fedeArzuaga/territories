@@ -1,0 +1,22 @@
+table tbody td:nth-child(2n) {
+  background-color: var(--color-gray-100)
+}
+
+@media (min-width: 768px) {
+  table {
+    display: inline-table !important;
+  }
+
+  table tbody td:nth-child(2n) {
+  background-color: initial
+}
+
+  table tbody tr:nth-child(2n) {
+    background-color: var(--color-gray-100)
+  }
+
+  thead tr:not(:first-child) {
+    display: none;
+  }
+}
+
