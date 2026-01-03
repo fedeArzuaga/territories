@@ -7,7 +7,8 @@ export interface PolygonData {
     started: string,
     finished: string,
     notes: string,
-    state: "Pendiente" | "En progreso" | "Completado",
+    state: string,
+    lastLeader: string,
     coordinates: number[][]
 }
 

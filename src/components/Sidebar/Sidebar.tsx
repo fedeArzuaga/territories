@@ -1,5 +1,5 @@
-import { FaMapMarkedAlt } from "react-icons/fa";
-import { FaUsers, FaHome } from "react-icons/fa";
+import { FaMapMarkedAlt, FaUser } from "react-icons/fa";
+import { FaListCheck } from "react-icons/fa6";
 import { TbLayoutDashboardFilled } from "react-icons/tb";
 import { FaArrowRightFromBracket } from "react-icons/fa6";
 
@@ -16,22 +16,22 @@ const menuItems: MenuItems[] = [
     {
         path: '/dashboard/territories',
         label: 'Territorios',
-        icon: <FaMapMarkedAlt size={ 25 } />
+        icon: <FaListCheck size={ 25 } />
     },
     {
-        path: '/dashboard/users',
-        label: 'Usuarios',
-        icon: <FaUsers size={ 25 } />
-    },
-    {
-        path: '/map',
-        label: 'Ver mapa del territorio',
-        icon: <FaHome size={ 25 } />
+        path: '/dashboard/user-profile',
+        label: 'Mi usuario',
+        icon: <FaUser size={ 25 } />
     },
     {
         path: '/auth/signout',
         label: 'Cerrar sesión',
         icon: <FaArrowRightFromBracket size={ 25 } />
+    },
+    {
+        path: '/map',
+        label: 'Ver mapa del territorio',
+        icon: <FaMapMarkedAlt size={ 25 } />
     }
 ]
 
@@ -39,7 +39,7 @@ export const Sidebar = () => {
     return (
         <div 
             id="dashboard-sidebar"
-            className="md:h-full w-full"
+            className="md:h-screen w-full"
         >
             <div
                 id="sidebar"

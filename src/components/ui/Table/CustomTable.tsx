@@ -2,25 +2,25 @@
 import Link from 'next/link'
 import { BiSolidEdit } from "react-icons/bi";
 
-import { State } from '@/types/polygon'
+import { PolygonData, State } from '@/types/polygon'
 import { SimpleTerritoryState } from '@/types/simpleTerritoryStats'
 import './CustomTable.css'
 
 interface Props {
-    territoryState: SimpleTerritoryState[]
+    territoryState: PolygonData[]
 }
 
 export const CustomTable = ({ territoryState }: Props) => {
     return (
-        <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden m-0">
+        <table className="w-full flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden m-0 tm-custom-table">
             <thead className="text-white">
                 {
                     territoryState.map( territory => (
                         <tr 
                             key={ crypto.randomUUID() } 
-                            className="bg-teal-400 flex flex-col flex-no wrap md:table-row rounded-l-lg md:rounded-none mb-2 md:mb-0"
+                            className="bg-teal-400 flex flex-col flex-no wrap md:table-row rounded-l-lg md:rounded-none mb-6 md:mb-0"
                         >
-                            <th className="p-3 text-left">Territorio:</th>
+                            <th className="p-3 text-left flex items-center md:table-cell">Territorio:</th>
                             <th className="p-3 text-left" >Estado:</th>
                             <th className="p-3 text-left">Último conductor:</th>
                             <th className="p-3 text-left">Comenzó - Finalizó</th>
@@ -34,7 +34,7 @@ export const CustomTable = ({ territoryState }: Props) => {
                     territoryState.map( ({ territory, square, state, lastLeader, started, finished }) => (
                         <tr 
                             key={ crypto.randomUUID() } 
-                            className="flex flex-col flex-no wrap md:table-row mb-2 md:mb-0"
+                            className="flex flex-col flex-no wrap md:table-row rounded-r-lg md:rounded-none mb-6 md:mb-0"
                         >
                             <td className="p-3">
                                 Territorio N°: { territory }<br />
