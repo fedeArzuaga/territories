@@ -45,5 +45,14 @@ export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
         lastLeader: 'Natalie Rodríguez',
         started: '20/12/2023',
         finished: 'En progreso'
+    },
+    {
+        id: 't:19-s:4',
+        territory: 19,
+        square: 4,
+        state: 'Completado',
+        lastLeader: 'Gerardo Rodríguez',
+        started: '20/12/2023',
+        finished: '05/01/2024'
     }
 ];

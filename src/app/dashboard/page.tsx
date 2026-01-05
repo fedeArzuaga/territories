@@ -1,7 +1,12 @@
-import { CustomTable } from "@/components/ui/Table/CustomTable";
+import { Badge } from "@/components/ui/Badge/Badge";
+import { Button } from "@/components/ui/Button/Button";
+import { CustomCard } from "@/components/ui/Card/CustomCard";
+import { CustomGrid } from "@/components/ui/CustomGrid/CustomGrid";
 import { Widget } from "@/components/Widget/Widget";
 import { MOCK_TERRITORY_DATA } from "@/data/MockSimpleTerritoryData";
 import { PolygonData } from "@/types/polygon";
+import { BiSolidEdit } from "react-icons/bi";
+import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
 
 export default function DashboardPage() {
     return (
@@ -13,7 +18,7 @@ export default function DashboardPage() {
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                     <Widget
-                        title="Último territorio trabajado:"
+                        title="Último territorio completado:"
                         type="primary"
                     >
                         <p className="text-xl font-bold">
@@ -40,9 +45,33 @@ export default function DashboardPage() {
                         title="Territorios más frecuentes:"
                         type="default"
                     >
-                        <CustomTable
-                            territoryState={ MOCK_TERRITORY_DATA }
-                        />
+                        <CustomGrid
+                            cssClasses="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6"
+                        >
+                            {
+                                MOCK_TERRITORY_DATA.map( ({ 
+                                    id,
+                                    territory,
+                                    square,
+                                    state,
+                                    lastLeader,
+                                    started,
+                                    finished 
+                                }) => (
+                                    <CustomCard key={ id }>
+                                        <TerritoryCardDetails
+                                            territory={territory}
+                                            square={square}
+                                            state={state}
+                                            lastLeader={lastLeader}
+                                            started={started}
+                                            finished={finished}
+                                            id={id}
+                                        />
+                                    </CustomCard>
+                                ))
+                            }
+                        </CustomGrid>
                     </Widget>
                 </div>
             </div>
