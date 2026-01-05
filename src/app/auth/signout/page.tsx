@@ -1,6 +1,5 @@
 import { redirect } from "next/navigation";
 
-export default function TerritoriesApp() {
+export default function SignOutPage() {
     redirect('/auth/signin')
-    return <></>
 }

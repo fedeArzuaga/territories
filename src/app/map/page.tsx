@@ -13,7 +13,7 @@ export default function MapPage() {
             {
                 polygons.map( polygon => (
                     <Square 
-                        key={`${polygon.territory}.${polygon.square}`}
+                        key={ `${polygon.id}` }
                         squareData={ polygon as PolygonData }
                     />
                 ))

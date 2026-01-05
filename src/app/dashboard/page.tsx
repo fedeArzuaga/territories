@@ -1,6 +1,7 @@
 import { CustomTable } from "@/components/ui/Table/CustomTable";
 import { Widget } from "@/components/Widget/Widget";
 import { MOCK_TERRITORY_DATA } from "@/data/MockSimpleTerritoryData";
+import { PolygonData } from "@/types/polygon";
 
 export default function DashboardPage() {
     return (

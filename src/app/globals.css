@@ -46,7 +46,7 @@ body {
     }
 
     .leaflet-popup-content-wrapper {
-        @apply w-[400px];
+        @apply w-[340px] md:w-[400px];
     }
 
     .leaflet-popup-content {
@@ -108,4 +108,13 @@ body {
 
 .tm-dashboard-link {
   z-index: 9999999999999999;
+}
+
+a.link {
+  text-decoration: underline !important;
+  color: inherit;
+}
+
+button {
+  @apply px-5 py-3 rounded-lg font-bold text-white bg-teal-600 hover:bg-teal-700 cursor-pointer
 }

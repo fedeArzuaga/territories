@@ -7,7 +7,7 @@ import { SimpleTerritoryState } from '@/types/simpleTerritoryStats'
 import './CustomTable.css'
 
 interface Props {
-    territoryState: PolygonData[]
+    territoryState: PolygonData[] | SimpleTerritoryState[]
 }
 
 export const CustomTable = ({ territoryState }: Props) => {
@@ -17,13 +17,13 @@ export const CustomTable = ({ territoryState }: Props) => {
                 {
                     territoryState.map( territory => (
                         <tr 
-                            key={ crypto.randomUUID() } 
+                            key={ territory.id } 
                             className="bg-teal-400 flex flex-col flex-no wrap md:table-row rounded-l-lg md:rounded-none mb-6 md:mb-0"
                         >
-                            <th className="p-3 text-left flex items-center md:table-cell">Territorio:</th>
+                            <th className="p-3 text-left flex items-center md:table-cell">Territorio:<br className='md:hidden' /></th>
                             <th className="p-3 text-left" >Estado:</th>
                             <th className="p-3 text-left">Último conductor:</th>
-                            <th className="p-3 text-left">Comenzó - Finalizó</th>
+                            <th className="p-3 text-left hidden sm:table-cell">Comenzó - Finalizó</th>
                             <th className="p-3 text-center">Editar</th>
                         </tr>
                     ))
@@ -31,9 +31,9 @@ export const CustomTable = ({ territoryState }: Props) => {
             </thead>
             <tbody className="flex-1 md:flex-none">
                 {
-                    territoryState.map( ({ territory, square, state, lastLeader, started, finished }) => (
+                    territoryState.map( ({ id, territory, square, state, lastLeader, started, finished }) => (
                         <tr 
-                            key={ crypto.randomUUID() } 
+                            key={ id }
                             className="flex flex-col flex-no wrap md:table-row rounded-r-lg md:rounded-none mb-6 md:mb-0"
                         >
                             <td className="p-3">
@@ -42,7 +42,7 @@ export const CustomTable = ({ territoryState }: Props) => {
                             </td>
                             <td className="p-3 truncate">{ state }</td>
                             <td className="p-3 truncate">{ lastLeader }</td>
-                            <td className="p-3 truncate">
+                            <td className="p-3 truncate hidden sm:table-cell">
                                 { 
                                     ( state === 'Completado' ) 
                                         ? `${started} - ${finished}` 
@@ -53,7 +53,7 @@ export const CustomTable = ({ territoryState }: Props) => {
                             </td>
                             <td className="p-3 truncate">
                                 <Link
-                                    href='/dashboard/territories'
+                                    href={`/dashboard/territories/${ id }`}
                                     className="flex justify-center"
                                 >
                                     <BiSolidEdit size={25} className='hover:text-teal-500' />

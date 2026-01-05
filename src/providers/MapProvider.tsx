@@ -20,12 +20,12 @@ interface Props {
 }
 
 export default function MapProvider({ children }: Props) {
-    // 2. Pass children directly as a prop or within the component tags
+    // 2. Pass children directly as a prop or within the component tags )
     return (
         <div className="w-full h-screen">
             <Map 
                 posix={[-34.815597, -56.304091]} 
-                zoom={14}
+                zoom={12}
             >
                 {children}
             </Map>

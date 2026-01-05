@@ -2,6 +2,7 @@ import { SimpleTerritoryState } from "@/types/simpleTerritoryStats";
 
 export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
     {
+        id: 't:14-s:2',
         territory: 14,
         square: 2,
         state: 'En progreso',
@@ -10,6 +11,7 @@ export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
         finished: 'En progreso'
     },
     {
+        id: 't:3-s:2',
         territory: 3,
         square: 2,
         state: 'Completado',
@@ -18,6 +20,7 @@ export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
         finished: '20/11/2023'
     },
     {
+        id: 't:38-s:2',
         territory: 38,
         square: 2,
         state: 'Pendiente',
@@ -26,6 +29,7 @@ export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
         finished: '15/02/2024'
     },
     {
+        id: 't:32-s:2',
         territory: 22,
         square: 2,
         state: 'Completado',
@@ -34,6 +38,7 @@ export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
         finished: '30/10/2023'
     },
     {
+        id: 't:9-s:2',
         territory: 9,
         square: 2,
         state: 'En progreso',

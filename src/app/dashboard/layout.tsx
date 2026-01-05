@@ -15,7 +15,7 @@ export default function DashboardLayout({
                 <div className="fixed left-0 md:left-[89px] lg:left-[300px] top-0 right-0">
                     <Topbar />
                 </div>
-                <div className="p-6 pb-[73px] md:p-8 ml-0 md:ml-[89px] lg:ml-[300px] mt-[54px] md:mt-[72px]">
+                <div className="p-6 pb-[90px] mt-[72px] md:p-8 ml-0 md:ml-[89px] lg:ml-[300px]">
                     { children }
                 </div>
             </div>

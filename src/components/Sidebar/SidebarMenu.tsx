@@ -21,7 +21,9 @@ export const SidebarMenu = ({ menuItems }: Props) => {
                         href={ item.path }
                         className={`
                             text-sm font-medium 
-                            ${ item.path === pathname ? 'bg-teal-500 hover:bg-teal-600 text-white' : 'text-gray-700 hover:bg-teal-500 hover:text-white' }
+                            ${ ( item.path === pathname || ( pathname.startsWith(item.path) && item.path !== '/dashboard' ) )
+                                ? 'bg-teal-500 hover:bg-teal-600 text-white' 
+                                : 'text-gray-700 hover:bg-teal-500 hover:text-white' }
                             p-3 rounded-md transition duration-150 ease-in-out
                         `}
                     >

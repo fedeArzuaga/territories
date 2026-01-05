@@ -1,6 +1,7 @@
 
 
 export interface PolygonData {
+    id: string,
     territory: number,
     square: number,
     color: string,
