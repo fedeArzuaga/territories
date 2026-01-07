@@ -4,7 +4,7 @@ import type { SquareData } from "@/types/polygon"
 import { LatLngExpression } from "leaflet"
 import { Polygon, Popup, SVGOverlay } from "react-leaflet"
 import { CustomPopUp } from "../CustomPopUp/CustomPopUp"
-import { getTerritoryBasedOnSquareId } from "@/app/helpers/getTerritoryBasedOnSquareId"
+import { getTerritoryBasedOnSquareId } from "@/helpers/getTerritoryBasedOnSquareId"
 
 interface Props {
     squareData: SquareData
