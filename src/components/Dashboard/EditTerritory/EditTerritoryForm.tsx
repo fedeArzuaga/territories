@@ -43,8 +43,6 @@ export const EditTerritoryForm = () => {
         notes 
     } = form;
 
-    console.log(form)
-
     const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm(prev => ({
             ...prev,
@@ -174,9 +172,9 @@ export const EditTerritoryForm = () => {
                                 </div>
                             </div>
                             
-                            <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                            <div className={`grid grid-cols-1 ${ squareStates.length > 1 && 'xl:grid-cols-2' } gap-4`}>
                                 {squareStates.map(({ square, state }) => (
-                                    <div key={square} className="flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center p-4 border rounded-xl bg-white shadow-sm hover:border-teal-200 transition-colors">
+                                    <div key={square} className="flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between items-center p-4 border rounded-xl bg-white shadow-sm transition-colors">
                                         <span className="font-bold text-gray-800">Manzana {square}</span>
                                         <div className="grid grid-cols-3 gap-2 shrink-0">
                                             <Button
@@ -196,7 +194,7 @@ export const EditTerritoryForm = () => {
                                             <Button
                                                 type="button"
                                                 onClickHandler={() => handleSquareStatusChange(square, "Completado")}
-                                                cssClasses={`py-2 px-3 text-xs min-w-[90px] ${state !== "Completado" ? 'bg-gray-100 text-gray-400 grayscale' : 'bg-green-400 text-white'}`}
+                                                cssClasses={`py-2 px-3 text-xs min-w-[90px] ${state !== "Completado" ? 'bg-gray-100 text-gray-400 grayscale' : 'bg-green-600 text-white'}`}
                                                 label={"Completado"}
                                                 style="success"
                                             />
