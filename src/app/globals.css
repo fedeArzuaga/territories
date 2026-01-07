@@ -1,0 +1,108 @@
+@import "tailwindcss";
+@tailwind utilities;
+
+/* TODO: Implement Dark Mode in the near future */
+/* @media (prefers-color-scheme: dark) {
+    :root {
+        --background: #0a0a0a;
+        --foreground: #ededed;
+    }
+} */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 12px
+}
+
+@media screen and (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+    font-family: var(--font-nunito-sans) !important;
+    background: #eee;
+}
+
+#main-map-container {
+    .leaflet-container {
+        font-family: var(--font-nunito-sans) !important;
+    }
+
+    .leaflet-popup-content-wrapper {
+        @apply w-[340px] md:w-[400px];
+    }
+
+    .leaflet-popup-content {
+        width: 100% !important;
+        margin: 0;
+        box-sizing: border-box;
+        @apply p-5
+    }
+
+    .leaflet-popup-content .tm-polygon-details li + li {
+      @apply mt-2
+    }
+
+    .leaflet-popup-content p {
+      @apply m-0
+    }
+
+    .leaflet-popup-content .tm-notes-title {
+      font-size: 1rem;
+    }
+
+    .leaflet-popup-content .tm-notes {
+      font-size: .8rem;
+    }
+
+    .leaflet-popup-content .tm-last-time-done {
+      font-size: 0.65rem;
+    }
+
+    .leaflet-container a.leaflet-popup-close-button {
+      width: auto;
+      height: auto;
+      font-size: 32px;
+      font-family: var(--font-sans);
+      color: #000;
+      margin-top: 1rem;
+      margin-right: 1rem;
+    }
+
+}
+
+#dashboard-sidebar {
+  #profile {
+    .tm-user-name {
+      font-size: .7rem;
+      @apply md:text-sm
+    }
+
+    .tm-user-role {
+      font-size: .6rem;
+      @apply md:text-xs
+    }
+  }
+}
+
+.tm-menu-item-icon svg {
+  @apply m-auto md:m-0
+}
+
+.tm-dashboard-link {
+  z-index: 9999999999999999;
+}
+
+a.link {
+  text-decoration: underline !important;
+  color: inherit;
+}
+
+/* button {
+  @apply px-5 py-3 rounded-lg font-bold text-white bg-teal-600 hover:bg-teal-700 cursor-pointer
+} */

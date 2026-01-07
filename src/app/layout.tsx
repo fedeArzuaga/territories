@@ -1,0 +1,32 @@
+import type { Metadata } from "next";
+import { Nunito_Sans } from "next/font/google";
+import "leaflet/dist/leaflet.css";
+import "./globals.css";
+
+const nunitoSans = Nunito_Sans({
+  variable: "--font-nunito-sans",
+  subsets: ["latin"],
+});
+
+export const metadata: Metadata = {
+  title: "Territorios Los Bulevares",
+  description: "App creada para administrar el estado de los territorios, ya sea su frecuencia de trabajado, cuándo fue la última vez que se trabajó, y demás datos relevantes.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html className={`${nunitoSans.variable}`} lang="es">
+      <body
+        className={`${nunitoSans.variable} antialiased`}
+      >
+        <div id="main-map-container">
+          {children}
+        </div>
+      </body>
+    </html>
+  );
+}
