@@ -2,12 +2,14 @@ import { CgNotes, CgTime } from "react-icons/cg"
 import { IoTimeOutline } from "react-icons/io5"
 
 interface Props {
-    state: string,
+    territoryState: string,
+    squareState: string,
+    started: string,
     finished: string,
     notes: string
 }
 
-export const CustomPopUpContent = ({ state, finished, notes }: Props) => {
+export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes }: Props) => {
     return (
         <>
             <div className="tm-polygon-details mt-3 grid grid-cols-2 gap-2">
@@ -16,7 +18,7 @@ export const CustomPopUpContent = ({ state, finished, notes }: Props) => {
                         <b>Estado</b>:
                     </p>
                     <p>
-                        { state }
+                        { squareState }
                     </p>
                 </div>
                 <div>
@@ -28,25 +30,25 @@ export const CustomPopUpContent = ({ state, finished, notes }: Props) => {
                     </p>
                 </div>
                 {
-                    (state === "En progreso" || state === "Completado") && (
+                    (territoryState === "En progreso" || territoryState === "Completado") && (
                         <div>
                             <p>
                                 <b>Se comenzó el</b>:
                             </p>
                             <p>
-                                10/05/2026
+                                { started }
                             </p>
                         </div>
                     )
                 }
                 {
-                    state === "Completado" && (
+                    (territoryState === "En progreso" || territoryState === "Completado") && (
                         <div>
                             <p>
                                 <b>Se finalizó el</b>:
                             </p>
                             <p>
-                                24/05/2026
+                                { finished ? finished : 'No finalizado' }
                             </p>
                         </div>
                     )

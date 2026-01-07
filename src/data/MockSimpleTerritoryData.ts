@@ -1,58 +1,65 @@
-import { SimpleTerritoryState } from "@/types/simpleTerritoryStats";
+import { TerritoriesData } from "@/types/polygon";
 
-export const MOCK_TERRITORY_DATA: SimpleTerritoryState[] = [
-    {
-        id: 't:14-s:2',
-        territory: 14,
-        square: 2,
-        state: 'En progreso',
-        lastLeader: 'Germán Demarco',
-        started: '12/01/2024',
-        finished: 'En progreso'
+
+export const MOCK_TERRITORY_DATA: TerritoriesData = {
+    11: {
+        id: 11,
+        name: "Territorio 11",
+        lastLeader: "Pablo Scigliano",
+        started: "08/09/2024",
+        finished: "17/09/2024",
+        territoryState: "Completado",
+        notes: "",
+        squareIds: ["t:11-s:1", "t:11-s:2", "t:11-s:3", "t:11-s:4"]
     },
-    {
-        id: 't:3-s:2',
-        territory: 3,
-        square: 2,
-        state: 'Completado',
-        lastLeader: 'Diego Demarco',
-        started: '05/11/2023',
-        finished: '20/11/2023'
+    12: {
+        id: 12,
+        name: "Territorio 12",
+        lastLeader: "Pablo Scigliano",
+        started: "10/05/2024",
+        finished: "25/05/2024",
+        territoryState: "Completado",
+        notes: "",
+        squareIds: ["t:12-s:1", "t:12-s:2", "t:12-s:3", "t:12-s:4"]
     },
-    {
-        id: 't:38-s:2',
-        territory: 38,
-        square: 2,
-        state: 'Pendiente',
-        lastLeader: 'Pablo Scigliano',
-        started: '01/02/2024',
-        finished: '15/02/2024'
+    13: {
+        id: 13,
+        name: "Territorio 13",
+        lastLeader: "Pablo Scigliano",
+        started: "",
+        finished: "",
+        territoryState: "Pendiente",
+        notes: "",
+        squareIds: ["t:13-s:1"]
     },
-    {
-        id: 't:32-s:2',
-        territory: 22,
-        square: 2,
-        state: 'Completado',
-        lastLeader: 'Ángel García',
-        started: '15/10/2023',
-        finished: '30/10/2023'
+    14: {
+        id: 14,
+        name: "Territorio 14",
+        lastLeader: "Pablo Scigliano",
+        started: "10/05/2024",
+        finished: "25/05/2024",
+        territoryState: "Completado",
+        notes: "",
+        squareIds: ["t:14-s:1"]
     },
-    {
-        id: 't:9-s:2',
-        territory: 9,
-        square: 2,
-        state: 'En progreso',
-        lastLeader: 'Natalie Rodríguez',
-        started: '20/12/2023',
-        finished: 'En progreso'
+    15: {
+        id: 15,
+        name: "Territorio 15",
+        lastLeader: "Pablo Scigliano",
+        started: "",
+        finished: "",
+        territoryState: "Pendiente",
+        notes: "",
+        squareIds: ["t:15-s:1"]
     },
-    {
-        id: 't:19-s:4',
-        territory: 19,
-        square: 4,
-        state: 'Completado',
-        lastLeader: 'Gerardo Rodríguez',
-        started: '20/12/2023',
-        finished: '05/01/2024'
-    }
-];
+    16: {
+        id: 16,
+        name: "Territorio 16",
+        lastLeader: "Pablo Scigliano",
+        started: "",
+        finished: "",
+        territoryState: "Pendiente",
+        notes: "",
+        squareIds: ["t:16-s:1"]
+    },
+};

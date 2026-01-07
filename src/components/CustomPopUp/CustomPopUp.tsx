@@ -1,34 +1,40 @@
-import { CustomPopUpForm } from './CustomPopUpForm'
 import { CustomPopUpContent } from './CustomPopUpContent'
+import { Badge } from '../ui/Badge/Badge'
 
 interface Props {
     territory: number,
     square: number,
-    state: string,
+    squareState: string,
+    territoryState: string,
+    started: string,
     finished: string,
     notes: string,
-    editMode: boolean
 }
 
 export const CustomPopUp = ({ 
     territory, 
     square, 
-    state, 
+    squareState,
+    territoryState,
+    started,
     finished, 
-    notes, 
-    editMode,
+    notes
 }: Props) => {
+
+    const badgeType = territoryState === "Pendiente" ? "danger" : territoryState === "En progreso" ? "warning" : "success"
 
     return (
         <div>
-            <h3 className="text-2xl font-bold mb-0">
-                Territorio N°{ territory }
+            <h3 className="text-2xl font-bold mb-0 flex items-center">
+                Territorio N°{ territory } -&nbsp;<Badge type={ badgeType } text={ territoryState } />
             </h3>
             <p className="text-gray-400 font-bold mt-0!">
                 Manzana N°{ square }
             </p>
             <CustomPopUpContent
-                state={ state }
+                territoryState={ territoryState }
+                squareState={ squareState }
+                started={ started }
                 finished={ finished }
                 notes={ notes }
             />

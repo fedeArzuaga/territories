@@ -1,11 +1,7 @@
-import { Badge } from "@/components/ui/Badge/Badge";
-import { Button } from "@/components/ui/Button/Button";
 import { CustomCard } from "@/components/ui/Card/CustomCard";
 import { CustomGrid } from "@/components/ui/CustomGrid/CustomGrid";
 import { Widget } from "@/components/Widget/Widget";
 import { MOCK_TERRITORY_DATA } from "@/data/MockSimpleTerritoryData";
-import { PolygonData } from "@/types/polygon";
-import { BiSolidEdit } from "react-icons/bi";
 import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
 
 export default function DashboardPage() {
@@ -49,24 +45,10 @@ export default function DashboardPage() {
                             cssClasses="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6"
                         >
                             {
-                                MOCK_TERRITORY_DATA.map( ({ 
-                                    id,
-                                    territory,
-                                    square,
-                                    state,
-                                    lastLeader,
-                                    started,
-                                    finished 
-                                }) => (
-                                    <CustomCard key={ id }>
+                                Object.keys(MOCK_TERRITORY_DATA).map( territoryId => (
+                                    <CustomCard key={ territoryId }>
                                         <TerritoryCardDetails
-                                            territory={territory}
-                                            square={square}
-                                            state={state}
-                                            lastLeader={lastLeader}
-                                            started={started}
-                                            finished={finished}
-                                            id={id}
+                                            territoryId={ territoryId }
                                         />
                                     </CustomCard>
                                 ))

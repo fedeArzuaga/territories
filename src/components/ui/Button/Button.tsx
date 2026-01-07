@@ -3,7 +3,8 @@ import React, { MouseEvent } from 'react'
 
 interface Props {
     label: string,
-    type: "primary" | "dark"
+    type?: "button" | "submit"
+    style: "primary" | "dark" | "danger" | "warning" | "success"
     icon?: React.ReactNode,
     cssClasses?: string,
     action?: "link" | "button",
@@ -11,17 +12,21 @@ interface Props {
     onClickHandler?: ( event:MouseEvent<HTMLButtonElement> ) => void,
 }
 
-export const Button = ({ label, icon, type, action = "button", href, cssClasses = "", onClickHandler }: Props) => {
+export const Button = ({ label, type = "button", icon, style, action = "button", href, cssClasses = "", onClickHandler }: Props) => {
     return (
         <>
             {
                 action === "button" && (
                     <button
                         onClick={ onClickHandler }
+                        type={ type }
                         className={`
-                            p-3 rounded-lg font-bold cursor-pointer
-                            ${ !cssClasses && type === "primary" && 'text-white bg-teal-600 hover:bg-teal-700' }
-                            ${ !cssClasses && type === "dark" && 'text-white bg-gray-800 hover:bg-gray-900' }
+                            p-2 rounded-lg font-bold cursor-pointer
+                            ${ (!cssClasses && style === "primary") ? 'text-white bg-teal-600 hover:bg-teal-700' : '' }
+                            ${ (!cssClasses && style === "dark") ? 'text-white bg-gray-800 hover:bg-gray-900' : '' }
+                            ${ (!cssClasses && style === "danger") ? 'text-white bg-red-400 hover:bg-red-500' : '' }
+                            ${ (!cssClasses && style === "warning") ? 'text-white bg-amber-500 hover:bg-amber-600' : '' }
+                            ${ (!cssClasses && style === "success") ? 'text-white bg-green-600 hover:bg-green-700' : '' }
                             ${ cssClasses }   
                         `}
                     >
@@ -37,8 +42,8 @@ export const Button = ({ label, icon, type, action = "button", href, cssClasses 
                         href={ href ?? '/' }
                         className={`
                             p-3 rounded-lg font-bold cursor-pointer
-                            ${ !cssClasses && type === "primary" && 'text-white bg-teal-600 hover:bg-teal-700' }
-                            ${ !cssClasses && type === "dark" && 'text-white bg-gray-800 hover:bg-gray-900' }
+                            ${ !cssClasses && style === "primary" && 'text-white bg-teal-600 hover:bg-teal-700' }
+                            ${ !cssClasses && style === "dark" && 'text-white bg-gray-800 hover:bg-gray-900' }
                             ${ cssClasses }   
                         `}
                     >

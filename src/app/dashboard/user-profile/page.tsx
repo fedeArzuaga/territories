@@ -5,6 +5,7 @@ import { Widget } from "@/components/Widget/Widget";
 import { IoCameraOutline } from "react-icons/io5";
 import Image from "next/image";
 import { FaEye } from "react-icons/fa";
+import { IoIosSave } from "react-icons/io";
 
 export default function UserProfilePage() {
     // Estado local para los campos editables
@@ -92,9 +93,9 @@ export default function UserProfilePage() {
                             <div className="pt-2">
                                 <button
                                     type="submit"
-                                    className="bg-teal-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-teal-700 transition-colors cursor-pointer"
+                                    className="bg-teal-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-teal-700 transition-colors cursor-pointer flex"
                                 >
-                                    Guardar Cambios
+                                    <IoIosSave size={ 25 } className="mr-2" /> Guardar Cambios
                                 </button>
                             </div>
                         </form>

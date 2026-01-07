@@ -1,17 +1,6 @@
 @import "tailwindcss";
 @tailwind utilities;
 
-:root {
-    --background: #eee;
-    --foreground: #171717;
-}
-
-@theme inline {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --font-sans: var(--font-nunito-sans);
-}
-
 /* TODO: Implement Dark Mode in the near future */
 /* @media (prefers-color-scheme: dark) {
     :root {
@@ -35,9 +24,8 @@ html {
 }
 
 body {
-    background: var(--background);
-    color: var(--foreground);
     font-family: var(--font-nunito-sans) !important;
+    background: #eee;
 }
 
 #main-map-container {
@@ -115,6 +103,6 @@ a.link {
   color: inherit;
 }
 
-button {
+/* button {
   @apply px-5 py-3 rounded-lg font-bold text-white bg-teal-600 hover:bg-teal-700 cursor-pointer
-}
+} */

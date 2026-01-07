@@ -14,7 +14,6 @@ export const getDocById = async ( id, setData ) => {
                 data: docSnap.data()
             }
         }
-        console.log( current )
     }) )
 
 }

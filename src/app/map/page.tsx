@@ -1,6 +1,5 @@
 import { Square } from "@/components/Square/Square";
-import { polygons } from "@/data/polygons";
-import { PolygonData } from "@/types/polygon";
+import { squaresData } from "@/data/polygons";
 
 export const metadata = {
     title: 'Mapa del territorio',
@@ -11,10 +10,10 @@ export default function MapPage() {
     return (
         <>
             {
-                polygons.map( polygon => (
+                Object.keys(squaresData).map( squareId => (
                     <Square 
-                        key={ `${polygon.id}` }
-                        squareData={ polygon as PolygonData }
+                        key={ squaresData[squareId].id }
+                        squareData={ squaresData[squareId] }
                     />
                 ))
             }

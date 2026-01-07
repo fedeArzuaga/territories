@@ -9,7 +9,7 @@ export const CancelTerritoryEditionButton = () => {
     return (
         <Button
             label="Cancelar"
-            type="dark"
+            style="dark"
             icon={ <MdCancel size={ 25 } className="mr-2" /> }
             onClickHandler={ () => redirect('/dashboard/territories') }
         />

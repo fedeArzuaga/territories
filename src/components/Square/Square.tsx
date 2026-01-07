@@ -1,32 +1,33 @@
 'use client'
 
-import type { PolygonData } from "@/types/polygon"
-import { LatLngBoundsExpression, LatLngExpression } from "leaflet"
+import type { SquareData } from "@/types/polygon"
+import { LatLngExpression } from "leaflet"
 import { Polygon, Popup, SVGOverlay } from "react-leaflet"
 import { CustomPopUp } from "../CustomPopUp/CustomPopUp"
-import { CustomPopUpTopbar } from "../CustomPopUp/CustomPopUpTopbar"
+import { getTerritoryBasedOnSquareId } from "@/app/helpers/getTerritoryBasedOnSquareId"
 
 interface Props {
-    squareData: PolygonData
+    squareData: SquareData
 }
 
 export const Square = ({ squareData }: Props) => {
 
-    const {  
+    const {
+        id,
         coordinates,
         territory,
         square,
-        state,
-        finished,
-        notes
+        state: squareState,
     } = squareData
 
-    const colorFromState = state === 'Pendiente' ? 'red' : state === 'Completado' ? 'green' : 'yellow'
+    const { started, finished, notes, territoryState } = getTerritoryBasedOnSquareId( id )
+
+    const colorFromState = squareState === 'Pendiente' ? 'red' : squareState === 'Completado' ? 'green' : 'yellow'
 
     return (
         <Polygon pathOptions={{ color: colorFromState }} positions={ coordinates as LatLngExpression[] }>
         
-            <SVGOverlay attributes={{ stroke: 'black' }} bounds={ coordinates as LatLngBoundsExpression }>
+            <SVGOverlay attributes={{ stroke: 'black' }} bounds={ coordinates }>
                 { territory }
             </SVGOverlay>
 
@@ -34,10 +35,11 @@ export const Square = ({ squareData }: Props) => {
                 <CustomPopUp
                     territory={ territory }
                     square={ square }
-                    state={ state }
+                    squareState={ squareState }
+                    territoryState={ territoryState }
+                    started={ started }
                     finished={ finished }
                     notes={ notes }
-                    editMode={ false }
                 />
             </Popup>
 
