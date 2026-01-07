@@ -28,7 +28,7 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
             <Button
                 label="imagen de referencia"
                 style="dark"
-                cssClasses="!p-0 bg-white !inline font-normal underline"
+                cssClasses="!p-0 bg-inherit !inline font-bold underline"
                 onClickHandler={ toggleModal }
             />
 
@@ -71,7 +71,7 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                             width={600}
                             height={600}
                             alt={`Imagen de referencia del territorio N° ${territoryID}`}
-                            className="max-w-[800px]"
+                            className="md:max-w-[800px]"
                         />
                     </div>
                 </div>
