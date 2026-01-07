@@ -1,7 +1,4 @@
 import './TopIcons.css'
-import { doc, setDoc } from 'firebase/firestore'
-import { db } from '../../firebase/firebase'
-import { getData } from '../../utils/getData';
 
 export const TopIcons = ({ editMode, toggleEditMode }) => {
     return (

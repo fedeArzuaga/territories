@@ -1,4 +1,3 @@
-import React from 'react'
 import { PopUpForm } from './PopUpForm/PopUpForm'
 import { PopUpContent } from './PopUpContent/PopUpContent'
 
