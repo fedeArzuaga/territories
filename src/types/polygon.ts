@@ -16,8 +16,8 @@ export interface SquaresData {
 
 export interface SquareData {
     id: string,
-    territory: number,
-    square: number,
+    territoryId: number,
+    squareNumber: number,
     state: string,
     coordinates: Cords[]
 }

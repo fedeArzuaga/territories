@@ -2,7 +2,6 @@ import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '../../../generated/client';
 import { NextResponse } from 'next/server'
 import { squaresData, territoriesData } from '@/data/polygons';
-import { parse } from 'path';
 const connectionString = `${process.env.DATABASE_URL}`
 
 const adapter = new PrismaPg({ connectionString })
@@ -15,9 +14,9 @@ const parseDate = (dateString: string | undefined | null) => {
     return isNaN(date.getTime()) ? null : date;
 };
 
+// Seed route to populate the database
 export async function GET(request: Request) { 
     try {
-
         // 1. Clean up existing data to avoid "Unique constraint" errors
         await prisma.square.deleteMany({});
         await prisma.territory.deleteMany({});
@@ -38,7 +37,7 @@ export async function GET(request: Request) {
                     squares: {
                         create: territory.squareIds.map(squareId => ({
                             id: String(squareId),
-                            squareNumber: squaresData[squareId].square,
+                            squareNumber: squaresData[squareId].squareNumber,
                             state: squaresData[squareId].state,
                         }))
                     }

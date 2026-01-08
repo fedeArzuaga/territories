@@ -2,21 +2,21 @@ import { BiSolidEdit } from 'react-icons/bi'
 
 import { Badge } from '@/components/ui/Badge/Badge'
 import { Button } from '@/components/ui/Button/Button'
-import { territoriesData } from '@/data/polygons'
+import { TerritoryDataWithSquares } from '@/types/territory'
 
 interface Props {
-    territoryId: string
+    territory: TerritoryDataWithSquares
 }
 
 export const TerritoryCardDetails = ({
-    territoryId
+    territory
 }: Props) => {
 
-    const { id, name, territoryState, lastLeader } = territoriesData[Number(territoryId)]
+    const { id, territoryState, lastLeaderName } = territory
 
     return (
         <>
-            <h4 className="text-2xl font-bold">{ name }</h4>
+            <h4 className="text-2xl font-bold">Territorio N° { id }</h4>
             <div className="mt-6">
                 <p className="mt-2">
                     <b className="mr-2">Estado:</b> 
@@ -26,7 +26,7 @@ export const TerritoryCardDetails = ({
                     />
                 </p>
                 <p className="mt-2">
-                    <b>Último conductor:</b> { lastLeader }
+                    <b>Último conductor:</b> { lastLeaderName }
                 </p>
             </div>
             <Button

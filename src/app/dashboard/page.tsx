@@ -3,8 +3,12 @@ import { CustomGrid } from "@/components/ui/CustomGrid/CustomGrid";
 import { Widget } from "@/components/Widget/Widget";
 import { MOCK_TERRITORY_DATA } from "@/data/MockSimpleTerritoryData";
 import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
+import { getAllTerritories } from "@/lib/services/getAllTerritories";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+
+    const territories = await getAllTerritories({ limit: 6 });
+
     return (
         <div>
             <h1 className="text-5xl font-bold mb-8">
@@ -45,10 +49,10 @@ export default function DashboardPage() {
                             cssClasses="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6"
                         >
                             {
-                                Object.keys(MOCK_TERRITORY_DATA).map( territoryId => (
-                                    <CustomCard key={ territoryId }>
+                                territories.map( territory => (
+                                    <CustomCard key={ territory.id }>
                                         <TerritoryCardDetails
-                                            territoryId={ territoryId }
+                                            territory={ territory }
                                         />
                                     </CustomCard>
                                 ))

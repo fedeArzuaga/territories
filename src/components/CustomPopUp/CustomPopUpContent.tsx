@@ -4,9 +4,9 @@ import { IoTimeOutline } from "react-icons/io5"
 interface Props {
     territoryState: string,
     squareState: string,
-    started: string,
-    finished: string,
-    notes: string
+    started: Date | null,
+    finished: Date | null,
+    notes: string | null
 }
 
 export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes }: Props) => {
@@ -36,7 +36,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 <b>Se comenzó el</b>:
                             </p>
                             <p>
-                                { started }
+                                { started ? new Date(started).toLocaleDateString() : 'No iniciado' }
                             </p>
                         </div>
                     )
@@ -48,7 +48,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 <b>Se finalizó el</b>:
                             </p>
                             <p>
-                                { finished ? finished : 'No finalizado' }
+                                { finished ? new Date(finished).toLocaleDateString() : 'No finalizado' }
                             </p>
                         </div>
                     )

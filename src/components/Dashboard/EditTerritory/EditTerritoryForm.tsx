@@ -23,7 +23,7 @@ export const EditTerritoryForm = () => {
 
     const data = territoriesData[Number(id)];
     const squares = data.squareIds.map( squareId => squaresData[squareId] )
-    const squaresState = squares.map( square => ({ square: square.square ,state: square.state }) )
+    const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
 
     const [squareStates, setSquareStates] = useState( squaresState )
 

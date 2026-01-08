@@ -3,7 +3,9 @@ import { Widget } from "@/components/Widget/Widget";
 import { EditTerritoryForm } from "@/components/Dashboard/EditTerritory/EditTerritoryForm";
 import { CancelTerritoryEditionButton } from "@/components/Dashboard/EditTerritory/CancelTerritoryEditionButton";
 
-export default function EditTerritoryPage() {
+export default async function EditTerritoryPage({ params }:{ params: { id: number } }) {
+
+    const { id } = await params;
 
     return (
         <div className="w-full">
