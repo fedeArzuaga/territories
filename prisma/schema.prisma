@@ -1,0 +1,60 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client"
+    output   = "../src/generated"
+}
+
+datasource db {
+    provider = "postgresql"
+}
+
+model User {
+    id                String      @id @default(uuid())
+    name              String
+    email             String      @unique
+    password          String
+    profilePictureUrl String?
+    phone             String?
+    roles             String[]    @default(["user"])
+    
+    // Relation: Track which registered users are managing/watching which territories
+    // This is now optional and separate from the "Conductor" name
+    managedTerritories Territory[] @relation("TerritoryManager")
+    createdAt         DateTime    @default(now())
+    updatedAt         DateTime    @updatedAt
+}
+
+model Territory {
+    id             Int       @id @default(autoincrement())
+    territoryState String    @default("Pendiente")
+    
+    // This field now stores the name directly (e.g., "Pablo Scigliano")
+    // as seen in your current form logic.
+    lastLeaderName String?   
+    notes          String?   @db.Text
+    started        DateTime?
+    finished       DateTime?
+
+    // Optional: Keep track of which registered system user is responsible 
+    // for this territory's data entry.
+    managerId      String?
+    manager        User?     @relation("TerritoryManager", fields: [managerId], references: [id])
+
+    // Relation: A territory consists of multiple squares (Manzanas)
+    squares        Square[]
+    updatedAt      DateTime  @updatedAt
+}
+
+model Square {
+    id           String       @id
+    squareNumber Int       
+    state        String    @default("Pendiente")
+    territoryId  Int
+    territory    Territory @relation(fields: [territoryId], references: [id], onDelete: Cascade)
+    updatedAt    DateTime  @updatedAt
+}
