@@ -1,19 +1,24 @@
 import { Square } from "@/components/Square/Square";
 import { squaresData } from "@/data/polygons";
+import { getAllSquares } from "@/lib/services/getAllSquares";
 
 export const metadata = {
     title: 'Mapa del territorio',
     description: 'Este es el mapa del territorio de la congregación Los Bulevares',
 }
 
-export default function MapPage() {
+export default async function MapPage() {
+
+    const squares = await getAllSquares()
+    console.log( squares )
+
     return (
         <>
             {
-                Object.keys(squaresData).map( squareId => (
+                squares.map( square => (
                     <Square 
-                        key={ squaresData[squareId].id }
-                        squareData={ squaresData[squareId] }
+                        key={ square.id }
+                        squareData={ square }
                     />
                 ))
             }
