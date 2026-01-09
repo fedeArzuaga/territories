@@ -51,7 +51,17 @@ export const Square = ({ squareData }: Props) => {
         <Polygon pathOptions={{ color: colorFromState }} positions={ coordinates as LatLngExpression[] }>
         
             <SVGOverlay attributes={{ stroke: 'black' }} bounds={ coordinates }>
-                { territoryId }
+                <text
+                    x="50%" 
+                    y="50%" 
+                    textAnchor="middle" 
+                    dominantBaseline="middle" 
+                    fill="black"
+                    fontSize="16"
+                    style={{ pointerEvents: 'none' }}
+                >
+                    T:{ territoryId } - M:{ squareNumber }
+                </text>
             </SVGOverlay>
 
             <Popup >

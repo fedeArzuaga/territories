@@ -10,6 +10,9 @@ interface Props {
 }
 
 export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes }: Props) => {
+
+    console.log( notes )
+    
     return (
         <>
             <div className="tm-polygon-details mt-3 grid grid-cols-2 gap-2">
@@ -56,7 +59,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
             </div>
             {
                 notes && (
-                    <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3">
+                    <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3 whitespace-pre-wrap">
                         <div className="flex items-center flex-start mb-1">
                             <CgNotes size={15} /> <span className="font-bold ml-1 tm-text-1xl">Notas:</span>
                         </div>
