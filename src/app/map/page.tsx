@@ -1,5 +1,4 @@
 import { Square } from "@/components/Square/Square";
-import { squaresData } from "@/data/polygons";
 import { getAllSquares } from "@/lib/services/getAllSquares";
 
 export const metadata = {
@@ -8,17 +7,15 @@ export const metadata = {
 }
 
 export default async function MapPage() {
-
-    const squares = await getAllSquares()
-    console.log( squares )
+    const squares = await getAllSquares();
 
     return (
         <>
             {
-                squares.map( square => (
+                squares.map(square => (
                     <Square 
-                        key={ square.id }
-                        squareData={ square }
+                        key={square.id}
+                        squareData={square}
                     />
                 ))
             }
