@@ -2,13 +2,19 @@
 import { Widget } from "@/components/Widget/Widget";
 import { EditTerritoryForm } from "@/components/Dashboard/EditTerritory/EditTerritoryForm";
 import { CancelTerritoryEditionButton } from "@/components/Dashboard/EditTerritory/CancelTerritoryEditionButton";
+import { getTerritoryBasedOnId } from "@/lib/services/getTerritoryBasedOnId";
 
-export default function EditTerritoryPage() {
+export default async function EditTerritoryPage({ params }:{ params: { id: number } }) {
+
+    const { id } = await params;
+    const territory = await getTerritoryBasedOnId(id);
+
+    if ( !territory ) return <div>Territorio no encontrado</div>
 
     return (
         <div className="w-full">
             <h1 className="text-5xl font-bold mb-2">Editar territorio</h1>
-            <EditTerritoryForm />
+            <EditTerritoryForm territory={territory} />
         </div>
     );
 }

@@ -6,9 +6,9 @@ interface Props {
     square: number,
     squareState: string,
     territoryState: string,
-    started: string,
-    finished: string,
-    notes: string,
+    started: Date | null,
+    finished: Date | null,
+    notes: string | null,
 }
 
 export const CustomPopUp = ({ 

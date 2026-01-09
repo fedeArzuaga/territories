@@ -71,7 +71,7 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                             width={600}
                             height={600}
                             alt={`Imagen de referencia del territorio N° ${territoryID}`}
-                            className="md:max-w-[800px]"
+                            className="md:max-w-[800px] h-auto"
                         />
                     </div>
                 </div>
