@@ -5,41 +5,54 @@ import { IoIosSave } from "react-icons/io";
 import { FaInfoCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/Button/Button";
 
-import { squaresData, territoriesData } from "@/data/polygons"; 
-import { redirect, useParams } from "next/navigation";
+import { squaresData } from "@/data/polygons"; 
+import { redirect } from "next/navigation";
 import { CancelTerritoryEditionButton } from "./CancelTerritoryEditionButton";
 import { Widget } from "@/components/Widget/Widget";
 import { Badge } from "@/components/ui/Badge/Badge";
 
 import { EditTerritoryReferenceImage } from "@/app/dashboard/components/EditTerritoryReferenceImage";
+import { TerritoryData, TerritoryDataWithSquares } from "@/types/territory";
+import { updateTerritory } from "@/lib/services/updateTerritory";
 
-export const EditTerritoryForm = () => {
+interface Props {
+    territory: TerritoryDataWithSquares
+}
 
-    const { id } = useParams() || 1
+export const EditTerritoryForm = ({ territory }: Props) => {
 
-    if ( !id && isNaN(Number(id)) ) {
-        redirect('/dashboard/territories')
-    }
+    const {
+        id: territoryId,
+        territoryState: state,
+        lastLeaderName: leaderName,
+        notes: territoryNotes,
+        squares,
+        started: startedDate,
+        finished: finishedDate,
+        managerId,
+        updatedAt
+    } = territory;
 
-    const data = territoriesData[Number(id)];
-    const squares = data.squareIds.map( squareId => squaresData[squareId] )
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
-
     const [squareStates, setSquareStates] = useState( squaresState )
 
-    const [form, setForm] = useState({
-        state: data?.territoryState || 'Pendiente',
-        leader: data?.lastLeader || '',
-        startDate: data?.started || '',
-        endDate: data?.finished || '',
-        notes: data?.notes || ''
+    const [form, setForm] = useState<TerritoryData>({
+        id: territoryId,
+        territoryState: state ?? 'Pendiente',
+        lastLeaderName: leaderName ?? '',
+        started: startedDate ? new Date(startedDate) : null,
+        finished: finishedDate ? new Date(finishedDate) : null,
+        notes: territoryNotes ?? '',
+        managerId: managerId ?? '',
+        updatedAt: new Date(updatedAt) ?? new Date().getTime()
     });
 
     const { 
-        state, 
-        leader, 
-        startDate, 
-        endDate, 
+        id,
+        territoryState, 
+        lastLeaderName, 
+        started, 
+        finished, 
         notes 
     } = form;
 
@@ -53,12 +66,31 @@ export const EditTerritoryForm = () => {
     const handleStatusChange = (newStatus: string) => {
         setForm(prev => ({
             ...prev,
-            state: newStatus,
-            // Requirements: Clear dates based on behavior
-            startDate: newStatus === 'Pendiente' ? '' : prev.startDate,
-            endDate: (newStatus === 'Pendiente' || newStatus === 'En progreso') ? '' : prev.endDate
+            territoryState: newStatus,
+            started: newStatus === 'Pendiente' ? null : prev.started,
+            finished: (newStatus === 'Pendiente' || newStatus === 'En progreso') ? null : prev.finished
         }));
     };
+
+    const handleSubmit = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        setForm({ 
+            ...form, 
+            updatedAt: new Date() 
+        });
+
+        console.log('Form submitted:', { ...form, squareStates });
+        await updateTerritory({
+            ...form,
+            squares: squareStates.map( square => ({
+                id: squares.find( s => s.squareNumber === square.square )?.id || '',
+                squareNumber: square.square,
+                state: square.state,
+                territoryId: territoryId
+            }))
+        })
+    }
 
     const handleSquareStatusChange = ( square: number, newStatus: string ) => {
         setSquareStates( prev => 
@@ -80,7 +112,8 @@ export const EditTerritoryForm = () => {
         }
     }, [squareStates])
 
-    const isDateError = startDate && endDate && (new Date(startDate) > new Date(endDate)) || false;
+    const isDateError = started && finished && (new Date(started) > new Date(finished)) || false;
+    const areNotesRequired = territoryState === "En progreso" || territoryState === "Completado";
 
     return (
         <>
@@ -89,8 +122,8 @@ export const EditTerritoryForm = () => {
                     <h2 className="text-3xl font-bold text-gray-800 flex items-center">
                         Territorio N° {id} -&nbsp; 
                         <Badge 
-                            type={form.state === "Pendiente" ? "danger" : form.state === "En progreso" ? "warning" : "success"} 
-                            text={form.state} 
+                            type={territoryState === "Pendiente" ? "danger" : territoryState === "En progreso" ? "warning" : "success"} 
+                            text={territoryState} 
                         />
                     </h2>
                 </div>
@@ -101,7 +134,7 @@ export const EditTerritoryForm = () => {
 
             <Widget title="Información del Territorio" type="default">
                 <div className="w-full">
-                    <form className="space-y-8 w-full mt-8">
+                    <form onSubmit={ handleSubmit } className="space-y-8 w-full mt-8">
                         
                         {/* SECTION 1: ASSIGNMENT DETAILS (Leader and Dates) */}
                         <div>
@@ -115,22 +148,23 @@ export const EditTerritoryForm = () => {
                                     <label className="font-bold mb-2 text-sm text-gray-600">Último conductor: *</label>
                                     <input
                                         type="text"
-                                        name="leader"
-                                        value={leader}
+                                        name="lastLeaderName"
+                                        value={lastLeaderName as string}
                                         onChange={handleInputChange}
+                                        placeholder="Ej: Ángel García"
                                         className="w-full p-2 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none h-11 transition-all"
                                         required
                                     />
                                 </div>
 
-                                {state !== "Pendiente" && (
+                                {territoryState !== "Pendiente" && (
                                     <>
                                         <div className="flex flex-col">
                                             <label className="font-bold mb-2 text-sm text-gray-600">Fecha de inicio: *</label>
                                             <input
                                                 type="date"
-                                                name="startDate"
-                                                value={startDate}
+                                                name="started"
+                                                value={ started ? new Date(started!).toISOString().split('T')[0]: new Date().toISOString().split('T')[0] }
                                                 onChange={handleInputChange}
                                                 className="w-full p-2 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none h-11"
                                                 required
@@ -141,17 +175,17 @@ export const EditTerritoryForm = () => {
                                             <label className="font-bold mb-2 text-sm text-gray-600">Fecha de fin: *</label>
                                             <input
                                                 type="date"
-                                                name="endDate"
-                                                value={endDate}
+                                                name="finished"
+                                                value={ finished ? new Date(finished!).toISOString().split('T')[0]: '' }
                                                 onChange={handleInputChange}
-                                                disabled={state === "En progreso"}
+                                                disabled={territoryState === "En progreso"}
                                                 className={`w-full p-2 rounded-md h-11 focus:ring-2 focus:ring-teal-500 outline-none transition-all ${
-                                                    state === "En progreso" ? "bg-gray-100 text-gray-400 cursor-not-allowed border-transparent" : "bg-white text-black border"
+                                                    territoryState === "En progreso" ? "bg-gray-100 text-gray-400 cursor-not-allowed border-transparent" : "bg-white text-black border"
                                                 }`}
-                                                required={state === "Completado"}
+                                                required={territoryState === "Completado"}
                                             />
                                             {isDateError && (
-                                                <span className="text-red-500 text-[10px] mt-1 font-bold uppercase tracking-wider italic">
+                                                <span className="text-red-500 text-[12px] mt-1 font-bold">
                                                     La fecha de inicio no puede ser posterior a la de conclusión.
                                                 </span>
                                             )}
@@ -207,13 +241,14 @@ export const EditTerritoryForm = () => {
                         {/* SECTION 3: NOTES & FOOTER */}
                         <div className="space-y-6">
                             <div className="flex flex-col w-full">
-                                <label className="font-bold mb-2 text-gray-700">Notas de la última salida:</label>
+                                <label className="font-bold mb-2 text-gray-700">Notas de la última salida: { areNotesRequired && '*' }</label>
                                 <textarea
                                     name="notes"
                                     rows={4}
-                                    value={notes}
-                                    onChange={handleInputChange}
-                                    placeholder="Enter territory notes..."
+                                    value={notes ?? ''}
+                                    required={ areNotesRequired }
+                                    onChange={ handleInputChange }
+                                    placeholder="Notas importantes sobre la última salida al territorio"
                                     className="w-full p-4 border rounded-xl bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none shadow-sm transition-all"
                                 ></textarea>
                             </div>
@@ -221,16 +256,16 @@ export const EditTerritoryForm = () => {
                             <div className="bg-blue-50 border-l-4 border-blue-900 p-5 rounded-r-xl flex gap-4 text-sm text-blue-900 shadow-sm">
                                 <FaInfoCircle size={22} className="shrink-0 text-blue-900" />
                                 <div className="leading-relaxed">
-                                    <span className="font-bold text-blue-900">Conductor:</span> Si bien las notas son opcionales, son un excelente punto de partida. Sea lo más detallista posible para que el territorio se trabaje de la mejor manera <a className="underline font-bold hover:text-blue-900" href="https://wol.jw.org/es/wol/l/r4/lp-s?q=Mateo+7%3A12" target="_blank">(Mateo 7:12)</a>.
+                                    <span className="font-bold text-blue-900">Conductor:</span> Las notas son un excelente punto de partida para la próxima salida al servicio del campo. Sea lo más detallista posible para que el territorio se trabaje de la mejor manera <a className="underline font-bold hover:text-blue-900" href="https://wol.jw.org/es/wol/l/r4/lp-s?q=Mateo+7%3A12" target="_blank">(Mateo 7:12)</a>.
                                 </div>
                             </div>
 
                             <div className="pt-6 flex justify-end border-t border-gray-100">
                                 <button
                                     type="submit"
-                                    disabled={isDateError || state === ""}
+                                    disabled={isDateError || territoryState === ""}
                                     className={`px-10 py-4 rounded-xl font-bold text-white transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 ${
-                                        (isDateError || state === "") ? "bg-gray-300 cursor-not-allowed shadow-none" : "bg-teal-600 hover:bg-teal-700 shadow-lg shadow-teal-100"
+                                        (isDateError || territoryState === "") ? "bg-gray-300 cursor-not-allowed shadow-none" : "bg-teal-600 hover:bg-teal-700 shadow-lg shadow-teal-100"
                                     }`}
                                 >
                                     <div className="flex items-center justify-center">
