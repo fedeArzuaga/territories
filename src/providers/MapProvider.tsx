@@ -1,8 +1,8 @@
 'use client'
 
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 
-// 1. Define the dynamic import at the top level
 const Map = dynamic(
     () => import('../components/Map'),
     {
@@ -20,9 +20,11 @@ interface Props {
 }
 
 export default function MapProvider({ children }: Props) {
-    // 2. Pass children directly as a prop or within the component tags )
+    const pathname = usePathname();
+
     return (
-        <div className="w-full h-screen">
+        // The key={pathname} forces a complete remount on route changes
+        <div key={pathname} className="w-full h-screen overflow-hidden">
             <Map 
                 posix={[-34.815597, -56.304091]} 
                 zoom={12}

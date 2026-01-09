@@ -4,12 +4,15 @@ import { IoTimeOutline } from "react-icons/io5"
 interface Props {
     territoryState: string,
     squareState: string,
-    started: string,
-    finished: string,
-    notes: string
+    started: Date | null,
+    finished: Date | null,
+    notes: string | null
 }
 
 export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes }: Props) => {
+
+    console.log( notes )
+    
     return (
         <>
             <div className="tm-polygon-details mt-3 grid grid-cols-2 gap-2">
@@ -36,7 +39,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 <b>Se comenzó el</b>:
                             </p>
                             <p>
-                                { started }
+                                { started ? new Date(started).toLocaleDateString() : 'No iniciado' }
                             </p>
                         </div>
                     )
@@ -48,7 +51,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 <b>Se finalizó el</b>:
                             </p>
                             <p>
-                                { finished ? finished : 'No finalizado' }
+                                { finished ? new Date(finished).toLocaleDateString() : 'No finalizado' }
                             </p>
                         </div>
                     )
@@ -56,7 +59,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
             </div>
             {
                 notes && (
-                    <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3">
+                    <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3 whitespace-pre-wrap">
                         <div className="flex items-center flex-start mb-1">
                             <CgNotes size={15} /> <span className="font-bold ml-1 tm-text-1xl">Notas:</span>
                         </div>

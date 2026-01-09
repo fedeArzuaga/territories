@@ -3,8 +3,14 @@ import { CustomGrid } from "@/components/ui/CustomGrid/CustomGrid";
 import { Widget } from "@/components/Widget/Widget";
 import { TerritoryCardDetails } from "../components/TerritoryCardDetails";
 import { territoriesData } from "@/data/polygons";
+import { getAllTerritories } from "@/lib/services/getAllTerritories";
 
-export default function TerritoriesPage() {
+export default async function TerritoriesPage() {
+
+    const territories = await getAllTerritories({
+        includeSquares: true,
+    })
+
     return (
         <div>
             <h1 className="text-5xl font-bold mb-8">
@@ -18,10 +24,10 @@ export default function TerritoriesPage() {
                         cssClasses="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-6"
                     >
                         {
-                            Object.keys(territoriesData).map( territoryId => (
-                                <CustomCard key={ territoryId }>
+                            territories.map( territory => (
+                                <CustomCard key={ territory.id }>
                                     <TerritoryCardDetails
-                                        territoryId={ territoryId }
+                                        territory={ territory }
                                     />
                                 </CustomCard>
                             ))
