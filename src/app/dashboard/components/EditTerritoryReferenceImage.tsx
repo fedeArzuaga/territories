@@ -38,10 +38,6 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                     isOpen ? 'visible' : 'invisible pointer-events-none'
                 }`}
             >
-                {/* BACKDROP: 
-                    We move the transition classes here. 
-                    'duration-500' matches the modal for perfect sync.
-                */}
                 <div
                     className={`absolute inset-0 bg-slate-900/40 backdrop-blur-md transition-opacity duration-500 ease-in-out ${
                         isOpen ? 'opacity-100' : 'opacity-0'
@@ -49,9 +45,6 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                     onClick={toggleModal}
                 />
 
-                {/* MODAL CARD: 
-                    Uses a springy cubic-bezier and matches the duration of the backdrop.
-                */}
                 <div
                     className={`relative w-full max-w-[1000px] p-8 bg-white rounded-3xl shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                         isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-90 translate-y-12 opacity-0'
