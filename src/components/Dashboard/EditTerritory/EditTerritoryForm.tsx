@@ -1,19 +1,17 @@
 'use client'
 
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState, useTransition } from "react";
 import { IoIosSave } from "react-icons/io";
 import { FaInfoCircle } from "react-icons/fa";
 import { Button } from "@/components/ui/Button/Button";
-
-import { squaresData } from "@/data/polygons"; 
-import { redirect } from "next/navigation";
 import { CancelTerritoryEditionButton } from "./CancelTerritoryEditionButton";
 import { Widget } from "@/components/Widget/Widget";
 import { Badge } from "@/components/ui/Badge/Badge";
-
 import { EditTerritoryReferenceImage } from "@/app/dashboard/components/EditTerritoryReferenceImage";
 import { TerritoryData, TerritoryDataWithSquares } from "@/types/territory";
 import { updateTerritory } from "@/lib/services/updateTerritory";
+import styles from './EditTerritoryForm.module.css';
+import { Spinner } from "@/components/ui/Spinner/Spinner";
 
 interface Props {
     territory: TerritoryDataWithSquares
@@ -35,6 +33,9 @@ export const EditTerritoryForm = ({ territory }: Props) => {
 
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
     const [squareStates, setSquareStates] = useState( squaresState )
+
+    // Used to manage pending state on form submission
+    const [isPending, startTransition] = useTransition()
 
     const [form, setForm] = useState<TerritoryData>({
         id: territoryId,
@@ -81,14 +82,17 @@ export const EditTerritoryForm = ({ territory }: Props) => {
         });
 
         console.log('Form submitted:', { ...form, squareStates });
-        await updateTerritory({
-            ...form,
-            squares: squareStates.map( square => ({
-                id: squares.find( s => s.squareNumber === square.square )?.id || '',
-                squareNumber: square.square,
-                state: square.state,
-                territoryId: territoryId
-            }))
+
+        startTransition( async () => {
+            await updateTerritory({
+                ...form,
+                squares: squareStates.map( square => ({
+                    id: squares.find( s => s.squareNumber === square.square )?.id || '',
+                    squareNumber: square.square,
+                    state: square.state,
+                    territoryId: territoryId
+                }))
+            })
         })
     }
 
@@ -263,13 +267,26 @@ export const EditTerritoryForm = ({ territory }: Props) => {
                             <div className="pt-6 flex justify-end border-t border-gray-100">
                                 <button
                                     type="submit"
-                                    disabled={isDateError || territoryState === ""}
+                                    disabled={isDateError || territoryState === "" || isPending}
                                     className={`px-10 py-4 rounded-xl font-bold text-white transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 ${
                                         (isDateError || territoryState === "") ? "bg-gray-300 cursor-not-allowed shadow-none" : "bg-teal-600 hover:bg-teal-700 shadow-lg shadow-teal-100"
                                     }`}
                                 >
                                     <div className="flex items-center justify-center">
-                                        <IoIosSave size={25} className="mr-2" /> Actualizar Territorio
+                                        {
+                                            isPending
+                                                ? (
+                                                    <>
+                                                        <Spinner /> Actualizando...
+                                                    </>
+                                                ) 
+                                                : (
+                                                    <>
+                                                        <IoIosSave size={25} className="mr-2" /> Actualizar Territorio
+                                                    </>
+                                                )
+                                        }
+                                        
                                     </div>
                                 </button>
                             </div>
