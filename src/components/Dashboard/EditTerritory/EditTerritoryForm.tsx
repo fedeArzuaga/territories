@@ -60,7 +60,7 @@ export const EditTerritoryForm = ({ territory }: Props) => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm(prev => ({
             ...prev,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.type === 'date' ? (event.target.value ? new Date(event.target.value + 'T00:00:00') : null) : event.target.value
         }));
     };
 
@@ -75,17 +75,13 @@ export const EditTerritoryForm = ({ territory }: Props) => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        const updatedData = { ...form, updatedAt: new Date() };
 
-        setForm({ 
-            ...form, 
-            updatedAt: new Date() 
-        });
-
-        console.log('Form submitted:', { ...form, squareStates });
+        setForm( updatedData );
 
         startTransition( async () => {
             await updateTerritory({
-                ...form,
+                ...updatedData,
                 squares: squareStates.map( square => ({
                     id: squares.find( s => s.squareNumber === square.square )?.id || '',
                     squareNumber: square.square,
@@ -168,7 +164,7 @@ export const EditTerritoryForm = ({ territory }: Props) => {
                                             <input
                                                 type="date"
                                                 name="started"
-                                                value={ started ? new Date(started!).toISOString().split('T')[0]: new Date().toISOString().split('T')[0] }
+                                                value={started ? new Date(started).toISOString().split('T')[0] : ''}
                                                 onChange={handleInputChange}
                                                 className="w-full p-2 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none h-11"
                                                 required
@@ -180,7 +176,7 @@ export const EditTerritoryForm = ({ territory }: Props) => {
                                             <input
                                                 type="date"
                                                 name="finished"
-                                                value={ finished ? new Date(finished!).toISOString().split('T')[0]: '' }
+                                                value={finished ? new Date(finished).toISOString().split('T')[0] : ''}
                                                 onChange={handleInputChange}
                                                 disabled={territoryState === "En progreso"}
                                                 className={`w-full p-2 rounded-md h-11 focus:ring-2 focus:ring-teal-500 outline-none transition-all ${
