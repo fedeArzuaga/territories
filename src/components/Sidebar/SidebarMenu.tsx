@@ -3,6 +3,10 @@
 import Link from "next/link"
 import { MenuItems } from "./types/menuItems"
 import { usePathname } from "next/navigation"
+import { Button } from "../ui/Button/Button"
+import { signOut } from "next-auth/react"
+import { FaArrowRightFromBracket } from "react-icons/fa6"
+import styles from './SidebarMenu.module.css'
 
 interface Props {
     menuItems: MenuItems[]
@@ -38,6 +42,14 @@ export const SidebarMenu = ({ menuItems }: Props) => {
                     </Link>
                 ))
             }
+            <Button 
+                label="Cerrar sesión"
+                type="button"
+                onClickHandler={ () => signOut() }
+                icon={ <FaArrowRightFromBracket size={ 25 } /> }
+                style="default"
+                cssClasses={`p-3 rounded-md transition duration-150 ease-in-out tm-sidebar-logoun-button hover:text-white hover:bg-teal-500 ${ styles.tmSidebarLogoutButton }`}
+            />
         </div>
     )
 }

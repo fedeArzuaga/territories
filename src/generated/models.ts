@@ -11,4 +11,6 @@
 export type * from './models/User'
 export type * from './models/Territory'
 export type * from './models/Square'
+export type * from './models/Account'
+export type * from './models/Session'
 export type * from './commonInputTypes'

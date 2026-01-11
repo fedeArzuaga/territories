@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
+import { TerritoriesSessionProvider } from "@/providers/TerritoriesSessionProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -24,7 +25,9 @@ export default function RootLayout({
         className={`${nunitoSans.variable} antialiased`}
       >
         <div id="main-map-container">
-          {children}
+          <TerritoriesSessionProvider>
+            {children}
+          </TerritoriesSessionProvider>
         </div>
       </body>
     </html>

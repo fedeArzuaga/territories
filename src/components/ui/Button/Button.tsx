@@ -4,7 +4,7 @@ import React, { MouseEvent } from 'react'
 interface Props {
     label: string,
     type?: "button" | "submit"
-    style: "primary" | "dark" | "danger" | "warning" | "success"
+    style: "primary" | "dark" | "danger" | "warning" | "success" | "default"
     icon?: React.ReactNode,
     cssClasses?: string,
     action?: "link" | "button",
@@ -27,6 +27,7 @@ export const Button = ({ label, type = "button", icon, style, action = "button",
                             ${ (!cssClasses && style === "danger") ? 'text-white bg-red-400 hover:bg-red-500' : '' }
                             ${ (!cssClasses && style === "warning") ? 'text-white bg-amber-500 hover:bg-amber-600' : '' }
                             ${ (!cssClasses && style === "success") ? 'text-white bg-green-600 hover:bg-green-700' : '' }
+                            ${ (!cssClasses && style === "default") ? 'text-gray-700 bg-white hover:bg-teal-600' : '' }
                             ${ cssClasses }   
                         `}
                     >

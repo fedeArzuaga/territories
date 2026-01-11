@@ -32,3 +32,13 @@ export type Territory = Prisma.TerritoryModel
  * 
  */
 export type Square = Prisma.SquareModel
+/**
+ * Model Account
+ * 
+ */
+export type Account = Prisma.AccountModel
+/**
+ * Model Session
+ * 
+ */
+export type Session = Prisma.SessionModel

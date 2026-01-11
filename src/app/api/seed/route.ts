@@ -1,7 +1,9 @@
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient } from '../../../generated/client';
+import { PrismaClient, User } from '../../../generated/client';
 import { NextResponse } from 'next/server'
 import { squaresData, territoriesData } from '@/data/polygons';
+import bcrypt from 'bcrypt';
+
 const connectionString = `${process.env.DATABASE_URL}`
 
 const adapter = new PrismaPg({ connectionString })
@@ -17,10 +19,12 @@ const parseDate = (dateString: string | undefined | null) => {
 // Seed route to populate the database
 export async function GET(request: Request) { 
     try {
+
         // 1. Clean up existing data to avoid "Unique constraint" errors
         await prisma.square.deleteMany({});
         await prisma.territory.deleteMany({});
 
+        // 2. Seed territories and squares
         const territoriesSaved = []
 
         for (const id of Object.keys(territoriesData)) {
@@ -46,8 +50,31 @@ export async function GET(request: Request) {
             territoriesSaved.push(created)
         }
 
-        return NextResponse.json({ message: 'Seed completed', territoriesSaved })
+        // 3.Seed a unique superuser account
+        const mySuperUser: User = {
+            id: crypto.randomUUID(),
+            name: "Federico Arzuaga",
+            email: "fede.arzuaga.perdomo@gmail.com",
+            password: bcrypt.hashSync("Fran29092012!", 10),
+            phone: "092345332",
+            createdAt: new Date(),
+            image: null,
+            role: "SUPERUSER",
+            updatedAt: new Date(),
+        }
+
+        const superUser = await prisma.user.create({
+            data: mySuperUser
+        })
+
+        return NextResponse.json({ 
+            message: 'Seed completed', 
+            territoriesSaved,
+            superUser
+        }, { status: 200 });
+
     } catch (error) {
+        
         // Check if it's a standard Error object
         if (error instanceof Error) {
             return NextResponse.json({ 
