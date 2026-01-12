@@ -24,11 +24,6 @@ const menuItems: MenuItems[] = [
         icon: <FaUser size={ 25 } />
     },
     {
-        path: '/auth/signout',
-        label: 'Cerrar sesión',
-        icon: <FaArrowRightFromBracket size={ 25 } />
-    },
-    {
         path: '/map',
         label: 'Ver mapa del territorio',
         icon: <FaMapMarkedAlt size={ 25 } />

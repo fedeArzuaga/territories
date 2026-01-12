@@ -1,60 +1,67 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
-    provider = "prisma-client"
-    output   = "../src/generated"
+  provider = "prisma-client"
+  output   = "../src/generated"
 }
 
 datasource db {
-    provider = "postgresql"
+  provider = "postgresql"
 }
 
 model User {
-    id                String      @id @default(uuid())
-    name              String
-    email             String      @unique
-    password          String
-    profilePictureUrl String?
-    phone             String?
-    roles             String[]    @default(["user"])
-    
-    // Relation: Track which registered users are managing/watching which territories
-    // This is now optional and separate from the "Conductor" name
-    managedTerritories Territory[] @relation("TerritoryManager")
-    createdAt         DateTime    @default(now())
-    updatedAt         DateTime    @updatedAt
+  id                 String      @id @default(uuid())
+  name               String
+  email              String      @unique
+  password           String
+  phone              String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+  image              String?
+  role               String      @default("USER")
+  Account            Account[]
+  Session            Session[]
+  managedTerritories Territory[] @relation("TerritoryManager")
 }
 
 model Territory {
-    id             Int       @id @default(autoincrement())
-    territoryState String    @default("Pendiente")
-    
-    // This field now stores the name directly (e.g., "Pablo Scigliano")
-    // as seen in your current form logic.
-    lastLeaderName String?   
-    notes          String?   @db.Text
-    started        DateTime?
-    finished       DateTime?
-
-    // Optional: Keep track of which registered system user is responsible 
-    // for this territory's data entry.
-    managerId      String?
-    manager        User?     @relation("TerritoryManager", fields: [managerId], references: [id])
-
-    // Relation: A territory consists of multiple squares (Manzanas)
-    squares        Square[]
-    updatedAt      DateTime  @updatedAt
+  id             Int       @id @default(autoincrement())
+  territoryState String    @default("Pendiente")
+  lastLeaderName String?
+  notes          String?
+  started        DateTime?
+  finished       DateTime?
+  managerId      String?
+  updatedAt      DateTime  @updatedAt
+  squares        Square[]
+  manager        User?     @relation("TerritoryManager", fields: [managerId], references: [id])
 }
 
 model Square {
-    id           String       @id
-    squareNumber Int       
-    state        String    @default("Pendiente")
-    territoryId  Int
-    territory    Territory @relation(fields: [territoryId], references: [id], onDelete: Cascade)
-    updatedAt    DateTime  @updatedAt
+  id           String    @id
+  squareNumber Int
+  state        String    @default("Pendiente")
+  territoryId  Int
+  updatedAt    DateTime  @updatedAt
+  territory    Territory @relation(fields: [territoryId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                String  @id
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

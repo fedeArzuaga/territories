@@ -4,16 +4,37 @@ import { useState } from "react";
 import { Widget } from "@/components/Widget/Widget";
 import { FiLogIn } from "react-icons/fi";
 import { redirect } from "next/navigation";
+import { signIn } from "next-auth/react";
+
+interface LoginForm {
+    email: string;
+    password: string;
+}
 
 export default function LoginPage() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [loginForm, setLoginForm] = useState<LoginForm>({ 
+        email: '', 
+        password: ''
+    });
+    const { email, password } = loginForm;
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        // Lógica de autenticación aquí
-        redirect('/map')
+
+        // Auth logic here
+        const result = await signIn('credentials', {
+            redirect: false,
+            email,
+            password
+        })
+
+        console.log( result )
+
+        if (result?.ok) {
+            // Redirect the user to the map upon successful login
+            redirect('/map');
+        }
     };
 
     return (
@@ -34,7 +55,7 @@ export default function LoginPage() {
                             <input
                                 type="email"
                                 value={email}
-                                onChange={(e) => setEmail(e.target.value)}
+                                onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
                                 autoComplete="email"
                                 placeholder="ejemplo@correo.com"
                                 className="w-full p-3 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none transition-all h-11"
@@ -50,7 +71,7 @@ export default function LoginPage() {
                             <input
                                 type="password"
                                 value={password}
-                                onChange={(e) => setPassword(e.target.value)}
+                                onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
                                 placeholder="••••••••"
                                 autoComplete="current-password"
                                 className="w-full p-3 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none transition-all h-11"

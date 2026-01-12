@@ -12,6 +12,7 @@ import { TerritoryData, TerritoryDataWithSquares } from "@/types/territory";
 import { updateTerritory } from "@/lib/services/updateTerritory";
 import styles from './EditTerritoryForm.module.css';
 import { Spinner } from "@/components/ui/Spinner/Spinner";
+import { getCurrentDate } from "@/helpers/getCurrentDate";
 
 interface Props {
     territory: TerritoryDataWithSquares
@@ -41,8 +42,8 @@ export const EditTerritoryForm = ({ territory }: Props) => {
         id: territoryId,
         territoryState: state ?? 'Pendiente',
         lastLeaderName: leaderName ?? '',
-        started: startedDate ? new Date(startedDate) : null,
-        finished: finishedDate ? new Date(finishedDate) : null,
+        started: startedDate ? new Date(getCurrentDate(startedDate)) : null,
+        finished: finishedDate ? new Date(getCurrentDate(finishedDate)) : null,
         notes: territoryNotes ?? '',
         managerId: managerId ?? '',
         updatedAt: new Date(updatedAt) ?? new Date().getTime()
@@ -60,7 +61,9 @@ export const EditTerritoryForm = ({ territory }: Props) => {
     const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setForm(prev => ({
             ...prev,
-            [event.target.name]: event.target.type === 'date' ? (event.target.value ? new Date(event.target.value + 'T00:00:00') : null) : event.target.value
+            [event.target.name]: event.target.name === 'started' || event.target.name === 'finished'
+                ? getCurrentDate(event.target.value)
+                : event.target.value
         }));
     };
 
@@ -68,17 +71,21 @@ export const EditTerritoryForm = ({ territory }: Props) => {
         setForm(prev => ({
             ...prev,
             territoryState: newStatus,
-            started: newStatus === 'Pendiente' ? null : prev.started,
+            started: newStatus === 'En progreso' || newStatus === 'Completado' ? new Date() : prev.started,
             finished: (newStatus === 'Pendiente' || newStatus === 'En progreso') ? null : prev.finished
         }));
     };
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-        const updatedData = { ...form, updatedAt: new Date() };
+        const updatedData = {
+            ...form,
+            updatedAt: new Date()
+        }
 
-        setForm( updatedData );
+        setForm(updatedData);
 
+        console.log(updatedData)
         startTransition( async () => {
             await updateTerritory({
                 ...updatedData,
@@ -164,7 +171,7 @@ export const EditTerritoryForm = ({ territory }: Props) => {
                                             <input
                                                 type="date"
                                                 name="started"
-                                                value={started ? new Date(started).toISOString().split('T')[0] : ''}
+                                                value={ started ? new Date(started).toISOString().split('T')[0] : new Date().toISOString().split('T')[0] }
                                                 onChange={handleInputChange}
                                                 className="w-full p-2 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none h-11"
                                                 required
@@ -176,7 +183,7 @@ export const EditTerritoryForm = ({ territory }: Props) => {
                                             <input
                                                 type="date"
                                                 name="finished"
-                                                value={finished ? new Date(finished).toISOString().split('T')[0] : ''}
+                                                value={ finished ? new Date(finished!).toISOString().split('T')[0]: new Date().toISOString().split('T')[0] }
                                                 onChange={handleInputChange}
                                                 disabled={territoryState === "En progreso"}
                                                 className={`w-full p-2 rounded-md h-11 focus:ring-2 focus:ring-teal-500 outline-none transition-all ${
