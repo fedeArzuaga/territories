@@ -1,6 +1,8 @@
+'use client';
+
 import { Button } from '@/components/ui/Button/Button';
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { IoClose } from 'react-icons/io5';
 
 interface Props {
@@ -60,9 +62,10 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                      <div className="flex justify-end gap-3 mb-10">
                         <Button
                             onClickHandler={toggleModal}
-                            icon={ <IoClose size={20} /> }
-                            style="dark"
+                            icon={ <IoClose size={30} /> }
+                            style="default"
                             label=""
+                            cssClasses='hover:bg-white'
                         />
                     </div>
                     <div className="mb-6 flex justify-center">

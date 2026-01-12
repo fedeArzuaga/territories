@@ -36,8 +36,8 @@ export async function GET(request: Request) {
                     territoryState: territory.territoryState,
                     lastLeaderName: territory.lastLeader,
                     notes: territory.notes,
-                    started: parseDate(territory.started),
-                    finished: parseDate(territory.finished),
+                    started: territory.started || null,
+                    finished: territory.finished || null,
                     squares: {
                         create: territory.squareIds.map(squareId => ({
                             id: String(squareId),
@@ -51,6 +51,8 @@ export async function GET(request: Request) {
         }
 
         // 3.Seed a unique superuser account
+        await prisma.user.deleteMany({});
+
         const mySuperUser: User = {
             id: crypto.randomUUID(),
             name: "Federico Arzuaga",

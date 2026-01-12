@@ -11,12 +11,10 @@ export const updateTerritory = async ( territory: TerritoryDataWithSquares ) => 
                 territoryState: territory.territoryState,
                 lastLeaderName: territory.lastLeaderName,
                 notes: territory.notes,
-                // Ensure dates are compatible with PostgreSQL DateTime
                 started: territory.started ? new Date(territory.started) : null,
                 finished: territory.finished ? new Date(territory.finished) : null,
                 updatedAt: new Date(),
                 squares: {
-                    // Change 'updateMany' to 'update'
                     update: territory.squares.map( square => ({
                         where: { id: square.id },
                         data: { state: square.state }
