@@ -9,7 +9,12 @@ const nextConfig: NextConfig = {
         hostname: 'i.pinimg.com'
       }
     ]
-  }
+  },
+  experimental: {
+    serverActions: {
+      allowedOrigins: ["*.devtunnels.ms", "localhost:3000"], 
+    },
+  },
 };
 
 export default nextConfig;
