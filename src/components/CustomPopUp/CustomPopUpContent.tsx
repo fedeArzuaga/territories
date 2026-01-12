@@ -11,8 +11,6 @@ interface Props {
 }
 
 export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes }: Props) => {
-
-    console.log( started, finished );
     
     return (
         <>
