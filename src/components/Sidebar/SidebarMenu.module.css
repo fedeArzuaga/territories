@@ -1,0 +1,5 @@
+.tmSidebarLogoutButton > div {
+    justify-content: flex-start;
+    gap: calc(var(--spacing) * 3);
+    font-size: 0.875rem;
+}

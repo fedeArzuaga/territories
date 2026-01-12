@@ -240,8 +240,8 @@ export type TerritoryWhereInput = {
   finished?: Prisma.DateTimeNullableFilter<"Territory"> | Date | string | null
   managerId?: Prisma.StringNullableFilter<"Territory"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Territory"> | Date | string
-  manager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   squares?: Prisma.SquareListRelationFilter
+  manager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }
 
 export type TerritoryOrderByWithRelationInput = {
@@ -253,8 +253,8 @@ export type TerritoryOrderByWithRelationInput = {
   finished?: Prisma.SortOrderInput | Prisma.SortOrder
   managerId?: Prisma.SortOrderInput | Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
-  manager?: Prisma.UserOrderByWithRelationInput
   squares?: Prisma.SquareOrderByRelationAggregateInput
+  manager?: Prisma.UserOrderByWithRelationInput
 }
 
 export type TerritoryWhereUniqueInput = Prisma.AtLeast<{
@@ -269,8 +269,8 @@ export type TerritoryWhereUniqueInput = Prisma.AtLeast<{
   finished?: Prisma.DateTimeNullableFilter<"Territory"> | Date | string | null
   managerId?: Prisma.StringNullableFilter<"Territory"> | string | null
   updatedAt?: Prisma.DateTimeFilter<"Territory"> | Date | string
-  manager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
   squares?: Prisma.SquareListRelationFilter
+  manager?: Prisma.XOR<Prisma.UserNullableScalarRelationFilter, Prisma.UserWhereInput> | null
 }, "id">
 
 export type TerritoryOrderByWithAggregationInput = {
@@ -310,8 +310,8 @@ export type TerritoryCreateInput = {
   started?: Date | string | null
   finished?: Date | string | null
   updatedAt?: Date | string
-  manager?: Prisma.UserCreateNestedOneWithoutManagedTerritoriesInput
   squares?: Prisma.SquareCreateNestedManyWithoutTerritoryInput
+  manager?: Prisma.UserCreateNestedOneWithoutManagedTerritoriesInput
 }
 
 export type TerritoryUncheckedCreateInput = {
@@ -333,8 +333,8 @@ export type TerritoryUpdateInput = {
   started?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   finished?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  manager?: Prisma.UserUpdateOneWithoutManagedTerritoriesNestedInput
   squares?: Prisma.SquareUpdateManyWithoutTerritoryNestedInput
+  manager?: Prisma.UserUpdateOneWithoutManagedTerritoriesNestedInput
 }
 
 export type TerritoryUncheckedUpdateInput = {
@@ -704,8 +704,8 @@ export type TerritorySelect<ExtArgs extends runtime.Types.Extensions.InternalArg
   finished?: boolean
   managerId?: boolean
   updatedAt?: boolean
-  manager?: boolean | Prisma.Territory$managerArgs<ExtArgs>
   squares?: boolean | Prisma.Territory$squaresArgs<ExtArgs>
+  manager?: boolean | Prisma.Territory$managerArgs<ExtArgs>
   _count?: boolean | Prisma.TerritoryCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["territory"]>
 
@@ -746,8 +746,8 @@ export type TerritorySelectScalar = {
 
 export type TerritoryOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "territoryState" | "lastLeaderName" | "notes" | "started" | "finished" | "managerId" | "updatedAt", ExtArgs["result"]["territory"]>
 export type TerritoryInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  manager?: boolean | Prisma.Territory$managerArgs<ExtArgs>
   squares?: boolean | Prisma.Territory$squaresArgs<ExtArgs>
+  manager?: boolean | Prisma.Territory$managerArgs<ExtArgs>
   _count?: boolean | Prisma.TerritoryCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type TerritoryIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -760,8 +760,8 @@ export type TerritoryIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
 export type $TerritoryPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Territory"
   objects: {
-    manager: Prisma.$UserPayload<ExtArgs> | null
     squares: Prisma.$SquarePayload<ExtArgs>[]
+    manager: Prisma.$UserPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: number
@@ -1166,8 +1166,8 @@ readonly fields: TerritoryFieldRefs;
  */
 export interface Prisma__TerritoryClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  manager<T extends Prisma.Territory$managerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Territory$managerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   squares<T extends Prisma.Territory$squaresArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Territory$squaresArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SquarePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  manager<T extends Prisma.Territory$managerArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Territory$managerArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1601,25 +1601,6 @@ export type TerritoryDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Int
 }
 
 /**
- * Territory.manager
- */
-export type Territory$managerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  /**
-   * Select specific fields to fetch from the User
-   */
-  select?: Prisma.UserSelect<ExtArgs> | null
-  /**
-   * Omit specific fields from the User
-   */
-  omit?: Prisma.UserOmit<ExtArgs> | null
-  /**
-   * Choose, which related nodes to fetch as well
-   */
-  include?: Prisma.UserInclude<ExtArgs> | null
-  where?: Prisma.UserWhereInput
-}
-
-/**
  * Territory.squares
  */
 export type Territory$squaresArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1641,6 +1622,25 @@ export type Territory$squaresArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   distinct?: Prisma.SquareScalarFieldEnum | Prisma.SquareScalarFieldEnum[]
+}
+
+/**
+ * Territory.manager
+ */
+export type Territory$managerArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the User
+   */
+  select?: Prisma.UserSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the User
+   */
+  omit?: Prisma.UserOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.UserInclude<ExtArgs> | null
+  where?: Prisma.UserWhereInput
 }
 
 /**

@@ -1,3 +1,4 @@
+import { formatToLocalDateString } from "@/helpers/formatToLocalDateString";
 import { CgNotes, CgTime } from "react-icons/cg"
 import { IoTimeOutline } from "react-icons/io5"
 
@@ -37,7 +38,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 <b>Se comenzó el</b>:
                             </p>
                             <p>
-                                { started ? new Date(started).toLocaleDateString() : 'No iniciado' }
+                                { started ? formatToLocalDateString(started) : 'No iniciado' }
                             </p>
                         </div>
                     )
@@ -49,7 +50,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 <b>Se finalizó el</b>:
                             </p>
                             <p>
-                                { finished ? new Date(finished).toLocaleDateString() : 'No finalizado' }
+                                { finished ? formatToLocalDateString(finished) : 'No finalizado' }
                             </p>
                         </div>
                     )

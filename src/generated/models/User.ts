@@ -29,10 +29,11 @@ export type UserMinAggregateOutputType = {
   name: string | null
   email: string | null
   password: string | null
-  profilePictureUrl: string | null
   phone: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  image: string | null
+  role: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -40,10 +41,11 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   email: string | null
   password: string | null
-  profilePictureUrl: string | null
   phone: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  image: string | null
+  role: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -51,11 +53,11 @@ export type UserCountAggregateOutputType = {
   name: number
   email: number
   password: number
-  profilePictureUrl: number
   phone: number
-  roles: number
   createdAt: number
   updatedAt: number
+  image: number
+  role: number
   _all: number
 }
 
@@ -65,10 +67,11 @@ export type UserMinAggregateInputType = {
   name?: true
   email?: true
   password?: true
-  profilePictureUrl?: true
   phone?: true
   createdAt?: true
   updatedAt?: true
+  image?: true
+  role?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -76,10 +79,11 @@ export type UserMaxAggregateInputType = {
   name?: true
   email?: true
   password?: true
-  profilePictureUrl?: true
   phone?: true
   createdAt?: true
   updatedAt?: true
+  image?: true
+  role?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -87,11 +91,11 @@ export type UserCountAggregateInputType = {
   name?: true
   email?: true
   password?: true
-  profilePictureUrl?: true
   phone?: true
-  roles?: true
   createdAt?: true
   updatedAt?: true
+  image?: true
+  role?: true
   _all?: true
 }
 
@@ -172,11 +176,11 @@ export type UserGroupByOutputType = {
   name: string
   email: string
   password: string
-  profilePictureUrl: string | null
   phone: string | null
-  roles: string[]
   createdAt: Date
   updatedAt: Date
+  image: string | null
+  role: string
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -205,11 +209,13 @@ export type UserWhereInput = {
   name?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  profilePictureUrl?: Prisma.StringNullableFilter<"User"> | string | null
   phone?: Prisma.StringNullableFilter<"User"> | string | null
-  roles?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.StringFilter<"User"> | string
+  Account?: Prisma.AccountListRelationFilter
+  Session?: Prisma.SessionListRelationFilter
   managedTerritories?: Prisma.TerritoryListRelationFilter
 }
 
@@ -218,11 +224,13 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  profilePictureUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  roles?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
+  Account?: Prisma.AccountOrderByRelationAggregateInput
+  Session?: Prisma.SessionOrderByRelationAggregateInput
   managedTerritories?: Prisma.TerritoryOrderByRelationAggregateInput
 }
 
@@ -234,11 +242,13 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   name?: Prisma.StringFilter<"User"> | string
   password?: Prisma.StringFilter<"User"> | string
-  profilePictureUrl?: Prisma.StringNullableFilter<"User"> | string | null
   phone?: Prisma.StringNullableFilter<"User"> | string | null
-  roles?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  image?: Prisma.StringNullableFilter<"User"> | string | null
+  role?: Prisma.StringFilter<"User"> | string
+  Account?: Prisma.AccountListRelationFilter
+  Session?: Prisma.SessionListRelationFilter
   managedTerritories?: Prisma.TerritoryListRelationFilter
 }, "id" | "email">
 
@@ -247,11 +257,11 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  profilePictureUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
-  roles?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  image?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -265,11 +275,11 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   password?: Prisma.StringWithAggregatesFilter<"User"> | string
-  profilePictureUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
-  roles?: Prisma.StringNullableListFilter<"User">
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  image?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  role?: Prisma.StringWithAggregatesFilter<"User"> | string
 }
 
 export type UserCreateInput = {
@@ -277,11 +287,13 @@ export type UserCreateInput = {
   name: string
   email: string
   password: string
-  profilePictureUrl?: string | null
   phone?: string | null
-  roles?: Prisma.UserCreaterolesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Account?: Prisma.AccountCreateNestedManyWithoutUserInput
+  Session?: Prisma.SessionCreateNestedManyWithoutUserInput
   managedTerritories?: Prisma.TerritoryCreateNestedManyWithoutManagerInput
 }
 
@@ -290,11 +302,13 @@ export type UserUncheckedCreateInput = {
   name: string
   email: string
   password: string
-  profilePictureUrl?: string | null
   phone?: string | null
-  roles?: Prisma.UserCreaterolesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Account?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  Session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   managedTerritories?: Prisma.TerritoryUncheckedCreateNestedManyWithoutManagerInput
 }
 
@@ -303,11 +317,13 @@ export type UserUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roles?: Prisma.UserUpdaterolesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Account?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  Session?: Prisma.SessionUpdateManyWithoutUserNestedInput
   managedTerritories?: Prisma.TerritoryUpdateManyWithoutManagerNestedInput
 }
 
@@ -316,11 +332,13 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roles?: Prisma.UserUpdaterolesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Account?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  Session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   managedTerritories?: Prisma.TerritoryUncheckedUpdateManyWithoutManagerNestedInput
 }
 
@@ -329,11 +347,11 @@ export type UserCreateManyInput = {
   name: string
   email: string
   password: string
-  profilePictureUrl?: string | null
   phone?: string | null
-  roles?: Prisma.UserCreaterolesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  image?: string | null
+  role?: string
 }
 
 export type UserUpdateManyMutationInput = {
@@ -341,11 +359,11 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roles?: Prisma.UserUpdaterolesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -353,19 +371,11 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roles?: Prisma.UserUpdaterolesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type StringNullableListFilter<$PrismaModel = never> = {
-  equals?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel> | null
-  has?: string | Prisma.StringFieldRefInput<$PrismaModel> | null
-  hasEvery?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  hasSome?: string[] | Prisma.ListStringFieldRefInput<$PrismaModel>
-  isEmpty?: boolean
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -373,11 +383,11 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  profilePictureUrl?: Prisma.SortOrder
   phone?: Prisma.SortOrder
-  roles?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -385,10 +395,11 @@ export type UserMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  profilePictureUrl?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -396,10 +407,11 @@ export type UserMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
   password?: Prisma.SortOrder
-  profilePictureUrl?: Prisma.SortOrder
   phone?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  image?: Prisma.SortOrder
+  role?: Prisma.SortOrder
 }
 
 export type UserNullableScalarRelationFilter = {
@@ -407,8 +419,9 @@ export type UserNullableScalarRelationFilter = {
   isNot?: Prisma.UserWhereInput | null
 }
 
-export type UserCreaterolesInput = {
-  set: string[]
+export type UserScalarRelationFilter = {
+  is?: Prisma.UserWhereInput
+  isNot?: Prisma.UserWhereInput
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -417,11 +430,6 @@ export type StringFieldUpdateOperationsInput = {
 
 export type NullableStringFieldUpdateOperationsInput = {
   set?: string | null
-}
-
-export type UserUpdaterolesInput = {
-  set?: string[]
-  push?: string | string[]
 }
 
 export type DateTimeFieldUpdateOperationsInput = {
@@ -444,16 +452,46 @@ export type UserUpdateOneWithoutManagedTerritoriesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutManagedTerritoriesInput, Prisma.UserUpdateWithoutManagedTerritoriesInput>, Prisma.UserUncheckedUpdateWithoutManagedTerritoriesInput>
 }
 
+export type UserCreateNestedOneWithoutAccountInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutAccountNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutAccountInput
+  upsert?: Prisma.UserUpsertWithoutAccountInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAccountInput, Prisma.UserUpdateWithoutAccountInput>, Prisma.UserUncheckedUpdateWithoutAccountInput>
+}
+
+export type UserCreateNestedOneWithoutSessionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionInput, Prisma.UserUncheckedCreateWithoutSessionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSessionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSessionInput, Prisma.UserUncheckedCreateWithoutSessionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSessionInput
+  upsert?: Prisma.UserUpsertWithoutSessionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSessionInput, Prisma.UserUpdateWithoutSessionInput>, Prisma.UserUncheckedUpdateWithoutSessionInput>
+}
+
 export type UserCreateWithoutManagedTerritoriesInput = {
   id?: string
   name: string
   email: string
   password: string
-  profilePictureUrl?: string | null
   phone?: string | null
-  roles?: Prisma.UserCreaterolesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Account?: Prisma.AccountCreateNestedManyWithoutUserInput
+  Session?: Prisma.SessionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutManagedTerritoriesInput = {
@@ -461,11 +499,13 @@ export type UserUncheckedCreateWithoutManagedTerritoriesInput = {
   name: string
   email: string
   password: string
-  profilePictureUrl?: string | null
   phone?: string | null
-  roles?: Prisma.UserCreaterolesInput | string[]
   createdAt?: Date | string
   updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Account?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  Session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutManagedTerritoriesInput = {
@@ -489,11 +529,13 @@ export type UserUpdateWithoutManagedTerritoriesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roles?: Prisma.UserUpdaterolesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Account?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  Session?: Prisma.SessionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutManagedTerritoriesInput = {
@@ -501,11 +543,157 @@ export type UserUncheckedUpdateWithoutManagedTerritoriesInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   password?: Prisma.StringFieldUpdateOperationsInput | string
-  profilePictureUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  roles?: Prisma.UserUpdaterolesInput | string[]
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Account?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  Session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutAccountInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  phone?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Session?: Prisma.SessionCreateNestedManyWithoutUserInput
+  managedTerritories?: Prisma.TerritoryCreateNestedManyWithoutManagerInput
+}
+
+export type UserUncheckedCreateWithoutAccountInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  phone?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Session?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  managedTerritories?: Prisma.TerritoryUncheckedCreateNestedManyWithoutManagerInput
+}
+
+export type UserCreateOrConnectWithoutAccountInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
+}
+
+export type UserUpsertWithoutAccountInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutAccountInput, Prisma.UserUncheckedUpdateWithoutAccountInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutAccountInput, Prisma.UserUncheckedCreateWithoutAccountInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutAccountInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutAccountInput, Prisma.UserUncheckedUpdateWithoutAccountInput>
+}
+
+export type UserUpdateWithoutAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Session?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  managedTerritories?: Prisma.TerritoryUpdateManyWithoutManagerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutAccountInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Session?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  managedTerritories?: Prisma.TerritoryUncheckedUpdateManyWithoutManagerNestedInput
+}
+
+export type UserCreateWithoutSessionInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  phone?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Account?: Prisma.AccountCreateNestedManyWithoutUserInput
+  managedTerritories?: Prisma.TerritoryCreateNestedManyWithoutManagerInput
+}
+
+export type UserUncheckedCreateWithoutSessionInput = {
+  id?: string
+  name: string
+  email: string
+  password: string
+  phone?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  image?: string | null
+  role?: string
+  Account?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  managedTerritories?: Prisma.TerritoryUncheckedCreateNestedManyWithoutManagerInput
+}
+
+export type UserCreateOrConnectWithoutSessionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionInput, Prisma.UserUncheckedCreateWithoutSessionInput>
+}
+
+export type UserUpsertWithoutSessionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSessionInput, Prisma.UserUncheckedUpdateWithoutSessionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSessionInput, Prisma.UserUncheckedCreateWithoutSessionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSessionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSessionInput, Prisma.UserUncheckedUpdateWithoutSessionInput>
+}
+
+export type UserUpdateWithoutSessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Account?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  managedTerritories?: Prisma.TerritoryUpdateManyWithoutManagerNestedInput
+}
+
+export type UserUncheckedUpdateWithoutSessionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  password?: Prisma.StringFieldUpdateOperationsInput | string
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.StringFieldUpdateOperationsInput | string
+  Account?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  managedTerritories?: Prisma.TerritoryUncheckedUpdateManyWithoutManagerNestedInput
 }
 
 
@@ -514,10 +702,14 @@ export type UserUncheckedUpdateWithoutManagedTerritoriesInput = {
  */
 
 export type UserCountOutputType = {
+  Account: number
+  Session: number
   managedTerritories: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  Account?: boolean | UserCountOutputTypeCountAccountArgs
+  Session?: boolean | UserCountOutputTypeCountSessionArgs
   managedTerritories?: boolean | UserCountOutputTypeCountManagedTerritoriesArgs
 }
 
@@ -534,6 +726,20 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
 /**
  * UserCountOutputType without action
  */
+export type UserCountOutputTypeCountAccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.AccountWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountSessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SessionWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
 export type UserCountOutputTypeCountManagedTerritoriesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TerritoryWhereInput
 }
@@ -544,11 +750,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   email?: boolean
   password?: boolean
-  profilePictureUrl?: boolean
   phone?: boolean
-  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  image?: boolean
+  role?: boolean
+  Account?: boolean | Prisma.User$AccountArgs<ExtArgs>
+  Session?: boolean | Prisma.User$SessionArgs<ExtArgs>
   managedTerritories?: boolean | Prisma.User$managedTerritoriesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
@@ -558,11 +766,11 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   email?: boolean
   password?: boolean
-  profilePictureUrl?: boolean
   phone?: boolean
-  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  image?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -570,11 +778,11 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   email?: boolean
   password?: boolean
-  profilePictureUrl?: boolean
   phone?: boolean
-  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  image?: boolean
+  role?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -582,15 +790,17 @@ export type UserSelectScalar = {
   name?: boolean
   email?: boolean
   password?: boolean
-  profilePictureUrl?: boolean
   phone?: boolean
-  roles?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  image?: boolean
+  role?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "profilePictureUrl" | "phone" | "roles" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "password" | "phone" | "createdAt" | "updatedAt" | "image" | "role", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  Account?: boolean | Prisma.User$AccountArgs<ExtArgs>
+  Session?: boolean | Prisma.User$SessionArgs<ExtArgs>
   managedTerritories?: boolean | Prisma.User$managedTerritoriesArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -600,6 +810,8 @@ export type UserIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
 export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "User"
   objects: {
+    Account: Prisma.$AccountPayload<ExtArgs>[]
+    Session: Prisma.$SessionPayload<ExtArgs>[]
     managedTerritories: Prisma.$TerritoryPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -607,11 +819,11 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string
     email: string
     password: string
-    profilePictureUrl: string | null
     phone: string | null
-    roles: string[]
     createdAt: Date
     updatedAt: Date
+    image: string | null
+    role: string
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -1006,6 +1218,8 @@ readonly fields: UserFieldRefs;
  */
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  Account<T extends Prisma.User$AccountArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$AccountArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AccountPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  Session<T extends Prisma.User$SessionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$SessionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   managedTerritories<T extends Prisma.User$managedTerritoriesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$managedTerritoriesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TerritoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1040,11 +1254,11 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly password: Prisma.FieldRef<"User", 'String'>
-  readonly profilePictureUrl: Prisma.FieldRef<"User", 'String'>
   readonly phone: Prisma.FieldRef<"User", 'String'>
-  readonly roles: Prisma.FieldRef<"User", 'String[]'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly image: Prisma.FieldRef<"User", 'String'>
+  readonly role: Prisma.FieldRef<"User", 'String'>
 }
     
 
@@ -1430,6 +1644,54 @@ export type UserDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Limit how many Users to delete.
    */
   limit?: number
+}
+
+/**
+ * User.Account
+ */
+export type User$AccountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Account
+   */
+  select?: Prisma.AccountSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Account
+   */
+  omit?: Prisma.AccountOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.AccountInclude<ExtArgs> | null
+  where?: Prisma.AccountWhereInput
+  orderBy?: Prisma.AccountOrderByWithRelationInput | Prisma.AccountOrderByWithRelationInput[]
+  cursor?: Prisma.AccountWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AccountScalarFieldEnum | Prisma.AccountScalarFieldEnum[]
+}
+
+/**
+ * User.Session
+ */
+export type User$SessionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Session
+   */
+  select?: Prisma.SessionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Session
+   */
+  omit?: Prisma.SessionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SessionInclude<ExtArgs> | null
+  where?: Prisma.SessionWhereInput
+  orderBy?: Prisma.SessionOrderByWithRelationInput | Prisma.SessionOrderByWithRelationInput[]
+  cursor?: Prisma.SessionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SessionScalarFieldEnum | Prisma.SessionScalarFieldEnum[]
 }
 
 /**
