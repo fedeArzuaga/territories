@@ -1,8 +1,15 @@
+'use client'
+
+import { useSession } from "next-auth/react"
 import Image from "next/image"
 
 //TODO: Use user's real data once implemented
 
 export const TopbarActiveUser = () => {
+
+    const { data: session } = useSession()
+    console.log( session )
+
     return (
         <div id="profile" className="space-y-3 flex items-center">
             <Image
