@@ -1,19 +1,18 @@
-'use client'
-
-import { useSession } from "next-auth/react"
 import Image from "next/image"
 
 //TODO: Use user's real data once implemented
+interface Props {
+    fullName: string;
+    role: string;
+    image?: string;
+}
 
-export const TopbarActiveUser = () => {
-
-    const { data: session } = useSession()
-    console.log( session )
+export const TopbarActiveUser = ({ fullName, role, image }: Props) => {
 
     return (
         <div id="profile" className="space-y-3 flex items-center">
             <Image
-                src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
+                src={ image || "https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg" }
                 width={40}
                 height={40}
                 alt="Avatar user"
@@ -23,9 +22,11 @@ export const TopbarActiveUser = () => {
                 <h2
                     className="font-bold text-xs md:text-sm text-left text-teal-700 tm-user-name"
                 >
-                    Fernando Llambías
+                    { fullName }
                 </h2>
-                <p className="text-xs text-gray-500 text-center mt-0.5 tm-user-role">Administador</p>
+                <p className="text-xs text-gray-500 text-center mt-0.5 tm-user-role">
+                    { role }
+                </p>
             </div>
         </div>
     )
