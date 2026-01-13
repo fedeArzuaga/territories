@@ -8,7 +8,6 @@ export const metadata = {
 
 export default async function MapPage() {
     const squares = await getAllSquares();
-    console.log(squares)
 
     return (
         <>
