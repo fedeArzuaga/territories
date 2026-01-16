@@ -3,7 +3,6 @@
 import { LatLngExpression } from "leaflet"
 import { Polygon, Popup, SVGOverlay } from "react-leaflet"
 import { CustomPopUp } from "../CustomPopUp/CustomPopUp"
-import { getTerritoryBasedOnSquareId } from "@/helpers/getTerritoryBasedOnSquareId"
 import { squaresData } from "@/data/polygons"
 
 interface TerritoryInfo {
@@ -14,7 +13,7 @@ interface TerritoryInfo {
     notes: string | null
     started: Date | null
     territoryState: string
-    updatedAt: Date
+    updatedAt: Date,
 }
 
 interface SquareData {
@@ -23,7 +22,7 @@ interface SquareData {
     state: string,
     territory: TerritoryInfo,
     territoryId: number,
-    updatedAt: Date
+    updatedAt: Date,
 }
 
 interface Props {
@@ -38,12 +37,11 @@ export const Square = ({ squareData }: Props) => {
         state,
         territory,
         territoryId,
-        updatedAt
     } = squareData
 
     const coordinates = squaresData[id].coordinates
 
-    const { started, finished, notes, territoryState } = territory
+    const { started, finished, notes, territoryState, managerId, updatedAt } = territory
 
     const colorFromState = state === 'Pendiente' ? 'red' : state === 'Completado' ? 'green' : 'yellow'
 
@@ -73,6 +71,8 @@ export const Square = ({ squareData }: Props) => {
                     started={ started }
                     finished={ finished }
                     notes={ notes }
+                    updatedAt={ updatedAt }
+                    managerId={ managerId || '' }
                 />
             </Popup>
 

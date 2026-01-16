@@ -1,24 +1,42 @@
 import Image from "next/image"
+import Link from "next/link";
 
 //TODO: Use user's real data once implemented
+interface Props {
+    fullName: string;
+    role: string;
+    image?: string;
+}
 
-export const TopbarActiveUser = () => {
+export const TopbarActiveUser = ({ fullName, role, image }: Props) => {
+
     return (
         <div id="profile" className="space-y-3 flex items-center">
-            <Image
-                src="https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg"
-                width={40}
-                height={40}
-                alt="Avatar user"
-                className="w-12 rounded-full m-0"
-            />
+            <Link
+                href="/dashboard/user-profile"
+                className="m-0"
+            >
+                <Image
+                    src={ image || "https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg" }
+                    width={40}
+                    height={40}
+                    alt="Avatar user"
+                    className="w-12 rounded-full m-0"
+                />
+            </Link>
             <div className="hidden md:block ml-3">
-                <h2
-                    className="font-bold text-xs md:text-sm text-left text-teal-700 tm-user-name"
+                <Link
+                    href="/dashboard/user-profile"
                 >
-                    Fernando Llambías
-                </h2>
-                <p className="text-xs text-gray-500 text-center mt-0.5 tm-user-role">Administador</p>
+                    <h2
+                        className="font-bold text-xs md:text-sm text-left text-teal-700 tm-user-name"
+                    >
+                        { fullName }
+                    </h2>
+                </Link>
+                <p className="text-xs text-gray-500 text-left mt-0.5 tm-user-role">
+                    { role }
+                </p>
             </div>
         </div>
     )

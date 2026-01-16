@@ -10,15 +10,15 @@ import { Badge } from "@/components/ui/Badge/Badge";
 import { EditTerritoryReferenceImage } from "@/app/dashboard/components/EditTerritoryReferenceImage";
 import { TerritoryData, TerritoryDataWithSquares } from "@/types/territory";
 import { updateTerritory } from "@/lib/services/updateTerritory";
-import styles from './EditTerritoryForm.module.css';
 import { Spinner } from "@/components/ui/Spinner/Spinner";
 import { getCurrentDate } from "@/helpers/getCurrentDate";
 
 interface Props {
-    territory: TerritoryDataWithSquares
+    territory: TerritoryDataWithSquares,
+    managerId: string
 }
 
-export const EditTerritoryForm = ({ territory }: Props) => {
+export const EditTerritoryForm = ({ territory, managerId }: Props) => {
 
     const {
         id: territoryId,
@@ -28,7 +28,6 @@ export const EditTerritoryForm = ({ territory }: Props) => {
         squares,
         started: startedDate,
         finished: finishedDate,
-        managerId,
         updatedAt
     } = territory;
 
@@ -80,6 +79,8 @@ export const EditTerritoryForm = ({ territory }: Props) => {
         event.preventDefault();
         const updatedData = {
             ...form,
+            manager: managerId,
+            managerId: managerId,
             updatedAt: new Date()
         }
 

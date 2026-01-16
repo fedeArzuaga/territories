@@ -1,16 +1,29 @@
 import { formatToLocalDateString } from "@/helpers/formatToLocalDateString";
 import { CgNotes, CgTime } from "react-icons/cg"
-import { IoTimeOutline } from "react-icons/io5"
 
 interface Props {
     territoryState: string,
     squareState: string,
     started: Date | null,
     finished: Date | null,
-    notes: string | null
+    notes: string | null,
+    updatedAt: Date
 }
 
-export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes }: Props) => {
+const getUpdatedDaysDistance = ( date: Date ): number => {
+    const lastEditedDate = new Date( date )
+
+    // Adding four hours to got date due to hours gap
+    lastEditedDate.setHours( date.getHours() + 4 )
+    const currentDate = new Date().getDate()
+
+    // Return the days distance between two dates
+    return currentDate - lastEditedDate.getDate()
+}
+
+export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes, updatedAt }: Props) => {
+
+
     
     return (
         <>
@@ -68,11 +81,25 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                     </div>
                 )
             }
-            <div className="bg-gray-100 p-2 text-gray-700 rounded mt-3">
-                <div className="flex items-center flex-start tm-last-time-done">
-                    <CgTime size={15} /> <span className="font-bold ml-1 text-xxs">Se trabajó hace:</span>&nbsp;15 días
-                </div>
-            </div>
+            {
+                updatedAt && (
+                    <div className="bg-gray-100 p-2 text-gray-700 rounded mt-3">
+                        <div className="flex items-center flex-start tm-last-time-done">
+                            <CgTime size={15} /> 
+                            <span className="font-bold ml-1 text-xxs">
+                                Última actualización:
+                            </span>&nbsp;
+                            { 
+                                getUpdatedDaysDistance( updatedAt ) === 0
+                                    ? 'hoy'
+                                    : getUpdatedDaysDistance( updatedAt ) === 1
+                                        ? '1 día atrás'
+                                        : `${ getUpdatedDaysDistance( updatedAt ) } días atrás`
+                            }
+                        </div>
+                    </div>
+                )
+            }
         </>
     )
 }

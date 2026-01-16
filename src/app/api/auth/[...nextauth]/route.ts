@@ -3,7 +3,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcrypt";
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -17,24 +17,29 @@ const handler = NextAuth({
                 email: credentials?.email
             }
         });
+
+        console.log(credentials)
         
         if ( (credentials?.email === userFromDatabase?.email) && userFromDatabase?.password && credentials?.password ) {
             const isPasswordValid = await bcrypt.compare( credentials?.password, userFromDatabase?.password );
             if ( isPasswordValid ) {
+                console.log( isPasswordValid )
                 return {
                     ...userFromDatabase,
-                    passwordHash: undefined // Exclude password hash from returned user object
+                    passwordHash: undefined
                 };
             }
         }
 
-        return userFromDatabase || null;
+        return null;
       }
     })
   ],
   pages: {
     signIn: '/auth/signin', // Custom login page
   }
-});
+}
+
+const handler = NextAuth( authOptions );
 
 export { handler as GET, handler as POST };
