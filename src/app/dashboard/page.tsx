@@ -4,6 +4,7 @@ import { Widget } from "@/components/Widget/Widget";
 import { MOCK_TERRITORY_DATA } from "@/data/MockSimpleTerritoryData";
 import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
 import { getAllTerritories } from "@/lib/services/getAllTerritories";
+import { UserGreeting } from "./components/UserGreeting";
 
 export default async function DashboardPage() {
 
@@ -11,10 +12,9 @@ export default async function DashboardPage() {
 
     return (
         <div>
-            <h1 className="text-5xl font-bold mb-8">
-                {/* //TODO: Replace with user's real data */}
-                Bienvenido, Fernando
-            </h1>
+            
+            <UserGreeting />
+
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
                 <div className="md:col-span-1">
                     <Widget
