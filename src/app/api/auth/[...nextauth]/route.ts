@@ -17,18 +17,21 @@ export const authOptions = {
                 email: credentials?.email
             }
         });
+
+        console.log(credentials)
         
         if ( (credentials?.email === userFromDatabase?.email) && userFromDatabase?.password && credentials?.password ) {
             const isPasswordValid = await bcrypt.compare( credentials?.password, userFromDatabase?.password );
             if ( isPasswordValid ) {
+                console.log( isPasswordValid )
                 return {
                     ...userFromDatabase,
-                    passwordHash: undefined // Exclude password hash from returned user object
+                    passwordHash: undefined
                 };
             }
         }
 
-        return userFromDatabase || null;
+        return null;
       }
     })
   ],
