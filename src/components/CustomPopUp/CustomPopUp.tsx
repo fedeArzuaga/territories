@@ -8,6 +8,8 @@ interface Props {
     territoryState: string,
     started: Date | null,
     finished: Date | null,
+    updatedAt: Date,
+    managerId: string,
     notes: string | null,
 }
 
@@ -18,7 +20,8 @@ export const CustomPopUp = ({
     territoryState,
     started,
     finished, 
-    notes
+    notes,
+    updatedAt
 }: Props) => {
 
     const badgeType = territoryState === "Pendiente" ? "danger" : territoryState === "En progreso" ? "warning" : "success"
@@ -37,6 +40,7 @@ export const CustomPopUp = ({
                 started={ started }
                 finished={ finished }
                 notes={ notes }
+                updatedAt={ updatedAt }
             />
         </div>
     )

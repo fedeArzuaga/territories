@@ -28,13 +28,8 @@ export default function LoginPage() {
             email,
             password
         })
-
-        console.log( result )
-
-        if (result?.ok) {
-            // Redirect the user to the map upon successful login
-            redirect('/map');
-        }
+        
+        if ( result?.ok ) redirect('/map');
     };
 
     return (
@@ -54,6 +49,7 @@ export default function LoginPage() {
                             </label>
                             <input
                                 type="email"
+                                name="email"
                                 value={email}
                                 onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
                                 autoComplete="email"
@@ -70,6 +66,7 @@ export default function LoginPage() {
                             </label>
                             <input
                                 type="password"
+                                name="password"
                                 value={password}
                                 onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
                                 placeholder="••••••••"
