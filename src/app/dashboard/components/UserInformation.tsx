@@ -1,10 +1,7 @@
 'use client'
 
-import { formatUserRole } from "@/helpers/formatUserRole"
-import { UploadButton } from "@/utils/uploadthing"
 import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { IoCameraOutline } from "react-icons/io5"
+import { UserUploadProfilePicture } from "./UserUploadProfilePicture"
 
 interface Props {
     image?: string,
@@ -19,36 +16,18 @@ export const UserInformation = ({
     role,
     id
 }: Props) => {
-
-    const router = useRouter()
     
     return (
         <div className="flex flex-col items-center text-center">
             <div className="relative group">
                 <Image
                     src={ image }
-                    alt="Profile"
+                    alt={`Imagen de perfil de ${name}`}
                     width={40}
                     height={40}
                     className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
                 />
-                <UploadButton
-                    endpoint="profilePicture"
-                    onClientUploadComplete={ async (res) => {
-                        await fetch(`/api/user/profile-picture/${id}`, {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({ image: res[0].ufsUrl })
-                        })
-                        router.refresh()
-                    }}
-                    onUploadError={(error: Error) => {
-                        // Do something with the error.
-                        throw new Error(`ERROR! ${error.message}`);
-                    }}
-                />
+                <UserUploadProfilePicture id={ id } />
             </div>
             <h2 className="mt-4 text-xl font-bold">{ name }</h2>
             <p className="text-sm opacity-90">{ role }</p>
