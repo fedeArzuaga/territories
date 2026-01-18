@@ -26,6 +26,7 @@ export default async function UserProfilePage() {
                             image={ user.image || profileMockData.profileImage }
                             name={ user.name }
                             role={ formatUserRole( user.role ) }
+                            id={ user.id }
                         />
                     </Widget>
                 </div>
