@@ -21,7 +21,7 @@ export const TopbarActiveUser = ({ fullName, role, image }: Props) => {
                     width={40}
                     height={40}
                     alt="Avatar user"
-                    className="w-12 rounded-full m-0"
+                    className="w-12 h-12 rounded-full m-0 object-cover"
                 />
             </Link>
             <div className="hidden md:block ml-3">
