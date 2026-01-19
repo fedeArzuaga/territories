@@ -1,7 +1,6 @@
 import { CustomCard } from "@/components/ui/Card/CustomCard";
 import { CustomGrid } from "@/components/ui/CustomGrid/CustomGrid";
 import { Widget } from "@/components/Widget/Widget";
-import { MOCK_TERRITORY_DATA } from "@/data/MockSimpleTerritoryData";
 import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
 import { getAllTerritories } from "@/lib/services/getAllTerritories";
 import { UserGreeting } from "./components/UserGreeting";
