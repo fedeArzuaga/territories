@@ -1,7 +1,4 @@
-
-import { Widget } from "@/components/Widget/Widget";
 import { EditTerritoryForm } from "@/components/Dashboard/EditTerritory/EditTerritoryForm";
-import { CancelTerritoryEditionButton } from "@/components/Dashboard/EditTerritory/CancelTerritoryEditionButton";
 import { getTerritoryBasedOnId } from "@/lib/services/getTerritoryBasedOnId";
 import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
 

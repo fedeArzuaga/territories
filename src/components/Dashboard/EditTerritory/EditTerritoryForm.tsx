@@ -2,20 +2,22 @@
 
 import { ChangeEvent, useEffect, useState, useTransition } from "react";
 import { IoIosSave } from "react-icons/io";
-import { FaInfoCircle } from "react-icons/fa";
+import { FaInfoCircle, FaMapMarkedAlt } from "react-icons/fa";
 import { Button } from "@/components/ui/Button/Button";
 import { CancelTerritoryEditionButton } from "./CancelTerritoryEditionButton";
 import { Widget } from "@/components/Widget/Widget";
 import { Badge } from "@/components/ui/Badge/Badge";
 import { EditTerritoryReferenceImage } from "@/app/dashboard/components/EditTerritoryReferenceImage";
-import { TerritoryData, TerritoryDataWithSquares } from "@/types/territory";
+import { TerritoryData, TerritoryDataWithSquares, TerritoryDataWithSquaresAndManager } from "@/types/territory";
 import { updateTerritory } from "@/lib/services/updateTerritory";
 import { Spinner } from "@/components/ui/Spinner/Spinner";
 import { getCurrentDate } from "@/helpers/getCurrentDate";
 import { hasAdminPriviliges } from "@/helpers/hasAdminPriviliges";
+import { LastEditedBy } from "@/app/dashboard/components/territoriyForm/LastEditedBy";
+import { TbMapX } from "react-icons/tb";
 
 interface Props {
-    territory: TerritoryDataWithSquares,
+    territory: TerritoryDataWithSquaresAndManager,
     managerId: string,
     role: string
 }
@@ -30,8 +32,11 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         squares,
         started: startedDate,
         finished: finishedDate,
-        updatedAt
+        updatedAt,
+        manager
     } = territory;
+
+    console.log( manager )
 
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
     const [squareStates, setSquareStates] = useState( squaresState )
@@ -90,7 +95,6 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
             ...form,
             started: (territoryState === 'En progreso' || territoryState === 'Completado') && !started ? new Date() : started,
             finished: (territoryState === 'Pendiente' || territoryState === 'En progreso') ? null : finished,
-            manager: managerId,
             managerId: managerId,
             updatedAt: new Date()
         }
@@ -167,6 +171,45 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
 
     const isDateError = started && finished && (new Date(started).getTime() > new Date(finished).getTime()) || false;
     const areNotesRequired = territoryState === "En progreso" || territoryState === "Completado";
+
+    if ( territoryState === "Personal" && role === "LEADER" ) {
+        return (
+            <>
+                <div className="mb-8 mt-8 flex flex-col md:flex-row md:justify-between md:items-center">
+                    <div>
+                        <h2 className="text-3xl font-bold text-gray-800 flex items-center">
+                            Territorio N° {id} -&nbsp; 
+                            <Badge 
+                                state={ territoryState }
+                            />
+                        </h2>
+                    </div>
+                    <div className="mt-4 md:mt-0">
+                        <CancelTerritoryEditionButton />
+                    </div>
+                </div>
+
+                <Widget title="Información del Territorio" type="default">
+                    <div className="p-10 max-w-xl mx-auto">
+                        <div className="w-full flex flex-col items-center text-center">
+                            <div className="text-9xl p-8 rounded-full mb-10 bg-teal-700 text-white">
+                                <TbMapX />
+                            </div>
+                            <h2 className="text-4xl font-bold mb-6">No tiene permisos suficientes</h2>
+                            <p className="text-1xl mb-6">No puede editar territorios personales. Si desea dejar una nota en un territorio personal, comuníquese directamente con un hermano con permisos de administrador.</p>
+                            <Button
+                                label="Volver a Territorios"
+                                action="link"
+                                style="primary"
+                                icon={ <FaMapMarkedAlt className="mr-2" size={ 25 } /> }
+                                href="/dashboard/territories"
+                            />
+                        </div>
+                    </div>
+                </Widget>
+            </>
+        )
+    }
 
     return (
         <>
@@ -380,11 +423,19 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                         }
 
                         <div className="space-y-6">
-                            <div className="pt-6 flex justify-end border-t border-gray-100">
+                            <div className={`pt-6 flex flex-col items-start sm:flex-row ${ manager ? 'justify-between' : 'justify-end' } items-center border-t border-gray-100`}>
+                                {
+                                    manager && (
+                                        <div className="">
+                                            <p className="font-bold mb-2">Última vez editado por:</p>
+                                            <LastEditedBy user={ manager } />
+                                        </div>
+                                    )
+                                }
                                 <button
                                     type="submit"
                                     disabled={isDateError || territoryState === "" || isPending}
-                                    className={`px-10 py-4 rounded-xl font-bold text-white transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 ${
+                                    className={`w-full sm:w-auto mt-6 px-10 py-4 rounded-xl font-bold text-white transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 ${
                                         (isDateError || territoryState === "") ? "bg-gray-300 cursor-not-allowed shadow-none" : "bg-teal-600 hover:bg-teal-700 shadow-lg shadow-teal-100"
                                     }`}
                                 >

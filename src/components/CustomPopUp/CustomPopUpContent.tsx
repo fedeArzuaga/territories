@@ -67,6 +67,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName
                     )
                 }
             </div>
+
             {
                 notes && (
                     <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3 whitespace-pre-wrap">
@@ -79,6 +80,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName
                     </div>
                 )
             }
+
             {
                 updatedAt && (
                     <div className="bg-gray-100 p-2 text-gray-700 rounded mt-3">
@@ -98,6 +100,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName
                     </div>
                 )
             }
+            
         </>
     )
 }

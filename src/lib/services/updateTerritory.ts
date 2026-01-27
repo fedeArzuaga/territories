@@ -19,6 +19,7 @@ export const updateTerritory = async ({ isPersonal, data }: Props) => {
                 started: data.started ? new Date(data.started) : null,
                 finished: data.finished ? new Date(data.finished) : null,
                 updatedAt: new Date(),
+                managerId: data.managerId,
                 squares: {
                     update: data.squares.map( square => ({
                         where: { id: square.id },
