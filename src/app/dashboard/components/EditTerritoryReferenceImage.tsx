@@ -10,6 +10,7 @@ interface Props {
 }
 
 export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
+    
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleModal = () => setIsOpen(!isOpen);

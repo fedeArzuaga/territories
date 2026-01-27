@@ -1,18 +1,37 @@
 import { withAuth } from "next-auth/middleware";
+import { NextResponse } from "next/server";
 
 export default withAuth(
     function middleware(req) {
-        // Custom logic can be added here if needed in the future
+        
+        const token = req.nextauth.token
+        
+        const path = req.nextUrl.pathname;
+
+        // If the user tries to go to login page and is already authenticated, it will be redirected to the map page
+        if (token && path.startsWith("/auth/signin")) {
+            return NextResponse.redirect(new URL("/map", req.url));
+        }
+
+        // If the user is NOT authenticated, and the path is NOT the login page, this redirects them to that page
+        if (!token && !path.startsWith("/auth/signin")) {
+            return NextResponse.redirect(new URL("/auth/signin", req.url));
+        }
+
     },
     {
-        // Ensures that only authenticated users can access the matched routes
         callbacks: {
-            authorized: ({ token }) => !!token,
+            authorized: () => true,
         },
     }
 );
 
 // 2. Keep your matcher as is
 export const config = {
-    matcher: ["/((?!api|_next/static|_next/image|favicon.ico|auth/signin|assets/territories).*)"],
+    matcher: [
+        "/dashboard/:path*",
+        "/auth/signin",
+        "/profile/:path*",
+        "/map"
+    ],
 };
