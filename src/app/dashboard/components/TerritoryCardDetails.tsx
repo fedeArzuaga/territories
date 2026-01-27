@@ -21,12 +21,23 @@ export const TerritoryCardDetails = ({
                 <p className="mt-2">
                     <b className="mr-2">Estado:</b> 
                     <Badge 
-                        type={ territoryState === 'Pendiente' ? 'danger' : territoryState === 'En progreso' ? 'warning' : 'success' } 
-                        text={ territoryState } 
+                        state={ territoryState }
                     />
                 </p>
                 <p className="mt-2">
-                    <b>Último conductor:</b> { lastLeaderName }
+                    {
+                        territoryState === "Personal"
+                            ? (
+                                <>
+                                    <b>Asignado a:</b> { lastLeaderName }
+                                </>
+                            )
+                            : (
+                                <>
+                                    <b>Último conductor:</b> { lastLeaderName }
+                                </>
+                            )
+                    }
                 </p>
             </div>
             <Button

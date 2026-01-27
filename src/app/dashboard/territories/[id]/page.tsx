@@ -1,7 +1,4 @@
-
-import { Widget } from "@/components/Widget/Widget";
 import { EditTerritoryForm } from "@/components/Dashboard/EditTerritory/EditTerritoryForm";
-import { CancelTerritoryEditionButton } from "@/components/Dashboard/EditTerritory/CancelTerritoryEditionButton";
 import { getTerritoryBasedOnId } from "@/lib/services/getTerritoryBasedOnId";
 import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
 
@@ -9,7 +6,7 @@ export default async function EditTerritoryPage({ params }:{ params: { id: numbe
 
     const { id } = await params;
     const territory = await getTerritoryBasedOnId(id);
-    const { id: managerId } = await getUserByActiveSession()
+    const { id: managerId, role } = await getUserByActiveSession()
 
     if ( !territory ) return <div>Territorio no encontrado</div>
 
@@ -19,6 +16,7 @@ export default async function EditTerritoryPage({ params }:{ params: { id: numbe
             <EditTerritoryForm 
                 territory={territory} 
                 managerId={ managerId }
+                role={ role }
             />
         </div>
     );

@@ -1,27 +1,18 @@
 import { formatToLocalDateString } from "@/helpers/formatToLocalDateString";
+import { getDaysDistanceFromCurrentDate } from "@/helpers/datesFunctions";
 import { CgNotes, CgTime } from "react-icons/cg"
 
 interface Props {
     territoryState: string,
     squareState: string,
+    lastLeaderName: string,
     started: Date | null,
     finished: Date | null,
     notes: string | null,
     updatedAt: Date
 }
 
-const getUpdatedDaysDistance = ( date: Date ): number => {
-    const lastEditedDate = new Date( date )
-
-    // Adding four hours to got date due to hours gap
-    lastEditedDate.setHours( date.getHours() + 4 )
-    const currentDate = new Date().getDate()
-
-    // Return the days distance between two dates
-    return currentDate - lastEditedDate.getDate()
-}
-
-export const CustomPopUpContent = ({ squareState, territoryState, started, finished, notes, updatedAt }: Props) => {
+export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName, started, finished, notes, updatedAt }: Props) => {
 
 
     
@@ -38,17 +29,22 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                 </div>
                 <div>
                     <p>
-                        <b>Último conductor</b>:
+                        <b>
+                            { territoryState === "Personal" ? "Asignado a" : "Último conductor" }
+                        </b>:
                     </p> 
                     <p>
-                        Pablo Scigliano
+                        { lastLeaderName || 'No asignado' }
                     </p>
                 </div>
                 {
-                    (territoryState === "En progreso" || territoryState === "Completado") && (
+                    (territoryState === "En progreso" || territoryState === "Completado" || territoryState === "Personal") && (
                         <div>
                             <p>
-                                <b>Se comenzó el</b>:
+                                <b>
+                                    { territoryState === "Personal" ? "Fecha de asignación" : "Se comenzó el" }
+                                    
+                                </b>:
                             </p>
                             <p>
                                 { started ? formatToLocalDateString(started) : 'No iniciado' }
@@ -57,10 +53,12 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                     )
                 }
                 {
-                    (territoryState === "En progreso" || territoryState === "Completado") && (
+                    (territoryState === "En progreso" || territoryState === "Completado" || territoryState === "Personal") && (
                         <div>
                             <p>
-                                <b>Se finalizó el</b>:
+                                <b>
+                                    { territoryState === "Personal" ? "Fecha de vencimiento" : "Se finalizó el" }
+                                </b>:
                             </p>
                             <p>
                                 { finished ? formatToLocalDateString(finished) : 'No finalizado' }
@@ -69,6 +67,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                     )
                 }
             </div>
+
             {
                 notes && (
                     <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3 whitespace-pre-wrap">
@@ -81,6 +80,7 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                     </div>
                 )
             }
+
             {
                 updatedAt && (
                     <div className="bg-gray-100 p-2 text-gray-700 rounded mt-3">
@@ -90,16 +90,17 @@ export const CustomPopUpContent = ({ squareState, territoryState, started, finis
                                 Última actualización:
                             </span>&nbsp;
                             { 
-                                getUpdatedDaysDistance( updatedAt ) === 0
+                                getDaysDistanceFromCurrentDate( updatedAt ) === 0
                                     ? 'hoy'
-                                    : getUpdatedDaysDistance( updatedAt ) === 1
+                                    : getDaysDistanceFromCurrentDate( updatedAt ) === 1
                                         ? '1 día atrás'
-                                        : `${ getUpdatedDaysDistance( updatedAt ) } días atrás`
+                                        : `${ getDaysDistanceFromCurrentDate( updatedAt ) } días atrás`
                             }
                         </div>
                     </div>
                 )
             }
+            
         </>
     )
 }

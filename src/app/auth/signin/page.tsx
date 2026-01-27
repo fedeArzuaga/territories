@@ -1,10 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Widget } from "@/components/Widget/Widget";
 import { FiLogIn } from "react-icons/fi";
 import { redirect } from "next/navigation";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
+import { useRouter } from "next/navigation";
 
 interface LoginForm {
     email: string;

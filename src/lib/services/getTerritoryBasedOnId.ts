@@ -6,6 +6,7 @@ export const getTerritoryBasedOnId = async ( id: number | string ) => {
         where: { id: Number(id) },
         include: {
             squares: true,
+            manager: true
         }
     });
     return territory;

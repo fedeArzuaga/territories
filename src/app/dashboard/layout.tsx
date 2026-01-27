@@ -1,11 +1,18 @@
 import { Sidebar } from "@/components/Sidebar/Sidebar";
 import { Topbar } from "@/components/Topbar/Topbar";
+import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
+import { redirect } from "next/navigation";
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
     children
 }: {
     children: React.ReactNode;
 }) {
+
+    const user = await getUserByActiveSession()
+    
+    if ( user.role === 'USER' ) redirect('/map')
+
     return (
         <div className="flex flex-col-reverse md:flex-row">
             <div className="fixed bottom-0 md:left-0 md:top-0 w-full md:w-auto lg:w-[300px] z-50">

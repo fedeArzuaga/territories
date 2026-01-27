@@ -3,27 +3,32 @@
 import { TerritoryDataWithSquares } from "@/types/territory";
 import { prisma } from "../prisma";
 
-export const updateTerritory = async ( territory: TerritoryDataWithSquares ) => {
+interface Props {
+    isPersonal: boolean,
+    data: TerritoryDataWithSquares
+}
+
+export const updateTerritory = async ({ isPersonal, data }: Props) => {
     try {
-        const updated = await prisma.territory.update({
-            where: { id: Number(territory.id) },
+        const updatedTerritory = await prisma.territory.update({
+            where: { id: Number(data.id) },
             data: {
-                territoryState: territory.territoryState,
-                lastLeaderName: territory.lastLeaderName,
-                notes: territory.notes,
-                started: territory.started ? new Date(territory.started) : null,
-                finished: territory.finished ? new Date(territory.finished) : null,
+                territoryState: data.territoryState,
+                lastLeaderName: data.lastLeaderName,
+                notes: isPersonal ? '' : data.notes, 
+                started: data.started ? new Date(data.started) : null,
+                finished: data.finished ? new Date(data.finished) : null,
                 updatedAt: new Date(),
+                managerId: data.managerId,
                 squares: {
-                    update: territory.squares.map( square => ({
+                    update: data.squares.map( square => ({
                         where: { id: square.id },
-                        data: { state: square.state }
+                        data: { state: isPersonal ? "Personal" : square.state }
                     }))
                 }
             }
         });
-
-        return updated;
+        return updatedTerritory;
     } catch ( error ) {
         console.error("Prisma Update Error:", error);
         throw error;

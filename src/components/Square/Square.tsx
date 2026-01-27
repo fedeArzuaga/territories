@@ -4,6 +4,7 @@ import { LatLngExpression } from "leaflet"
 import { Polygon, Popup, SVGOverlay } from "react-leaflet"
 import { CustomPopUp } from "../CustomPopUp/CustomPopUp"
 import { squaresData } from "@/data/polygons"
+import { getColorByState } from "@/helpers/getColorByState"
 
 interface TerritoryInfo {
     finished: Date | null
@@ -41,9 +42,9 @@ export const Square = ({ squareData }: Props) => {
 
     const coordinates = squaresData[id].coordinates
 
-    const { started, finished, notes, territoryState, managerId, updatedAt } = territory
+    const { started, finished, notes, territoryState, lastLeaderName, managerId, updatedAt } = territory
 
-    const colorFromState = state === 'Pendiente' ? 'red' : state === 'Completado' ? 'green' : 'yellow'
+    const colorFromState = getColorByState( state )
 
     return (
         <Polygon pathOptions={{ color: colorFromState }} positions={ coordinates as LatLngExpression[] }>
@@ -66,6 +67,7 @@ export const Square = ({ squareData }: Props) => {
                 <CustomPopUp
                     territory={ territoryId }
                     square={ squareNumber }
+                    lastLeaderName={ lastLeaderName || '' }
                     squareState={ state }
                     territoryState={ territoryState }
                     started={ started }
