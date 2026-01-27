@@ -11,8 +11,6 @@ export default async function UserProfilePage() {
 
     const user: User = await getUserByActiveSession()
 
-    console.log( user )
-
     return (
         <div className="mx-auto">
             <h1 className="text-5xl font-bold mb-8">Mi Perfil</h1>

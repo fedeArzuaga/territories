@@ -5,8 +5,8 @@ export interface TerritoryData {
     territoryState: string,
     lastLeaderName: string | null,
     notes: string | null,
-    started: Date | null,
-    finished: Date | null,
+    started: Date | null | string,
+    finished: Date | null | string,
     managerId: string | null,
     updatedAt: Date
 }
