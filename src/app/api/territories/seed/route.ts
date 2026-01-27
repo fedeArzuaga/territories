@@ -1,5 +1,5 @@
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient, User } from '../../../generated/client';
+import { PrismaClient, User } from './../../../../generated/client';
 import { NextResponse } from 'next/server'
 import { squaresData, territoriesData } from '@/data/polygons';
 import bcrypt from 'bcrypt';
@@ -50,53 +50,9 @@ export async function POST(request: Request) {
             territoriesSaved.push(created)
         }
 
-        // 3.Seed a unique superuser account
-        await prisma.user.deleteMany({});
-
-        const mySuperUser: User[] = [
-            {
-                id: crypto.randomUUID(),
-                name: "Federico Arzuaga",
-                email: "fede.arzuaga.perdomo@gmail.com",
-                password: bcrypt.hashSync("Fran29092012!", 10),
-                phone: "092345332",
-                createdAt: new Date(),
-                image: null,
-                role: "SUPERUSER",
-                updatedAt: new Date(),
-            },
-            {
-                id: crypto.randomUUID(),
-                name: "Fernando Llambías",
-                email: "ferllambis@gmail.com",
-                password: bcrypt.hashSync("C4mb14m3_P0r_F4v0r", 10),
-                phone: "094666575",
-                createdAt: new Date(),
-                image: null,
-                role: "ADMIN",
-                updatedAt: new Date(),
-            },
-            {
-                id: crypto.randomUUID(),
-                name: "Diego Demarco",
-                email: "demarcodiego@hotmail.com",
-                password: bcrypt.hashSync("C4mb14m3_P0r_F4v0r", 10),
-                phone: "099280125",
-                createdAt: new Date(),
-                image: null,
-                role: "LEADER",
-                updatedAt: new Date(),
-            }
-        ]
-
-        const superUser = await prisma.user.createMany({
-            data: mySuperUser
-        })
-
         return NextResponse.json({ 
             message: 'Seed completed', 
-            territoriesSaved,
-            superUser
+            territoriesSaved
         }, { status: 200 });
 
     } catch (error) {

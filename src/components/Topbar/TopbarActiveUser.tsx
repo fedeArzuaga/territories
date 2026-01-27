@@ -1,7 +1,6 @@
 import Image from "next/image"
 import Link from "next/link";
 
-//TODO: Use user's real data once implemented
 interface Props {
     fullName: string;
     role: string;
