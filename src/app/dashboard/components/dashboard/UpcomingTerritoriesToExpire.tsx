@@ -2,6 +2,7 @@ import { getCurrentDate } from "@/helpers/getCurrentDate"
 import { getDaysDistanceFromCurrentDate, getDaysDistanceFromTwoGivenDates } from "@/helpers/datesFunctions"
 import { prisma } from "@/lib/prisma"
 import { formatToLocalDateString } from "@/helpers/formatToLocalDateString"
+import { Widget } from "@/components/Widget/Widget"
 
 export const UpcomingTerritoriesToExpire = async () => {
 
@@ -22,8 +23,11 @@ export const UpcomingTerritoriesToExpire = async () => {
     return (
         <>
             {
-                territoriesDate && (
-                    <>
+                territoriesDate.length > 0 && (
+                    <Widget
+                        title="Territorios personales próximos a caducar"
+                        type="info"
+                    >
                         <p>Estos son los territorios personales que van a caducar pronto:</p>
                         
                         <ul>
@@ -42,7 +46,7 @@ export const UpcomingTerritoriesToExpire = async () => {
                                 </li>
                             )) }
                         </ul>
-                    </>
+                    </Widget>
                 )
             }
         </>

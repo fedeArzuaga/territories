@@ -67,12 +67,7 @@ export default async function DashboardPage() {
             </div>
 
             <div className="w-full mt-6">
-                <Widget
-                    title="Territorios personales próximos a caducar"
-                    type="info"
-                >
-                    <UpcomingTerritoriesToExpire />
-                </Widget>
+                <UpcomingTerritoriesToExpire />
             </div>
 
         </div>

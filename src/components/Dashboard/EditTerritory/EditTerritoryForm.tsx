@@ -435,7 +435,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                 <button
                                     type="submit"
                                     disabled={isDateError || territoryState === "" || isPending}
-                                    className={`w-full sm:w-auto mt-6 px-10 py-4 rounded-xl font-bold text-white transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 ${
+                                    className={`cursor-pointer w-full sm:w-auto mt-6 px-10 py-4 rounded-xl font-bold text-white transition-all transform hover:-translate-y-1 active:scale-95 flex items-center justify-center gap-2 ${
                                         (isDateError || territoryState === "") ? "bg-gray-300 cursor-not-allowed shadow-none" : "bg-teal-600 hover:bg-teal-700 shadow-lg shadow-teal-100"
                                     }`}
                                 >
