@@ -4,6 +4,7 @@ import { Badge } from '../ui/Badge/Badge'
 interface Props {
     territory: number,
     square: number,
+    lastLeaderName: string,
     squareState: string,
     territoryState: string,
     started: Date | null,
@@ -16,6 +17,7 @@ interface Props {
 export const CustomPopUp = ({ 
     territory, 
     square, 
+    lastLeaderName,
     squareState,
     territoryState,
     started,
@@ -23,13 +25,10 @@ export const CustomPopUp = ({
     notes,
     updatedAt
 }: Props) => {
-
-    const badgeType = territoryState === "Pendiente" ? "danger" : territoryState === "En progreso" ? "warning" : "success"
-
     return (
         <div>
             <h3 className="text-2xl font-bold mb-0 flex items-center">
-                Territorio N°{ territory } -&nbsp;<Badge type={ badgeType } text={ territoryState } />
+                Territorio N°{ territory } -&nbsp;<Badge state={ territoryState } />
             </h3>
             <p className="text-gray-400 font-bold mt-0!">
                 Manzana N°{ square }
@@ -40,6 +39,7 @@ export const CustomPopUp = ({
                 started={ started }
                 finished={ finished }
                 notes={ notes }
+                lastLeaderName={ lastLeaderName }
                 updatedAt={ updatedAt }
             />
         </div>

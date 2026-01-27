@@ -9,7 +9,7 @@ export default async function EditTerritoryPage({ params }:{ params: { id: numbe
 
     const { id } = await params;
     const territory = await getTerritoryBasedOnId(id);
-    const { id: managerId } = await getUserByActiveSession()
+    const { id: managerId, role } = await getUserByActiveSession()
 
     if ( !territory ) return <div>Territorio no encontrado</div>
 
@@ -19,6 +19,7 @@ export default async function EditTerritoryPage({ params }:{ params: { id: numbe
             <EditTerritoryForm 
                 territory={territory} 
                 managerId={ managerId }
+                role={ role }
             />
         </div>
     );

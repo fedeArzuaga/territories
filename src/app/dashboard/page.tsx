@@ -4,6 +4,8 @@ import { Widget } from "@/components/Widget/Widget";
 import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
 import { getAllTerritories } from "@/lib/services/getAllTerritories";
 import { UserGreeting } from "./components/UserGreeting";
+import { InfoBlock } from "./components/InfoBlock";
+import { UpcomingTerritoriesToExpire } from "./components/dashboard/UpcomingTerritoriesToExpire";
 
 export default async function DashboardPage() {
 
@@ -15,9 +17,10 @@ export default async function DashboardPage() {
             <UserGreeting />
 
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+
                 <div className="md:col-span-1">
                     <Widget
-                        title="Último territorio completado:"
+                        title="Último territorio trabajado:"
                         type="primary"
                     >
                         <p className="text-xl font-bold">
@@ -39,6 +42,7 @@ export default async function DashboardPage() {
                         </div>
                     </Widget>
                 </div>
+
                 <div className="xl:col-span-3">
                     <Widget
                         title="Territorios más frecuentes:"
@@ -59,7 +63,18 @@ export default async function DashboardPage() {
                         </CustomGrid>
                     </Widget>
                 </div>
+
             </div>
+
+            <div className="w-full mt-6">
+                <Widget
+                    title="Territorios personales próximos a caducar"
+                    type="info"
+                >
+                    <UpcomingTerritoriesToExpire />
+                </Widget>
+            </div>
+
         </div>
     );
 }
