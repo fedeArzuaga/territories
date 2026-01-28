@@ -32,7 +32,7 @@ export default async function MapLayout({
                         </Link>
                     )
                     : (
-                        <SignOutButton location="map" />
+                        <SignOutButton />
                     )
             }
         </>

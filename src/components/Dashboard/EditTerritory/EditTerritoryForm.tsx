@@ -2,19 +2,24 @@
 
 import { ChangeEvent, useEffect, useState, useTransition } from "react";
 import { IoIosSave } from "react-icons/io";
+import Link from "next/link";
 import { FaInfoCircle, FaMapMarkedAlt } from "react-icons/fa";
+
 import { Button } from "@/components/ui/Button/Button";
 import { CancelTerritoryEditionButton } from "./CancelTerritoryEditionButton";
 import { Widget } from "@/components/Widget/Widget";
 import { Badge } from "@/components/ui/Badge/Badge";
 import { EditTerritoryReferenceImage } from "@/app/dashboard/components/EditTerritoryReferenceImage";
-import { TerritoryData, TerritoryDataWithSquares, TerritoryDataWithSquaresAndManager } from "@/types/territory";
+import { TerritoryData, TerritoryDataWithSquaresAndManager } from "@/types/territory";
 import { updateTerritory } from "@/lib/services/updateTerritory";
 import { Spinner } from "@/components/ui/Spinner/Spinner";
 import { getCurrentDate } from "@/helpers/getCurrentDate";
 import { hasAdminPriviliges } from "@/helpers/hasAdminPriviliges";
 import { LastEditedBy } from "@/app/dashboard/components/territoriyForm/LastEditedBy";
 import { TbMapX } from "react-icons/tb";
+import { Modal } from "@/components/ui/Modal/Modal";
+import { AnimatedCheckmark } from "@/components/ui/CheckMark/CheckMark";
+import { revalidateMyPath } from "@/lib/services/revalidateMyPath";
 
 interface Props {
     territory: TerritoryDataWithSquaresAndManager,
@@ -41,6 +46,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
     const [squareStates, setSquareStates] = useState( squaresState )
     const [ isPersonal, setIsPersonal ] = useState( state === "Personal" )
+    const [ isModalOpen, setIsModalOpen ] = useState( false )
 
     // Used to manage pending state on form submission
     const [isPending, startTransition] = useTransition()
@@ -114,6 +120,8 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                     }))
                 }
             })
+            setIsModalOpen(true)
+            revalidateMyPath(`/dashboard/territories/${territoryId}`)
         })
         
     }
@@ -198,7 +206,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                             <h2 className="text-4xl font-bold mb-6">No tiene permisos suficientes</h2>
                             <p className="text-1xl mb-6">No puede editar territorios personales. Si desea dejar una nota en un territorio personal, comuníquese directamente con un hermano con permisos de administrador.</p>
                             <Button
-                                label="Volver a Territorios"
+                                label="Ir a Territorios"
                                 action="link"
                                 style="primary"
                                 icon={ <FaMapMarkedAlt className="mr-2" size={ 25 } /> }
@@ -462,6 +470,27 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                     </form>
                 </div>
             </Widget>
+
+            <Modal 
+                isOpen={isModalOpen} 
+                onClose={() => setIsModalOpen(false)}
+                maxWidth="max-w-[600px]"
+            >
+                <div className="text-center">
+                    <AnimatedCheckmark trigger={ isModalOpen } />
+                    <h2 className="text-4xl font-bold mb-4">Territorio Actualizado</h2>
+                    <p className="text-lg">El territorio se ha actualizado correctamente.</p>
+                    <Link
+                        href="/map"
+                        className="py-3 px-5 inline-block rounded-lg font-bold cursor-pointer text-white bg-teal-600 hover:bg-teal-700 mt-4"
+                    >
+                        <div className="flex items-center justify-center">
+                            <FaMapMarkedAlt size={ 25 } className="mr-3" /> Ver el mapa
+                        </div>
+                    </Link>
+                </div>
+            </Modal>
+
         </>
     );
 };
