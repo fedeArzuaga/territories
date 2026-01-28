@@ -20,7 +20,7 @@ const initialErrorState = {
     confirmPassword: { message: '' }
 }
 
-export const useUpdateUserForm = ( initialState: InitialState, id: string ) => {
+export const useUpdateUserForm = ( initialState: InitialState, id: string, openModal: ( state:boolean ) => void ) => {
 
     const [formData, setFormData] = useState( initialState );
     const [error, setError] = useState( initialErrorState )
@@ -34,7 +34,7 @@ export const useUpdateUserForm = ( initialState: InitialState, id: string ) => {
         setError( initialErrorState )
     }
 
-    const handleSubmit = ( event: FormEvent<HTMLFormElement> ) => {
+    const handleSubmit = async ( event: FormEvent<HTMLFormElement> ) => {
         event.preventDefault()
         
         // Check if it's a valid email address
@@ -64,20 +64,19 @@ export const useUpdateUserForm = ( initialState: InitialState, id: string ) => {
             return
         }
 
-        // Only when all requirement are met
-        console.log("form sent:", formData)
         const newUserData = {
             email: formData.email,
             password: formData.password
         }
 
-        fetch(`/api/user/update/${id}`, {
+        await fetch(`/api/user/update/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify( newUserData )
         })
+        openModal(true)
 
     }
 

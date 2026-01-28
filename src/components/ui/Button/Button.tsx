@@ -24,7 +24,7 @@ export const Button = ({ label, type = "button", icon, style, action = "button",
                             p-2 rounded-lg font-bold cursor-pointer
                             ${ (!cssClasses && style === "primary") ? 'text-white bg-teal-600 hover:bg-teal-700' : '' }
                             ${ (!cssClasses && style === "dark") ? 'text-white bg-gray-800 hover:bg-gray-900' : '' }
-                            ${ (!cssClasses && style === "danger") ? 'text-white bg-red-400 hover:bg-red-500' : '' }
+                            ${ (!cssClasses && style === "danger") ? 'text-white bg-red-600 hover:bg-red-700' : '' }
                             ${ (!cssClasses && style === "warning") ? 'text-white bg-amber-500 hover:bg-amber-600' : '' }
                             ${ (!cssClasses && style === "success") ? 'text-white bg-green-600 hover:bg-green-700' : '' }
                             ${ (!cssClasses && style === "default") ? 'text-gray-700 bg-white hover:bg-teal-600' : '' }
