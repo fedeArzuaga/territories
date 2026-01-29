@@ -27,9 +27,9 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
         <div className="col-span-2">
 
             {/* Trigger Button */}
-            ¿No está seguro de qué manzana editar? Aquí tiene una&nbsp;
+            Aquí tiene una&nbsp;
             <Button
-                label="imagen de referencia"
+                label={`imagen de referencia del territorio N° ${territoryID}`}
                 style="dark"
                 cssClasses="!p-0 bg-inherit !inline font-bold underline"
                 onClickHandler={ toggleModal }

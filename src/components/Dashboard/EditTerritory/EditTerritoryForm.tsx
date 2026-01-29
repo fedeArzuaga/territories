@@ -41,8 +41,6 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         manager
     } = territory;
 
-    console.log( manager )
-
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
     const [squareStates, setSquareStates] = useState( squaresState )
     const [ isPersonal, setIsPersonal ] = useState( state === "Personal" )
@@ -408,7 +406,27 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                             !isPersonal && (
                                 <div className="space-y-6">
                                     <div className="flex flex-col w-full">
-                                        <label className="font-bold mb-2 text-gray-700">Notas de la última salida: { areNotesRequired && '*' }</label>
+                                        <div className="flex justify-between items-center">
+                                            <label className="font-bold mb-2 text-gray-700">Notas de la última salida: { areNotesRequired && '*' }</label>
+                                            {
+                                                !hasAdminPriviliges( role ) && (
+                                                    <>
+                                                        {/* SECTION 2: PROGRESS BY SQUARE (Full Width for easier reading) */}
+                                                        {
+                                                            !isPersonal && (
+                                                                <div className="flex flex-col space-y-4">
+                                                                    <div className="flex flex-col xl:flex-row xl:items-center justify-between gap-2 border-b border-gray-100 pb-2">
+                                                                        <div className="text-sm p-0 xl:px-3 xl:py-1 rounded-full text-gray-900 font-medium">
+                                                                            <EditTerritoryReferenceImage territoryID={Number(id)} />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        }
+                                                    </>
+                                                )
+                                            }
+                                        </div>
                                         <textarea
                                             name="notes"
                                             rows={4}

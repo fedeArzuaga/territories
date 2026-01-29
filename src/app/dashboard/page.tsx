@@ -6,10 +6,11 @@ import { getAllTerritories } from "@/lib/services/getAllTerritories";
 import { UserGreeting } from "./components/UserGreeting";
 import { InfoBlock } from "./components/InfoBlock";
 import { UpcomingTerritoriesToExpire } from "./components/dashboard/UpcomingTerritoriesToExpire";
+import { LastEditedTerritory } from "./components/dashboard/LastEditedTerritory";
 
 export default async function DashboardPage() {
 
-    const territories = await getAllTerritories({ limit: 6 });
+    const territories = await getAllTerritories({ limit: 6, customOrder: 'desc' });
 
     return (
         <div>
@@ -23,23 +24,7 @@ export default async function DashboardPage() {
                         title="Último territorio trabajado:"
                         type="primary"
                     >
-                        <p className="text-xl font-bold">
-                            Territorio N° 25
-                        </p>
-                        <p className="mt-0 font-bold">
-                            Manzana N° 2
-                        </p>
-                        <div className="mt-3">
-                            <p>
-                                <b>Último conductor:</b> Pablo Scigliano
-                            </p>
-                            <p>
-                                <b>Fecha de inicio:</b> 10/05/2025
-                            </p>
-                            <p>
-                                <b>Fecha de finalizado:</b> 24/05/2025
-                            </p>
-                        </div>
+                        <LastEditedTerritory />
                     </Widget>
                 </div>
 

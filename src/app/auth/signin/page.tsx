@@ -20,18 +20,34 @@ export default function LoginPage() {
         password: ''
     });
     const { email, password } = loginForm;
+    const [error, setError] = useState('')
+    const router = useRouter()
+
+    const handleInputChange = ( e: React.ChangeEvent<HTMLInputElement> ) => {
+        setLoginForm({...loginForm, [e.target.name]: e.target.value})
+        setError('')
+    }
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
         // Auth logic here
-        const result = await signIn('credentials', {
-            redirect: false,
-            email,
-            password
-        })
-        
-        if ( result?.ok ) redirect('/map');
+        try {
+            const result = await signIn('credentials', {
+                redirect: false,
+                email,
+                password
+            })
+            
+            if ( result?.ok ) router.push('/map');
+
+            if ( !result?.ok && result?.status === 401 ) {
+                setError('Las credenciales no son válidas. Inténtelo nuevamente.')
+            }
+            
+        } catch ( error ) {
+            console.log( error )
+        }
     };
 
     return (
@@ -53,7 +69,7 @@ export default function LoginPage() {
                                 type="email"
                                 name="email"
                                 value={email}
-                                onChange={(e) => setLoginForm({...loginForm, email: e.target.value})}
+                                onChange={ handleInputChange }
                                 autoComplete="email"
                                 placeholder="ejemplo@correo.com"
                                 className="w-full p-3 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none transition-all h-11"
@@ -70,7 +86,7 @@ export default function LoginPage() {
                                 type="password"
                                 name="password"
                                 value={password}
-                                onChange={(e) => setLoginForm({...loginForm, password: e.target.value})}
+                                onChange={ handleInputChange }
                                 placeholder="••••••••"
                                 autoComplete="current-password"
                                 className="w-full p-3 border rounded-md bg-white text-black focus:ring-2 focus:ring-teal-500 outline-none transition-all h-11"
@@ -89,6 +105,15 @@ export default function LoginPage() {
                             </button>
                         </div>
                     </form>
+                    {
+                        error && (
+                            <div
+                                className="rounded-md border border-red-300 bg-red-100 text-red-700 py-2 px-3 text-sm mt-4"
+                            >
+                                { error }
+                            </div>
+                        )
+                    }
                 </Widget>
             </div>
         </div>

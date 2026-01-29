@@ -58,6 +58,7 @@ type Roles = "SUPERUSER" | "ADMIN" | "LEADER" | "USER"
 export const Sidebar = async () => {
 
     const user = await getUserByActiveSession()
+    const usersMenuItems = menuItems.filter ( item => item.permissionLevel <= permissionLevelsByRole[user.role as Roles] )
 
     return (
         <div 
@@ -69,7 +70,7 @@ export const Sidebar = async () => {
                 className="bg-white md:h-screen md:block shadow-xl overflow-x-hiddenw-full transition-transform duration-300 ease-in-out"
             >
                 <div className="space-y-6 md:space-y-10 p-2 md:p-5">
-                    <SidebarMenu menuItems={ menuItems } permissionLevel={ permissionLevelsByRole[user.role as Roles] } />
+                    <SidebarMenu menuItems={ usersMenuItems } permissionLevel={ permissionLevelsByRole[user.role as Roles] } />
                 </div>
             </div>
 

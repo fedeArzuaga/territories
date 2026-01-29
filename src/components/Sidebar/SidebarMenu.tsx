@@ -14,10 +14,13 @@ interface Props {
 export const SidebarMenu = ({ menuItems, permissionLevel }: Props) => {
 
     const pathname = usePathname()
-    console.log({menuItems, permissionLevel})
 
     return (
-        <div id="menu" className={`grid grid-cols-${menuItems.length} gap-2 md:flex justify-between md:flex-start md:flex-col`}>
+        <div 
+            id="menu" 
+            style={{ gridTemplateColumns: `repeat(${menuItems.length}, minmax(0, 1fr))` }}
+            className={`grid gap-2 md:flex justify-between md:flex-start md:flex-col`}
+        >
             {
                 menuItems.map( item => {
 
