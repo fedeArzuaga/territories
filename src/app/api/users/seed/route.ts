@@ -105,6 +105,17 @@ export async function POST(request: Request) {
                 image: null,
                 role: "LEADER",
                 updatedAt: new Date(),
+            },
+            {
+                id: crypto.randomUUID(),
+                name: "Juan Pérez",
+                email: "juanperez@gmail.com",
+                password: bcrypt.hashSync("salmo8318", 10),
+                phone: "099111222",
+                createdAt: new Date(),
+                image: null,
+                role: "USER",
+                updatedAt: new Date(),
             }
         ]
 
