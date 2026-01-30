@@ -1,7 +1,7 @@
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcrypt'
 
-export async function POST(request: Request, { params }: { params: { id: string } }) { 
+export async function POST(request: Request, { params }: { params: Promise<{ id: string }> }) { 
 
     const { id } = await params;
     const body = await request.json()

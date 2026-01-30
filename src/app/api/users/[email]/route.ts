@@ -1,7 +1,7 @@
 import { isValidEmail } from '@/helpers/isValidEmail';
 import { prisma } from '@/lib/prisma';
 
-export async function GET(request: Request, { params }: { params: { email: string } }) { 
+export async function GET(request: Request, { params }: { params: Promise<{ email: string }> }) { 
 
     const { email } = await params;
 

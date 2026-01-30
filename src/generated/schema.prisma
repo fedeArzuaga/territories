@@ -1,0 +1,68 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../src/generated"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id                 String      @id @default(uuid())
+  name               String
+  email              String      @unique
+  password           String
+  phone              String?
+  createdAt          DateTime    @default(now())
+  updatedAt          DateTime    @updatedAt
+  image              String?
+  role               String      @default("USER")
+  Account            Account[]
+  Session            Session[]
+  managedTerritories Territory[] @relation("TerritoryManager")
+}
+
+model Territory {
+  id             Int       @id @default(autoincrement())
+  territoryState String    @default("Pendiente")
+  lastLeaderName String?
+  notes          String?
+  started        DateTime?
+  finished       DateTime?
+  managerId      String?
+  updatedAt      DateTime  @updatedAt
+  squares        Square[]
+  manager        User?     @relation("TerritoryManager", fields: [managerId], references: [id])
+}
+
+model Square {
+  id           String    @id
+  squareNumber Int
+  state        String    @default("Pendiente")
+  territoryId  Int
+  updatedAt    DateTime  @updatedAt
+  territory    Territory @relation(fields: [territoryId], references: [id], onDelete: Cascade)
+}
+
+model Account {
+  id                String  @id
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  User              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
