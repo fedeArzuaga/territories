@@ -23,9 +23,9 @@ export const UserInformation = ({
                 <Image
                     src={ image }
                     alt={`Imagen de perfil de ${name}`}
-                    width={40}
-                    height={40}
-                    className="w-32 h-32 rounded-full border-4 border-white shadow-lg object-cover"
+                    width={300}
+                    height={300}
+                    className="w-48 h-48 sm:w-32 sm:h-32 xl:w-48 xl:h-48 rounded-full border-4 border-white shadow-lg object-cover"
                 />
                 <UserUploadProfilePicture id={ id } />
             </div>

@@ -30,15 +30,15 @@ export const UserUploadProfilePicture = ({ id }: Props) => {
     });
 
     return (
-        <label className="absolute bottom-0 w-10 h-10 right-0 bg-white p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-colors flex justify-center items-center">
+        <label className="absolute bottom-0 w-14 h-14 sm:w-10 sm:h-10 xl:w-14 xl:h-14 right-0 bg-white p-2 rounded-full cursor-pointer hover:bg-gray-100 transition-colors flex justify-center items-center">
             <span className="text-white text-xs">
                 {
                     isUploading 
                         ? (
-                            <LuLoaderCircle className={`text-teal-500 ${style.spinner}`} size={25} />
+                            <LuLoaderCircle className={`text-teal-500 ${style.spinner} w-10 h-10 sm:w-6 sm:h-6 xl:w-10 xl:h-10`} size={70} />
                         )
                         : (
-                            <IoCameraOutline className="text-teal-500" size={25} />
+                            <IoCameraOutline className="text-teal-500 w-10 h-10 sm:w-6 sm:h-6 xl:w-10 xl:h-10" size={70} />
                         )
                 }
             </span>

@@ -15,10 +15,10 @@ export default async function UserProfilePage() {
         <div className="mx-auto">
             <h1 className="text-5xl font-bold mb-8">Mi Perfil</h1>
 
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 xl:grid-cols-4 gap-8">
                 
                 {/* Visual information */}
-                <div className="lg:col-span-1">
+                <div className="xl:col-span-1">
                     <Widget title="Usuario" type="primary">
                         <UserInformation 
                             image={ user.image || profileMockData.profileImage }
@@ -30,7 +30,7 @@ export default async function UserProfilePage() {
                 </div>
 
                 {/* Edit user data */}
-                <div className="lg:col-span-3">
+                <div className="lg:col-span-2 xl:col-span-3">
                     <Widget title="Editar Información" type="default">
                         <UserUpdateForm
                             email={ user.email }

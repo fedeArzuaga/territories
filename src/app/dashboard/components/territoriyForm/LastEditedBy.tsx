@@ -20,8 +20,8 @@ export const LastEditedBy = ({ user }: Props) => {
         <div id="profile" className="space-y-3 flex items-center">
             <Image
                 src={ image || "https://i.pinimg.com/1200x/6e/59/95/6e599501252c23bcf02658617b29c894.jpg" }
-                width={30}
-                height={30}
+                width={200}
+                height={200}
                 alt="Avatar user"
                 className="w-12 h-12 rounded-full m-0 object-cover"
             />

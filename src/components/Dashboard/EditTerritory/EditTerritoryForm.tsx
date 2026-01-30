@@ -406,7 +406,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                             !isPersonal && (
                                 <div className="space-y-6">
                                     <div className="flex flex-col w-full">
-                                        <div className="flex justify-between items-center">
+                                        <div className="flex flex-col md:flex-row justify-center md:justify-between md:items-center">
                                             <label className="font-bold mb-2 text-gray-700">Notas de la última salida: { areNotesRequired && '*' }</label>
                                             {
                                                 !hasAdminPriviliges( role ) && (
