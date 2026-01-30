@@ -12,6 +12,10 @@ const nunitoSans = Nunito_Sans({
 export const metadata: Metadata = {
   title: "Territorios Los Bulevares",
   description: "App creada para administrar el estado de los territorios, ya sea su frecuencia de trabajado, cuándo fue la última vez que se trabajó, y demás datos relevantes.",
+  icons: {
+    icon: '/assets/logo.svg'
+  },
+  manifest: '/manifest.json'
 };
 
 export default function RootLayout({
@@ -21,6 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html className={`${nunitoSans.variable}`} lang="es">
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+      </head>
       <body
         className={`${nunitoSans.variable} antialiased`}
       >
