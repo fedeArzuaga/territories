@@ -10,9 +10,6 @@ export const LastEditedTerritory = async () => {
             <p className="text-xl font-bold">
                 Territorio N° { lastEditedTerritory?.id }
             </p>
-            <p className="mt-0 font-bold">
-                Manzana N° 2
-            </p>
             <div className="mt-3">
                 <p>
                     <b>Último conductor:</b> { lastEditedTerritory?.lastLeaderName }
