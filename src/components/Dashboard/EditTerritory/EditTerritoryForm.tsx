@@ -143,7 +143,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                 handleStatusChange("Completado")
                 setForm( prev => ({
                     ...prev,
-                    finished: new Date()
+                    finished: finished ? finished : new Date()
                 }))
             } else {
                 handleStatusChange("En progreso")
