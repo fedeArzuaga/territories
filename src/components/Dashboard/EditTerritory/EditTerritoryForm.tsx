@@ -141,6 +141,10 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                 handleStatusChange("Pendiente")
             } else if ( squareStates.every( square => square.state === "Completado" ) ) {
                 handleStatusChange("Completado")
+                setForm( prev => ({
+                    ...prev,
+                    finished: new Date()
+                }))
             } else {
                 handleStatusChange("En progreso")
             }
