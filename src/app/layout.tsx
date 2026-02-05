@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { Nunito_Sans } from "next/font/google";
+import { SpeedInsights } from '@vercel/speed-insights/next';
+
+import { TerritoriesSessionProvider } from "@/providers/TerritoriesSessionProvider";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
-import { TerritoriesSessionProvider } from "@/providers/TerritoriesSessionProvider";
 
 const nunitoSans = Nunito_Sans({
   variable: "--font-nunito-sans",
@@ -35,6 +37,7 @@ export default function RootLayout({
           <TerritoriesSessionProvider>
             {children}
           </TerritoriesSessionProvider>
+          <SpeedInsights />
         </div>
       </body>
     </html>
