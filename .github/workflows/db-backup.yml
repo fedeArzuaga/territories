@@ -2,9 +2,8 @@ name: Daily Database Backup
 
 on:
   schedule:
-    # This runs at 00:00 UTC every day (Approx 9:00 PM in Uruguay/Argentina)
-    - cron: '0 6 * * *'
-  workflow_dispatch: # Allows you to run it manually anytime for testing
+    - cron: '3 0 * * *'
+  workflow_dispatch:
 
 jobs:
   backup:
@@ -13,18 +12,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install PostgreSQL Tools
+      - name: Install PostgreSQL 17 Tools
         run: |
+          # Add the official PostgreSQL repository to get version 17
           sudo apt-get update
-          sudo apt-get install -y postgresql-client
+          sudo apt-get install -y wget gnupg2
+          wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | sudo apt-key add -
+          echo "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -cs)-pgdg main" | sudo tee /etc/apt/sources.list.d/pgdg.list
+          sudo apt-get update
+          sudo apt-get install -y postgresql-client-17
 
       - name: Run pg_dump
         env:
           DATABASE_URL: ${{ secrets.BACKUP_DATABASE_URL }}
         run: |
-          # Creates a filename with the current date
           FILENAME="backup-$(date +'%Y-%m-%d_%H-%M').sql"
-          pg_dump "$DATABASE_URL" --no-owner --no-acl --column-inserts > $FILENAME
+          # Use pg_dump17 specifically
+          /usr/lib/postgresql/17/bin/pg_dump "$DATABASE_URL" --no-owner --no-acl --column-inserts > $FILENAME
           echo "FILENAME=$FILENAME" >> $GITHUB_ENV
 
       - name: Upload Backup Artifact
@@ -32,4 +36,4 @@ jobs:
         with:
           name: database-backup-${{ env.FILENAME }}
           path: ${{ env.FILENAME }}
-          retention-days: 7 # GitHub will delete old backups after 7 days to save space
+          retention-days: 7
