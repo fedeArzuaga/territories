@@ -2,14 +2,16 @@ import { CustomCard } from "@/components/ui/Card/CustomCard";
 import { CustomGrid } from "@/components/ui/CustomGrid/CustomGrid";
 import { Widget } from "@/components/Widget/Widget";
 import { TerritoryCardDetails } from "../components/TerritoryCardDetails";
-import { territoriesData } from "@/data/polygons";
 import { getAllTerritories } from "@/lib/services/getAllTerritories";
+import Link from "next/link";
 
 export default async function TerritoriesPage() {
 
     const territories = await getAllTerritories({
         includeSquares: true,
     })
+
+    console.log( territories )
 
     return (
         <div>
@@ -25,11 +27,21 @@ export default async function TerritoriesPage() {
                     >
                         {
                             territories.map( territory => (
-                                <CustomCard key={ territory.id }>
-                                    <TerritoryCardDetails
-                                        territory={ territory }
-                                    />
-                                </CustomCard>
+                                <Link 
+                                    key={ territory.id } 
+                                    href={`/dashboard/territories/${territory.id}`}
+                                    className="block"
+                                >
+                                    <CustomCard
+                                        cssClasses={ 
+                                            territory.category === "Personal" 
+                                                ? "border-blue-600" 
+                                                : "border-teal-500" 
+                                        }
+                                    >
+                                        <TerritoryCardDetails territory={ territory } />
+                                    </CustomCard>
+                                </Link>
                             ))
                         }
                     </CustomGrid>

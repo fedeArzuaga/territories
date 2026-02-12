@@ -3,6 +3,7 @@ import { User } from "./user"
 
 export interface TerritoryData {
     id: number,
+    category?: string | null,
     territoryState: string,
     lastLeaderName: string | null,
     notes: string | null,

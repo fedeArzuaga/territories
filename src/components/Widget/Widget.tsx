@@ -3,7 +3,7 @@ import { FaInfoCircle } from "react-icons/fa"
 interface Props {
     title?: string,
     children: React.ReactNode,
-    type: 'primary' | 'default' | 'info'
+    type: 'primary' | 'default' | 'info' | 'personalTerritory' | 'congregationalTerritory'
 }
 
 export const Widget = ({children, title, type}: Props) => {
@@ -11,7 +11,9 @@ export const Widget = ({children, title, type}: Props) => {
     const cssClasses = {
         primary: 'bg-teal-600 text-white',
         default: 'bg-white',
-        info: 'bg-blue-50 text-blue-900 border-l-4 border-blue-900'
+        info: 'bg-blue-50 text-blue-900 border-l-4 border-blue-900',
+        personalTerritory: 'bg-white border-t-10 border-t-blue-600',
+        congregationalTerritory: 'bg-white border-t-10 border-t-teal-500'
     }
 
     return (

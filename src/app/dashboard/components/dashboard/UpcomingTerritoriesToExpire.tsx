@@ -20,6 +20,8 @@ export const UpcomingTerritoriesToExpire = async () => {
         }
     })
 
+    console.log( getDaysDistanceFromCurrentDate( territoriesDate[0].finished! ) )
+
     return (
         <>
             {

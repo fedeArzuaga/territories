@@ -7,6 +7,7 @@ import { squaresData } from "@/data/polygons"
 import { getColorByState } from "@/helpers/getColorByState"
 
 interface TerritoryInfo {
+    category: string | null
     finished: Date | null
     id: number
     lastLeaderName: string | null
@@ -42,9 +43,18 @@ export const Square = ({ squareData }: Props) => {
 
     const coordinates = squaresData[id].coordinates
 
-    const { started, finished, notes, territoryState, lastLeaderName, managerId, updatedAt } = territory
+    const { 
+        category,
+        finished, 
+        lastLeaderName, 
+        managerId, 
+        notes,
+        started, 
+        territoryState, 
+        updatedAt 
+    } = territory
 
-    const colorFromState = getColorByState( state )
+    const colorFromState = category === "Personal" ? getColorByState( category ) : getColorByState( state )
 
     return (
         <Polygon pathOptions={{ color: colorFromState }} positions={ coordinates as LatLngExpression[] }>
@@ -63,8 +73,11 @@ export const Square = ({ squareData }: Props) => {
                 </text>
             </SVGOverlay>
 
-            <Popup >
+            <Popup
+                className="relative"
+            >
                 <CustomPopUp
+                    category={ category }
                     territory={ territoryId }
                     square={ squareNumber }
                     lastLeaderName={ lastLeaderName || '' }

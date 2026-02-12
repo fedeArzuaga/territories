@@ -6,13 +6,14 @@ interface Props {
     type?: "button" | "submit"
     style: "primary" | "dark" | "danger" | "warning" | "success" | "default"
     icon?: React.ReactNode,
+    disabled?: boolean,
     cssClasses?: string,
     action?: "link" | "button",
     href?: string,
     onClickHandler?: ( event:MouseEvent<HTMLButtonElement> ) => void,
 }
 
-export const Button = ({ label, type = "button", icon, style, action = "button", href, cssClasses = "", onClickHandler }: Props) => {
+export const Button = ({ label, type = "button", icon, disabled, style, action = "button", href, cssClasses = "", onClickHandler }: Props) => {
     return (
         <>
             {
@@ -20,11 +21,12 @@ export const Button = ({ label, type = "button", icon, style, action = "button",
                     <button
                         onClick={ onClickHandler }
                         type={ type }
+                        disabled={ disabled }
                         className={`
                             p-2 rounded-lg font-bold cursor-pointer
                             ${ (!cssClasses && style === "primary") ? 'text-white bg-teal-600 hover:bg-teal-700' : '' }
                             ${ (!cssClasses && style === "dark") ? 'text-white bg-gray-800 hover:bg-gray-900' : '' }
-                            ${ (!cssClasses && style === "danger") ? 'text-white bg-red-600 hover:bg-red-700' : '' }
+                            ${ (!cssClasses && style === "danger") ? 'text-white bg-red-400 hover:bg-red-500' : '' }
                             ${ (!cssClasses && style === "warning") ? 'text-white bg-amber-500 hover:bg-amber-600' : '' }
                             ${ (!cssClasses && style === "success") ? 'text-white bg-green-600 hover:bg-green-700' : '' }
                             ${ (!cssClasses && style === "default") ? 'text-gray-700 bg-white hover:bg-teal-600' : '' }

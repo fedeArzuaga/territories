@@ -7,6 +7,7 @@ import { UserGreeting } from "./components/UserGreeting";
 import { InfoBlock } from "./components/InfoBlock";
 import { UpcomingTerritoriesToExpire } from "./components/dashboard/UpcomingTerritoriesToExpire";
 import { LastEditedTerritory } from "./components/dashboard/LastEditedTerritory";
+import Link from "next/link";
 
 export default async function DashboardPage() {
 
@@ -38,11 +39,23 @@ export default async function DashboardPage() {
                         >
                             {
                                 territories.map( territory => (
-                                    <CustomCard key={ territory.id }>
-                                        <TerritoryCardDetails
-                                            territory={ territory }
-                                        />
-                                    </CustomCard>
+                                    <Link 
+                                        key={ territory.id } 
+                                        href={`/dashboard/territories/${territory.id}`}
+                                        className="block h-full"
+                                    >
+                                        <CustomCard 
+                                            cssClasses={ 
+                                                territory.category === "Personal" 
+                                                    ? "border-blue-600" 
+                                                    : "border-teal-500" 
+                                            }
+                                        >
+                                            <TerritoryCardDetails
+                                                territory={ territory }
+                                            />
+                                        </CustomCard>
+                                    </Link>
                                 ))
                             }
                         </CustomGrid>

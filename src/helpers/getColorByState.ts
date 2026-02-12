@@ -1,7 +1,7 @@
 
 export const getColorByState = ( state: string ): string => {
-    if ( state === "Personal" ) return "blue"
+    if ( state === "Pendiente" ) return "red"
     if ( state === "Completado" ) return "green"
     if ( state === "En progreso" ) return "yellow"
-    return "red"
+    return "blue"
 }

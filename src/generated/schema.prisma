@@ -25,6 +25,7 @@ model User {
 
 model Territory {
   id             Int       @id @default(autoincrement())
+  category       String?   @default("Congregación")
   territoryState String    @default("Pendiente")
   lastLeaderName String?
   notes          String?

@@ -12,10 +12,20 @@ export const TerritoryCardDetails = ({
     territory
 }: Props) => {
 
-    const { id, territoryState, lastLeaderName } = territory
+    const { id, territoryState, lastLeaderName, category } = territory
 
     return (
         <>
+            {
+                category && (
+                    <span className={`
+                        rounded-full px-3 py-1 text-sm font-bold mb-4 inline-block
+                        ${ category === "Personal" ? "bg-blue-100 text-blue-800" : "bg-teal-100 text-teal-800" }
+                    `}>
+                        { category }
+                    </span>
+                )
+            }
             <h4 className="text-2xl font-bold">Territorio N° { id }</h4>
             <div className="mt-6">
                 <p className="mt-2">
@@ -40,14 +50,6 @@ export const TerritoryCardDetails = ({
                     }
                 </p>
             </div>
-            <Button
-                cssClasses="absolute top-2 right-2 !p-2"
-                label=""
-                icon={ <BiSolidEdit size={25} /> }
-                style="primary"
-                action="link"
-                href={`/dashboard/territories/${id}`}
-            />
         </>
     )
 }

@@ -3,6 +3,7 @@ import { getDaysDistanceFromCurrentDate } from "@/helpers/datesFunctions";
 import { CgNotes, CgTime } from "react-icons/cg"
 
 interface Props {
+    category: string | null,
     territoryState: string,
     squareState: string,
     lastLeaderName: string,
@@ -12,7 +13,7 @@ interface Props {
     updatedAt: Date
 }
 
-export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName, started, finished, notes, updatedAt }: Props) => {
+export const CustomPopUpContent = ({ category, squareState, territoryState, lastLeaderName, started, finished, notes, updatedAt }: Props) => {
 
 
     
@@ -24,13 +25,13 @@ export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName
                         <b>Estado</b>:
                     </p>
                     <p>
-                        { squareState }
+                        { category === "Personal" ? territoryState : squareState }
                     </p>
                 </div>
                 <div>
                     <p>
                         <b>
-                            { territoryState === "Personal" ? "Asignado a" : "Último conductor" }
+                            { category === "Personal" ? "Asignado a" : "Último conductor" }
                         </b>:
                     </p> 
                     <p>
@@ -38,11 +39,11 @@ export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName
                     </p>
                 </div>
                 {
-                    (territoryState === "En progreso" || territoryState === "Completado" || territoryState === "Personal") && (
+                    (territoryState === "En progreso" || territoryState === "Completado" || category === "Personal") && (
                         <div>
                             <p>
                                 <b>
-                                    { territoryState === "Personal" ? "Fecha de asignación" : "Se comenzó el" }
+                                    { category === "Personal" ? "Fecha de asignación" : "Se comenzó el" }
                                     
                                 </b>:
                             </p>
@@ -53,11 +54,11 @@ export const CustomPopUpContent = ({ squareState, territoryState, lastLeaderName
                     )
                 }
                 {
-                    (territoryState === "En progreso" || territoryState === "Completado" || territoryState === "Personal") && (
+                    (territoryState === "En progreso" || territoryState === "Completado" || category === "Personal") && (
                         <div>
                             <p>
                                 <b>
-                                    { territoryState === "Personal" ? "Fecha de vencimiento" : "Se finalizó el" }
+                                    { category === "Personal" ? "Fecha de vencimiento" : "Se finalizó el" }
                                 </b>:
                             </p>
                             <p>
