@@ -282,7 +282,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                     <input
                                         type="date"
                                         name="finished"
-                                        value={ finished ? new Date(finished).toISOString().split('T')[0] : '' }
+                                        value={ finished ? new Date(finished).toISOString().split('T')[0] : new Date().toISOString().split('T')[0] }
                                         onChange={handleInputChange}
                                         className={`w-full p-3 rounded-xl h-12 transition-all border ${ 
                                             territoryState === "Pendiente" || territoryState === "En progreso"
