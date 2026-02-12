@@ -15,10 +15,10 @@ export const Badge = ({ state }: Props) => {
                 ${ color === "red" && 'bg-red-400 hover:bg-red-500' }
                 ${ color === "yellow" && 'bg-amber-500 hover:bg-amber-600' }
                 ${ color === "green" && 'bg-green-600 hover:bg-green-700' }
-                ${ color === "blue" && 'bg-blue-600 hover:bg-blue-700' }
+                ${ color === "blue" && 'bg-blue-500 hover:bg-blue-600' }
              rounded-full`}
         >
-            { state }
+            { state === "Personal" ? "Personal" : state }
         </span>
     )
 }

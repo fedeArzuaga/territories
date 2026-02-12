@@ -652,6 +652,7 @@ export const squaresData: Record<string, SquareData> = {
 export const territoriesData: Record<number, TerritoryData> = {
   1: {
     id: 1,
+    category: "Congregación",
     name: "Territorio N° 1",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -662,6 +663,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   2: {
     id: 2,
+    category: "Congregación",
     name: "Territorio N° 2",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -672,6 +674,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   3: {
     id: 3,
+    category: "Congregación",
     name: "Territorio N° 3",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -682,6 +685,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   4: {
     id: 4,
+    category: "Congregación",
     name: "Territorio N° 4",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -692,6 +696,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   5: {
     id: 5,
+    category: "Congregación",
     name: "Territorio N° 5",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -702,6 +707,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   6: {
     id: 6,
+    category: "Congregación",
     name: "Territorio N° 6",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -712,6 +718,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   7: {
     id: 7,
+    category: "Congregación",
     name: "Territorio N° 7",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -722,6 +729,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   8: {
     id: 8,
+    category: "Congregación",
     name: "Territorio N° 8",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -732,6 +740,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   9: {
     id: 9,
+    category: "Congregación",
     name: "Territorio N° 9",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -742,6 +751,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   10: {
     id: 10,
+    category: "Congregación",
     name: "Territorio N° 10",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -752,6 +762,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   11: {
     id: 11,
+    category: "Congregación",
     name: "Territorio N° 11",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -762,6 +773,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   12: {
     id: 12,
+    category: "Congregación",
     name: "Territorio N° 12",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -772,6 +784,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   13: {
     id: 13,
+    category: "Congregación",
     name: "Territorio N° 13",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -782,6 +795,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   14: {
     id: 14,
+    category: "Congregación",
     name: "Territorio N° 14",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -792,6 +806,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   15: {
     id: 15,
+    category: "Congregación",
     name: "Territorio N° 15",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -802,6 +817,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   16: {
     id: 16,
+    category: "Congregación",
     name: "Territorio N° 16",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -812,6 +828,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   17: {
     id: 17,
+    category: "Congregación",
     name: "Territorio N° 17",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -822,6 +839,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   18: {
     id: 18,
+    category: "Congregación",
     name: "Territorio N° 18",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -832,6 +850,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   19: {
     id: 19,
+    category: "Congregación",
     name: "Territorio N° 19",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -842,6 +861,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   20: {
     id: 20,
+    category: "Congregación",
     name: "Territorio N° 20",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -852,6 +872,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   21: {
     id: 21,
+    category: "Congregación",
     name: "Territorio N° 21",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -862,6 +883,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   22: {
     id: 22,
+    category: "Congregación",
     name: "Territorio N° 22",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -872,6 +894,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   23: {
     id: 23,
+    category: "Congregación",
     name: "Territorio N° 23",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -882,6 +905,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   24: {
     id: 24,
+    category: "Congregación",
     name: "Territorio N° 24",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -892,6 +916,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   25: {
     id: 25,
+    category: "Congregación",
     name: "Territorio N° 25",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -902,6 +927,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   26: {
     id: 26,
+    category: "Congregación",
     name: "Territorio N° 26",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -912,6 +938,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   27: {
     id: 27,
+    category: "Congregación",
     name: "Territorio N° 27",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -922,6 +949,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   28: {
     id: 28,
+    category: "Congregación",
     name: "Territorio N° 28",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -932,6 +960,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   29: {
     id: 29,
+    category: "Congregación",
     name: "Territorio N° 29",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -942,6 +971,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   30: {
     id: 30,
+    category: "Congregación",
     name: "Territorio N° 30",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -952,6 +982,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   31: {
     id: 31,
+    category: "Congregación",
     name: "Territorio N° 31",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -962,6 +993,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   32: {
     id: 32,
+    category: "Congregación",
     name: "Territorio N° 32",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -972,6 +1004,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   33: {
     id: 33,
+    category: "Congregación",
     name: "Territorio N° 33",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -982,6 +1015,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   34: {
     id: 34,
+    category: "Congregación",
     name: "Territorio N° 34",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -992,6 +1026,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   35: {
     id: 35,
+    category: "Congregación",
     name: "Territorio N° 35",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -1002,6 +1037,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   36: {
     id: 36,
+    category: "Congregación",
     name: "Territorio N° 36",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -1012,6 +1048,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   37: {
     id: 37,
+    category: "Congregación",
     name: "Territorio N° 37",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -1022,6 +1059,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   38: {
     id: 38,
+    category: "Congregación",
     name: "Territorio N° 38",
     lastLeader: "Pablo Scigliano",
     started: "",
@@ -1032,6 +1070,7 @@ export const territoriesData: Record<number, TerritoryData> = {
   },
   39: {
     id: 39,
+    category: "Congregación",
     name: "Territorio N° 39",
     lastLeader: "Pablo Scigliano",
     started: "",

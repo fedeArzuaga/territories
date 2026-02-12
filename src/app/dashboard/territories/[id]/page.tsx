@@ -2,6 +2,12 @@ import { EditTerritoryForm } from "@/components/Dashboard/EditTerritory/EditTerr
 import { getTerritoryBasedOnId } from "@/lib/services/getTerritoryBasedOnId";
 import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
 
+
+export const metadata = {
+ title: 'Editar territorio',
+ description: 'Página para editar un territorio de la congregación.',
+};
+
 export default async function EditTerritoryPage({ params }:{ params: { id: number } }) {
 
     const { id } = await params;

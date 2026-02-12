@@ -4,26 +4,36 @@ import { TerritoryDataWithSquares } from "@/types/territory";
 import { prisma } from "../prisma";
 
 interface Props {
-    isPersonal: boolean,
     data: TerritoryDataWithSquares
 }
 
-export const updateTerritory = async ({ isPersonal, data }: Props) => {
+export const updateTerritory = async ({ data }: Props) => {
+
+    const startedDate = ( data.territoryState !== "Pendiente" && data.started ) 
+                            ? new Date(data.started) 
+                            : !data.started
+                                    ? new Date()
+                                    : null;
+    const finishedDate = (( data.territoryState === "Completado" || data.category === "Personal") && data.finished ) 
+                            ? new Date(data.finished) 
+                            : null
+
     try {
         const updatedTerritory = await prisma.territory.update({
             where: { id: Number(data.id) },
             data: {
                 territoryState: data.territoryState,
                 lastLeaderName: data.lastLeaderName,
-                notes: isPersonal ? '' : data.notes, 
-                started: data.started ? new Date(data.started) : null,
-                finished: data.finished ? new Date(data.finished) : null,
+                category: data.category,
+                notes: data.category !== "Personal" ? data.notes : "",
+                started: startedDate,
+                finished: finishedDate,
                 updatedAt: new Date(),
                 managerId: data.managerId,
                 squares: {
                     update: data.squares.map( square => ({
                         where: { id: square.id },
-                        data: { state: isPersonal ? "Personal" : square.state }
+                        data: { state: square.state }
                     }))
                 }
             }

@@ -42,7 +42,7 @@ body {
         width: 100% !important;
         margin: 0;
         box-sizing: border-box;
-        @apply p-5
+        @apply p-5 pt-6
     }
 
     .leaflet-popup-content .tm-polygon-details li + li {

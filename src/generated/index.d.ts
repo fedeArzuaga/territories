@@ -2505,6 +2505,7 @@ export namespace Prisma {
 
   export type TerritoryMinAggregateOutputType = {
     id: number | null
+    category: string | null
     territoryState: string | null
     lastLeaderName: string | null
     notes: string | null
@@ -2516,6 +2517,7 @@ export namespace Prisma {
 
   export type TerritoryMaxAggregateOutputType = {
     id: number | null
+    category: string | null
     territoryState: string | null
     lastLeaderName: string | null
     notes: string | null
@@ -2527,6 +2529,7 @@ export namespace Prisma {
 
   export type TerritoryCountAggregateOutputType = {
     id: number
+    category: number
     territoryState: number
     lastLeaderName: number
     notes: number
@@ -2548,6 +2551,7 @@ export namespace Prisma {
 
   export type TerritoryMinAggregateInputType = {
     id?: true
+    category?: true
     territoryState?: true
     lastLeaderName?: true
     notes?: true
@@ -2559,6 +2563,7 @@ export namespace Prisma {
 
   export type TerritoryMaxAggregateInputType = {
     id?: true
+    category?: true
     territoryState?: true
     lastLeaderName?: true
     notes?: true
@@ -2570,6 +2575,7 @@ export namespace Prisma {
 
   export type TerritoryCountAggregateInputType = {
     id?: true
+    category?: true
     territoryState?: true
     lastLeaderName?: true
     notes?: true
@@ -2668,6 +2674,7 @@ export namespace Prisma {
 
   export type TerritoryGroupByOutputType = {
     id: number
+    category: string | null
     territoryState: string
     lastLeaderName: string | null
     notes: string | null
@@ -2698,6 +2705,7 @@ export namespace Prisma {
 
   export type TerritorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    category?: boolean
     territoryState?: boolean
     lastLeaderName?: boolean
     notes?: boolean
@@ -2712,6 +2720,7 @@ export namespace Prisma {
 
   export type TerritorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    category?: boolean
     territoryState?: boolean
     lastLeaderName?: boolean
     notes?: boolean
@@ -2724,6 +2733,7 @@ export namespace Prisma {
 
   export type TerritorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
+    category?: boolean
     territoryState?: boolean
     lastLeaderName?: boolean
     notes?: boolean
@@ -2736,6 +2746,7 @@ export namespace Prisma {
 
   export type TerritorySelectScalar = {
     id?: boolean
+    category?: boolean
     territoryState?: boolean
     lastLeaderName?: boolean
     notes?: boolean
@@ -2745,7 +2756,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type TerritoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "territoryState" | "lastLeaderName" | "notes" | "started" | "finished" | "managerId" | "updatedAt", ExtArgs["result"]["territory"]>
+  export type TerritoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "category" | "territoryState" | "lastLeaderName" | "notes" | "started" | "finished" | "managerId" | "updatedAt", ExtArgs["result"]["territory"]>
   export type TerritoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     squares?: boolean | Territory$squaresArgs<ExtArgs>
     manager?: boolean | Territory$managerArgs<ExtArgs>
@@ -2766,6 +2777,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
+      category: string | null
       territoryState: string
       lastLeaderName: string | null
       notes: string | null
@@ -3199,6 +3211,7 @@ export namespace Prisma {
    */
   interface TerritoryFieldRefs {
     readonly id: FieldRef<"Territory", 'Int'>
+    readonly category: FieldRef<"Territory", 'String'>
     readonly territoryState: FieldRef<"Territory", 'String'>
     readonly lastLeaderName: FieldRef<"Territory", 'String'>
     readonly notes: FieldRef<"Territory", 'String'>
@@ -6966,6 +6979,7 @@ export namespace Prisma {
 
   export const TerritoryScalarFieldEnum: {
     id: 'id',
+    category: 'category',
     territoryState: 'territoryState',
     lastLeaderName: 'lastLeaderName',
     notes: 'notes',
@@ -7187,6 +7201,7 @@ export namespace Prisma {
     OR?: TerritoryWhereInput[]
     NOT?: TerritoryWhereInput | TerritoryWhereInput[]
     id?: IntFilter<"Territory"> | number
+    category?: StringNullableFilter<"Territory"> | string | null
     territoryState?: StringFilter<"Territory"> | string
     lastLeaderName?: StringNullableFilter<"Territory"> | string | null
     notes?: StringNullableFilter<"Territory"> | string | null
@@ -7200,6 +7215,7 @@ export namespace Prisma {
 
   export type TerritoryOrderByWithRelationInput = {
     id?: SortOrder
+    category?: SortOrderInput | SortOrder
     territoryState?: SortOrder
     lastLeaderName?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
@@ -7216,6 +7232,7 @@ export namespace Prisma {
     AND?: TerritoryWhereInput | TerritoryWhereInput[]
     OR?: TerritoryWhereInput[]
     NOT?: TerritoryWhereInput | TerritoryWhereInput[]
+    category?: StringNullableFilter<"Territory"> | string | null
     territoryState?: StringFilter<"Territory"> | string
     lastLeaderName?: StringNullableFilter<"Territory"> | string | null
     notes?: StringNullableFilter<"Territory"> | string | null
@@ -7229,6 +7246,7 @@ export namespace Prisma {
 
   export type TerritoryOrderByWithAggregationInput = {
     id?: SortOrder
+    category?: SortOrderInput | SortOrder
     territoryState?: SortOrder
     lastLeaderName?: SortOrderInput | SortOrder
     notes?: SortOrderInput | SortOrder
@@ -7248,6 +7266,7 @@ export namespace Prisma {
     OR?: TerritoryScalarWhereWithAggregatesInput[]
     NOT?: TerritoryScalarWhereWithAggregatesInput | TerritoryScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Territory"> | number
+    category?: StringNullableWithAggregatesFilter<"Territory"> | string | null
     territoryState?: StringWithAggregatesFilter<"Territory"> | string
     lastLeaderName?: StringNullableWithAggregatesFilter<"Territory"> | string | null
     notes?: StringNullableWithAggregatesFilter<"Territory"> | string | null
@@ -7534,6 +7553,7 @@ export namespace Prisma {
   }
 
   export type TerritoryCreateInput = {
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -7546,6 +7566,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedCreateInput = {
     id?: number
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -7557,6 +7578,7 @@ export namespace Prisma {
   }
 
   export type TerritoryUpdateInput = {
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7569,6 +7591,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7581,6 +7604,7 @@ export namespace Prisma {
 
   export type TerritoryCreateManyInput = {
     id?: number
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -7591,6 +7615,7 @@ export namespace Prisma {
   }
 
   export type TerritoryUpdateManyMutationInput = {
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7601,6 +7626,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7990,6 +8016,7 @@ export namespace Prisma {
 
   export type TerritoryCountOrderByAggregateInput = {
     id?: SortOrder
+    category?: SortOrder
     territoryState?: SortOrder
     lastLeaderName?: SortOrder
     notes?: SortOrder
@@ -8005,6 +8032,7 @@ export namespace Prisma {
 
   export type TerritoryMaxOrderByAggregateInput = {
     id?: SortOrder
+    category?: SortOrder
     territoryState?: SortOrder
     lastLeaderName?: SortOrder
     notes?: SortOrder
@@ -8016,6 +8044,7 @@ export namespace Prisma {
 
   export type TerritoryMinOrderByAggregateInput = {
     id?: SortOrder
+    category?: SortOrder
     territoryState?: SortOrder
     lastLeaderName?: SortOrder
     notes?: SortOrder
@@ -8696,6 +8725,7 @@ export namespace Prisma {
   }
 
   export type TerritoryCreateWithoutManagerInput = {
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -8707,6 +8737,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedCreateWithoutManagerInput = {
     id?: number
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -8803,6 +8834,7 @@ export namespace Prisma {
     OR?: TerritoryScalarWhereInput[]
     NOT?: TerritoryScalarWhereInput | TerritoryScalarWhereInput[]
     id?: IntFilter<"Territory"> | number
+    category?: StringNullableFilter<"Territory"> | string | null
     territoryState?: StringFilter<"Territory"> | string
     lastLeaderName?: StringNullableFilter<"Territory"> | string | null
     notes?: StringNullableFilter<"Territory"> | string | null
@@ -8936,6 +8968,7 @@ export namespace Prisma {
   }
 
   export type TerritoryCreateWithoutSquaresInput = {
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -8947,6 +8980,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedCreateWithoutSquaresInput = {
     id?: number
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -8973,6 +9007,7 @@ export namespace Prisma {
   }
 
   export type TerritoryUpdateWithoutSquaresInput = {
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -8984,6 +9019,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedUpdateWithoutSquaresInput = {
     id?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9155,6 +9191,7 @@ export namespace Prisma {
 
   export type TerritoryCreateManyManagerInput = {
     id?: number
+    category?: string | null
     territoryState?: string
     lastLeaderName?: string | null
     notes?: string | null
@@ -9212,6 +9249,7 @@ export namespace Prisma {
   }
 
   export type TerritoryUpdateWithoutManagerInput = {
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9223,6 +9261,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedUpdateWithoutManagerInput = {
     id?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null
@@ -9234,6 +9273,7 @@ export namespace Prisma {
 
   export type TerritoryUncheckedUpdateManyWithoutManagerInput = {
     id?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
     territoryState?: StringFieldUpdateOperationsInput | string
     lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
     notes?: NullableStringFieldUpdateOperationsInput | string | null

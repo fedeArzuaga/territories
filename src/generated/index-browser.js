@@ -134,6 +134,7 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.TerritoryScalarFieldEnum = {
   id: 'id',
+  category: 'category',
   territoryState: 'territoryState',
   lastLeaderName: 'lastLeaderName',
   notes: 'notes',

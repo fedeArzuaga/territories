@@ -4,6 +4,7 @@ import { TerritoriesData } from "@/types/polygon";
 export const MOCK_TERRITORY_DATA: TerritoriesData = {
     11: {
         id: 11,
+        category: "Personal",
         name: "Territorio 11",
         lastLeader: "Pablo Scigliano",
         started: "08/09/2024",
@@ -14,6 +15,7 @@ export const MOCK_TERRITORY_DATA: TerritoriesData = {
     },
     12: {
         id: 12,
+        category: "Personal",
         name: "Territorio 12",
         lastLeader: "Pablo Scigliano",
         started: "10/05/2024",
@@ -24,6 +26,7 @@ export const MOCK_TERRITORY_DATA: TerritoriesData = {
     },
     13: {
         id: 13,
+        category: "Personal",
         name: "Territorio 13",
         lastLeader: "Pablo Scigliano",
         started: "",
@@ -34,6 +37,7 @@ export const MOCK_TERRITORY_DATA: TerritoriesData = {
     },
     14: {
         id: 14,
+        category: "Personal",
         name: "Territorio 14",
         lastLeader: "Pablo Scigliano",
         started: "10/05/2024",
@@ -44,6 +48,7 @@ export const MOCK_TERRITORY_DATA: TerritoriesData = {
     },
     15: {
         id: 15,
+        category: "Personal",
         name: "Territorio 15",
         lastLeader: "Pablo Scigliano",
         started: "",
@@ -54,6 +59,7 @@ export const MOCK_TERRITORY_DATA: TerritoriesData = {
     },
     16: {
         id: 16,
+        category: "Personal",
         name: "Territorio 16",
         lastLeader: "Pablo Scigliano",
         started: "",
