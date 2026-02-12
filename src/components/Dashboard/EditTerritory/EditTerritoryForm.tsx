@@ -69,6 +69,14 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
 
     const { id, territoryState, lastLeaderName, started, finished, notes } = form;
 
+    const formatSafeDate = (dateValue: any) => {
+        const d = new Date(dateValue);
+        if (dateValue && !isNaN(d.getTime())) {
+            return d.toISOString().split('T')[0];
+        }
+        return new Date().toISOString().split('T')[0];
+    };
+
     const setAllSquaresAsPending = () => {
         setSquareStates( prev => prev.map( square => ({ ...square, state: "Pendiente" })) )
     }
@@ -282,7 +290,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                     <input
                                         type="date"
                                         name="finished"
-                                        value={ finished ? new Date(finished).toISOString().split('T')[0] : new Date().toISOString().split('T')[0] }
+                                        value={ formatSafeDate(finished) }
                                         onChange={handleInputChange}
                                         className={`w-full p-3 rounded-xl h-12 transition-all border ${ 
                                             territoryState === "Pendiente" || territoryState === "En progreso"
