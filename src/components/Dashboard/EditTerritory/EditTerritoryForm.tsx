@@ -1,9 +1,10 @@
 'use client'
 
-import { ChangeEvent, useEffect, useState, useTransition } from "react";
+import { ChangeEvent, useState, useTransition } from "react";
 import { IoIosSave } from "react-icons/io";
 import Link from "next/link";
 import { FaCheckCircle, FaInfoCircle, FaMapMarkedAlt } from "react-icons/fa";
+import { add } from "date-fns";
 
 import { Button } from "@/components/ui/Button/Button";
 import { CancelTerritoryEditionButton } from "./CancelTerritoryEditionButton";
@@ -20,6 +21,7 @@ import { TbMapX } from "react-icons/tb";
 import { Modal } from "@/components/ui/Modal/Modal";
 import { AnimatedCheckmark } from "@/components/ui/CheckMark/CheckMark";
 import { revalidateMyPath } from "@/lib/services/revalidateMyPath";
+import { getFormattedDate } from "@/helpers/datesFunctions";
 
 interface Props {
     territory: TerritoryDataWithSquaresAndManager,
@@ -42,7 +44,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     } = territory;
 
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
-    const [ squareStates, setSquareStates ] = useState( squaresState )
+    const [ squareStates, setSquareStates ] = useState( [...squaresState.sort( (a, b) => a.square - b.square )] )
     const [ category, setCategory ] = useState( territory.category || "Congregación" )
     const [ isModalOpen, setIsModalOpen ] = useState( false )
 
@@ -77,8 +79,8 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
 
     const getFinishDate = ( customDate:Date = new Date() ) => {
         const date = customDate ? new Date(customDate) : new Date()
-        date.setMonth(date.getMonth() + 4)
-        return date
+        const finishDate = add(date, { months: 4 })
+        return finishDate
     }
 
     const handleCompletePersonalTerritory = () => {
@@ -108,6 +110,9 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                 ? getCurrentDate(event.target.value)
                 : event.target.value
         }));
+        if ( event.target.name === 'started' && category === "Personal" ) {
+            setFinishDateForPersonalTerritory()
+        }
     };
 
     const handleStatusChange = (newStatus: string) => {
@@ -155,18 +160,24 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     const areNotesRequired = territoryState === "En progreso" || territoryState === "Completado";
 
     // View for restricted access
-    if ( territoryState === "Personal" && role === "LEADER" ) {
+    if ( category === "Personal" && role === "LEADER" ) {
         return (
-            <div className="max-w-5xl mx-auto px-4 py-8">
-                <div className="flex justify-between items-center mb-8">
+            <div className="mx-auto mt-12">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-10">
                     <div>
-                        <h2 className="text-3xl text-gray-800 flex items-center gap-3">
+                        <h2 className="text-4xl font-bold text-gray-800 flex items-center gap-4">
                             Territorio N° {id} - <Badge state={ territoryState } />
                         </h2>
                     </div>
-                    <CancelTerritoryEditionButton />
+                    <div className="flex items-center gap-4">
+                        <EditTerritoryReferenceImage territoryID={Number(id)} />
+                        <CancelTerritoryEditionButton />
+                    </div>
                 </div>
-                <Widget title="Información del Territorio" type="default">
+                <Widget 
+                    title="Acción inválida"
+                    type="personalTerritory"
+                >
                     <div className="p-10 text-center flex flex-col items-center">
                         <div className="text-9xl p-8 rounded-full mb-10 bg-teal-700 text-white"><TbMapX /></div>
                         <h2 className="text-4xl font-bold mb-6">No tiene permisos suficientes</h2>
@@ -199,7 +210,10 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                 </div>
             </div>
 
-            <Widget title={`Actualizar territorio (${category})`} type={ category === "Personal" ? "personalTerritory" : "congregationalTerritory" }>
+            <Widget 
+                title={`Actualizar territorio (${category})`} 
+                type={ category === "Personal" ? "personalTerritory" : "congregationalTerritory" }
+            >
                 <form onSubmit={ handleSubmit } className="space-y-12 py-4">
 
                     {/* SECTION 1: CATEGORY SELECTION (ADMIN) */}
@@ -278,6 +292,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                         required={ territoryState === "Completado" }
                                         disabled={ territoryState === "Pendiente" || territoryState === "En progreso" }
                                     />
+                                    {isDateError && <p className="text-red-500 text-sm font-bold">La fecha de inicio no puede ser posterior a la de conclusión.</p>}
                                 </div>
 
                                 {
@@ -309,8 +324,6 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                             </div>
                         </div>
                     )}
-
-                    {isDateError && <p className="text-red-500 text-sm font-bold">- La fecha de inicio no puede ser posterior a la de conclusión.</p>}
 
                     {/* SECTION 3: PROGRESS TRACKING (SQUARES) */}
                     { category === "Congregación" && hasAdminPriviliges(role) && (
@@ -386,9 +399,11 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                     {/* FORM FOOTER */}
                     <div className="pt-10 border-t flex flex-col md:flex-row justify-between items-center gap-6">
                         {manager && (
-                            <div className="flex flex-col items-start w-full md:w-auto">
-                                <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Última edición</p>
-                                <LastEditedBy user={ manager } />
+                            <div className="flex justify-start items-start gap-6">
+                                <div className="flex flex-col items-start w-full md:w-auto">
+                                    <p className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Última edición</p>
+                                    <LastEditedBy user={ manager } date={ updatedAt } />
+                                </div>
                             </div>
                         )}
                         

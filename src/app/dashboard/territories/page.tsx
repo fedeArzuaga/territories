@@ -5,6 +5,12 @@ import { TerritoryCardDetails } from "../components/TerritoryCardDetails";
 import { getAllTerritories } from "@/lib/services/getAllTerritories";
 import Link from "next/link";
 
+
+export const metadata = {
+    title: 'Administrar territorios',
+    description: 'Página para administrar los territorios de la congregación.',
+};
+
 export default async function TerritoriesPage() {
 
     const territories = await getAllTerritories({

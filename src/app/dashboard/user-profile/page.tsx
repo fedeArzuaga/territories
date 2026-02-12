@@ -7,6 +7,11 @@ import { formatUserRole } from "@/helpers/formatUserRole";
 import { profileMockData } from "@/data/profileMockData";
 import { User } from "@/types/user";
 
+export const metadata = {
+    title: 'Mi perfil',
+    description: 'Página de perfil del usuario',
+};
+
 export default async function UserProfilePage() {
 
     const user: User = await getUserByActiveSession()

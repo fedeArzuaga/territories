@@ -1,21 +1,19 @@
 import { formatToLocalDateString } from "@/helpers/formatToLocalDateString";
-import { getDaysDistanceFromCurrentDate } from "@/helpers/datesFunctions";
 import { CgNotes, CgTime } from "react-icons/cg"
+import { TerritoryData } from "@/types/territory";
+import { format } from "date-fns/format";
+import { es } from "date-fns/locale/es";
+import { FaUser } from "react-icons/fa";
 
 interface Props {
-    category: string | null,
-    territoryState: string,
     squareState: string,
-    lastLeaderName: string,
-    started: Date | null,
-    finished: Date | null,
-    notes: string | null,
-    updatedAt: Date
+    territory: TerritoryData
 }
 
-export const CustomPopUpContent = ({ category, squareState, territoryState, lastLeaderName, started, finished, notes, updatedAt }: Props) => {
-
-
+export const CustomPopUpContent = ({ 
+    squareState,
+    territory
+}: Props) => {
     
     return (
         <>
@@ -25,44 +23,44 @@ export const CustomPopUpContent = ({ category, squareState, territoryState, last
                         <b>Estado</b>:
                     </p>
                     <p>
-                        { category === "Personal" ? territoryState : squareState }
+                        { territory.category === "Personal" ? territory.territoryState : squareState }
                     </p>
                 </div>
                 <div>
                     <p>
                         <b>
-                            { category === "Personal" ? "Asignado a" : "Último conductor" }
+                            { territory.category === "Personal" ? "Asignado a" : "Último conductor" }
                         </b>:
                     </p> 
                     <p>
-                        { lastLeaderName || 'No asignado' }
+                        { territory.lastLeaderName || 'No asignado' }
                     </p>
                 </div>
                 {
-                    (territoryState === "En progreso" || territoryState === "Completado" || category === "Personal") && (
+                    (territory.territoryState === "En progreso" || territory.territoryState === "Completado" || territory.category === "Personal") && (
                         <div>
                             <p>
                                 <b>
-                                    { category === "Personal" ? "Fecha de asignación" : "Se comenzó el" }
+                                    { territory.category === "Personal" ? "Fecha de asignación" : "Se comenzó el" }
                                     
                                 </b>:
                             </p>
                             <p>
-                                { started ? formatToLocalDateString(started) : 'No iniciado' }
+                                { territory.started ? formatToLocalDateString(territory.started) : 'No iniciado' }
                             </p>
                         </div>
                     )
                 }
                 {
-                    (territoryState === "En progreso" || territoryState === "Completado" || category === "Personal") && (
+                    (territory.territoryState === "En progreso" || territory.territoryState === "Completado" || territory.category === "Personal") && (
                         <div>
                             <p>
                                 <b>
-                                    { category === "Personal" ? "Fecha de vencimiento" : "Se finalizó el" }
+                                    { territory.category === "Personal" ? "Fecha de vencimiento" : "Se finalizó el" }
                                 </b>:
                             </p>
                             <p>
-                                { finished ? formatToLocalDateString(finished) : 'No finalizado' }
+                                { territory.finished ? formatToLocalDateString(territory.finished) : 'No finalizado' }
                             </p>
                         </div>
                     )
@@ -70,37 +68,37 @@ export const CustomPopUpContent = ({ category, squareState, territoryState, last
             </div>
 
             {
-                notes && (
+                territory.notes && (
                     <div className="bg-blue-100 p-2 text-blue-950 rounded mt-3 whitespace-pre-wrap">
                         <div className="flex items-center flex-start mb-1">
                             <CgNotes size={15} /> <span className="font-bold ml-1 tm-text-1xl">Notas:</span>
                         </div>
                         <p className="mt-0 tm-notes">
-                            { notes }
+                            { territory.notes }
                         </p>
                     </div>
                 )
             }
 
-            {
-                updatedAt && (
-                    <div className="bg-gray-100 p-2 text-gray-700 rounded mt-3">
-                        <div className="flex items-center flex-start tm-last-time-done">
-                            <CgTime size={15} /> 
-                            <span className="font-bold ml-1 text-xxs">
-                                Última actualización:
-                            </span>&nbsp;
-                            { 
-                                getDaysDistanceFromCurrentDate( updatedAt ) === 0
-                                    ? 'hoy'
-                                    : getDaysDistanceFromCurrentDate( updatedAt ) === 1
-                                        ? '1 día atrás'
-                                        : `${ getDaysDistanceFromCurrentDate( updatedAt ) } días atrás`
-                            }
+            {territory.updatedAt && (
+                <div className="mt-4 pt-3 border-t border-gray-100 flex flex-col gap-1.5">
+                    <div className="flex flex-col flex-wrap items-start gap-x-4 gap-y-1">
+                        <div className="flex items-center text-xs text-gray-600">
+                            <FaUser size={12} className="mr-1.5 text-gray-400" />
+                            <span className="text-gray-400 mr-1">Editado por:</span>
+                            <span className="font-semibold">{territory.manager?.name || 'No asignado'}</span>
+                        </div>
+
+                        <div className="flex items-center text-xs text-gray-600">
+                            <CgTime size={12} className="mr-1.5 text-gray-400" />
+                            <span className="text-gray-400 mr-1">Cuándo:</span>
+                            <span className="font-semibold">
+                                {format(territory.updatedAt, "dd MMM, HH:mm", { locale: es })}
+                            </span>
                         </div>
                     </div>
-                )
-            }
+                </div>
+            )}
             
         </>
     )

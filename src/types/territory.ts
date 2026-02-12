@@ -10,6 +10,7 @@ export interface TerritoryData {
     started: Date | null | string,
     finished: Date | null | string,
     managerId: string | null,
+    manager?: User | null,
     updatedAt: Date
 }
 

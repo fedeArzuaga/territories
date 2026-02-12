@@ -3,6 +3,12 @@ import { Widget } from "@/components/Widget/Widget";
 import { UserCreateForm } from "../components/UserCreateForm";
 import { UsersList } from "../components/UsersList";
 
+
+export const metadata = {
+    title: 'Crear usuario',
+    description: 'Página para crear un nuevo usuario de la congregación.',
+};
+
 export default async function UserProfilePage() {
 
     return (

@@ -23,6 +23,7 @@ export interface SquareData {
 }
 
 export interface TerritoryData {
+    category: string,
     id: number,
     name: string,
     lastLeader: string,

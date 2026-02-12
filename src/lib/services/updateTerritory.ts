@@ -9,12 +9,12 @@ interface Props {
 
 export const updateTerritory = async ({ data }: Props) => {
 
-    const startedDate = (data.territoryState !== "Pendiente" && data.started) 
+    const startedDate = ( data.territoryState !== "Pendiente" && data.started ) 
                             ? new Date(data.started) 
                             : !data.started
                                     ? new Date()
                                     : null;
-    const finishedDate = (data.territoryState === "Completado" && data.finished) 
+    const finishedDate = (( data.territoryState === "Completado" || data.category === "Personal") && data.finished ) 
                             ? new Date(data.finished) 
                             : null
 
@@ -25,7 +25,7 @@ export const updateTerritory = async ({ data }: Props) => {
                 territoryState: data.territoryState,
                 lastLeaderName: data.lastLeaderName,
                 category: data.category,
-                notes: data.notes, 
+                notes: data.category !== "Personal" ? data.notes : "",
                 started: startedDate,
                 finished: finishedDate,
                 updatedAt: new Date(),

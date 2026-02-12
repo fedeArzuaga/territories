@@ -4,10 +4,15 @@ import { Widget } from "@/components/Widget/Widget";
 import { TerritoryCardDetails } from "./components/TerritoryCardDetails";
 import { getAllTerritories } from "@/lib/services/getAllTerritories";
 import { UserGreeting } from "./components/UserGreeting";
-import { InfoBlock } from "./components/InfoBlock";
 import { UpcomingTerritoriesToExpire } from "./components/dashboard/UpcomingTerritoriesToExpire";
 import { LastEditedTerritory } from "./components/dashboard/LastEditedTerritory";
 import Link from "next/link";
+
+
+export const metadata = {
+    title: 'Panel de Control',
+    description: 'Panel de control de la aplicación de territorios Los Bulevares, donde podrás ver un resumen del estado de los territorios, los próximos territorios a vencer, y demás datos relevantes para la administración de los territorios.',
+};
 
 export default async function DashboardPage() {
 

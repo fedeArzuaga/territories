@@ -37,3 +37,7 @@ export const getDaysDistanceFromTwoGivenDates = ( firstDate: Date, secondDate: D
     return diffInDays;
 
 }
+
+export const getFormattedDate = ( date: Date ): string => {
+    return date.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" })
+}
