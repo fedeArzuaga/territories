@@ -40,7 +40,7 @@ export default async function DashboardPage() {
                         type="default"
                     >
                         <CustomGrid
-                            cssClasses="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6"
+                            cssClasses="grid grid-cols-1 sm:grid-cols-2 2xl:grid-cols-3 gap-6"
                         >
                             {
                                 territories.map( territory => (

@@ -171,7 +171,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     if ( category === "Personal" && role === "LEADER" ) {
         return (
             <div className="mx-auto mt-12">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-10">
+                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-10">
                     <div>
                         <h2 className="text-4xl font-bold text-gray-800 flex items-center gap-4">
                             Territorio N° {id} - <Badge state={ territoryState } />
@@ -206,7 +206,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     return (
         <div className="mx-auto mt-12">
             {/* TOP HEADER SECTION */}
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-10">
+            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-10">
                 <div>
                     <h2 className="text-4xl font-bold text-gray-800 flex items-center gap-4">
                         Territorio N° {id} - <Badge state={ territoryState } />
@@ -405,7 +405,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                     </div>
 
                     {/* FORM FOOTER */}
-                    <div className="pt-10 border-t flex flex-col md:flex-row justify-between items-center gap-6">
+                    <div className="pt-10 border-t flex flex-col md:flex-row items-start md:justify-between md:items-center gap-6">
                         {manager && (
                             <div className="flex justify-start items-start gap-6">
                                 <div className="flex flex-col items-start w-full md:w-auto">
