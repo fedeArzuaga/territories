@@ -24,17 +24,18 @@ model User {
 }
 
 model Territory {
-  id             Int       @id @default(autoincrement())
-  category       String?   @default("Congregación")
-  territoryState String    @default("Pendiente")
-  lastLeaderName String?
-  notes          String?
-  started        DateTime?
-  finished       DateTime?
-  managerId      String?
-  updatedAt      DateTime  @updatedAt
-  squares        Square[]
-  manager        User?     @relation("TerritoryManager", fields: [managerId], references: [id])
+  id               Int       @id @default(autoincrement())
+  category         String?   @default("Congregación")
+  territoryState   String    @default("Pendiente")
+  lastLeaderName   String?
+  notes            String?
+  started          DateTime?
+  finished         DateTime?
+  managerId        String?
+  updatedAt        DateTime  @updatedAt
+  squares          Square[]
+  manager          User?     @relation("TerritoryManager", fields: [managerId], references: [id])
+  activityRegister Activity_Register[]
 }
 
 model Square {
@@ -44,6 +45,17 @@ model Square {
   territoryId  Int
   updatedAt    DateTime  @updatedAt
   territory    Territory @relation(fields: [territoryId], references: [id], onDelete: Cascade)
+}
+
+model Activity_Register {
+  id                String    @id @default(uuid())
+  territoryId       Int
+  territory         Territory @relation(fields: [territoryId], references: [id], onDelete: Cascade)
+  lastLeaderName    String    
+  started           DateTime  @default(now())
+  finished          DateTime?
+  createdAt         DateTime  @default(now()) 
+  @@index([territoryId]) 
 }
 
 model Account {

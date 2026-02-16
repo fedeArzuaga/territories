@@ -35,7 +35,7 @@ body {
     }
 
     .leaflet-popup-content-wrapper {
-        @apply w-[340px] md:w-[400px];
+        @apply w-85 md:w-100;
     }
 
     .leaflet-popup-content {

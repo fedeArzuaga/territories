@@ -49,7 +49,7 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                 />
 
                 <div
-                    className={`relative w-full max-w-[1000px] p-8 bg-white rounded-3xl shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
+                    className={`relative w-full max-w-250 p-8 bg-white rounded-3xl shadow-2xl transform transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] ${
                         isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-90 translate-y-12 opacity-0'
                     }`}
                 >
@@ -68,7 +68,7 @@ export const EditTerritoryReferenceImage = ({ territoryID }: Props) => {
                             width={600}
                             height={600}
                             alt={`Imagen de referencia del territorio N° ${territoryID}`}
-                            className="md:max-w-[800px] h-auto"
+                            className="md:max-w-200 h-auto"
                         />
                     </div>
                 </div>
