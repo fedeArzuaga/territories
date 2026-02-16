@@ -68,8 +68,6 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         updatedAt: new Date(updatedAt) ?? new Date().getTime()
     }
 
-    console.log({ startedDate, finishedDate })
-
     const [form, setForm] = useState<TerritoryData>( initialFormState );
 
     const { id, territoryState, lastLeaderName, started, finished, notes } = form;
@@ -142,8 +140,6 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
             category: category,
             updatedAt: new Date()
         }
-
-        console.log(updatedData)
         
         startTransition( async () => {
             await updateTerritory({
