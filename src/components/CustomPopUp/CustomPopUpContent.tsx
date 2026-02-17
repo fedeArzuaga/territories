@@ -56,8 +56,14 @@ export const CustomPopUpContent = ({
                         <div>
                             <p>
                                 <b>
-                                    { territory.category === "Personal" ? "Fecha de vencimiento" : "Se finalizó el" }
-                                </b>:
+                                    { 
+                                        territory.category === "Personal" && territory.territoryState === "Completado" 
+                                            ? "Completado el:" 
+                                            : territory.category === "Personal" && territory.territoryState !== "Completado"
+                                                ? "Fecha de vencimiento:"
+                                                : "Fecha de finalizado:"
+                                    }
+                                </b>
                             </p>
                             <p>
                                 { territory.finished ? formatToLocalDateString(territory.finished) : 'No finalizado' }

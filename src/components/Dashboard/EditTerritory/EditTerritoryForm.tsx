@@ -44,6 +44,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     } = territory;
 
     const squaresState = squares.map( square => ({ square: square.squareNumber ,state: square.state }) )
+
     const [ squareStates, setSquareStates ] = useState( [...squaresState.sort( (a, b) => a.square - b.square )] )
     const [ category, setCategory ] = useState( territory.category || "Congregación" )
     const [ isModalOpen, setIsModalOpen ] = useState( false )
@@ -56,16 +57,18 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         return "En progreso"
     }
 
-    const [form, setForm] = useState<TerritoryData>({
+    const initialFormState = {
         id: territoryId,
         territoryState: state ?? getCurrentTerritoryState( squareStates ),
         lastLeaderName: leaderName ?? '',
-        started: startedDate ? new Date(getCurrentDate(startedDate)) : null,
-        finished: finishedDate ? new Date(getCurrentDate(finishedDate)) : null,
+        started: startedDate ? startedDate : new Date(),
+        finished: finishedDate ? finishedDate : new Date(),
         notes: territoryNotes ?? '',
         managerId: managerId ?? '',
         updatedAt: new Date(updatedAt) ?? new Date().getTime()
-    });
+    }
+
+    const [form, setForm] = useState<TerritoryData>( initialFormState );
 
     const { id, territoryState, lastLeaderName, started, finished, notes } = form;
 
@@ -82,7 +85,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     }
 
     const setFinishDateForPersonalTerritory = () => {
-        setForm( prev => ({ ...prev, finished: getFinishDate(new Date(started ?? '')) }))
+        setForm( prev => ({ ...prev, finished: getFinishDate(new Date(started ?? ''))}))
     }
 
     const getFinishDate = ( customDate:Date = new Date() ) => {
@@ -97,17 +100,19 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         
         if (isClosing) {
             // Use your helper to ensure consistency across the form
-            const today = getCurrentDate(new Date().toISOString());
+            const today = formatSafeDate(new Date().toISOString());
             setForm(prev => ({ ...prev, finished: today }));
         }
     };
 
     const handleChangeCategory = ( newCategory: string ) => {
         setCategory(newCategory)
-        handleStatusChange( newCategory === "Personal" ? "En progreso" : "Pendiente" )
         if ( newCategory === "Personal" ) {
-            setAllSquaresAsPending()
             setFinishDateForPersonalTerritory()
+            handleStatusChange("En progreso")
+        }
+        if ( newCategory === "Congregación" ) {
+            setForm(initialFormState)
         }
     }
 
@@ -115,10 +120,10 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         setForm(prev => ({
             ...prev,
             [event.target.name]: event.target.name === 'started' || event.target.name === 'finished'
-                ? getCurrentDate(event.target.value)
+                ? formatSafeDate(event.target.value)
                 : event.target.value
         }));
-        if ( event.target.name === 'started' && category === "Personal" ) {
+        if ( event.target.name === 'started' && category === "Personal" && territoryState !== "Completado" ) {
             setFinishDateForPersonalTerritory()
         }
     };
@@ -129,12 +134,10 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
+        
         const updatedData = {
             ...form,
             category: category,
-            started: started,
-            finished: finished,
-            managerId: managerId,
             updatedAt: new Date()
         }
         
@@ -171,7 +174,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     if ( category === "Personal" && role === "LEADER" ) {
         return (
             <div className="mx-auto mt-12">
-                <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-10">
+                <div className="flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center gap-8 mb-10">
                     <div>
                         <h2 className="text-4xl font-bold text-gray-800 flex items-center gap-4">
                             Territorio N° {id} - <Badge state={ territoryState } />
@@ -206,7 +209,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     return (
         <div className="mx-auto mt-12">
             {/* TOP HEADER SECTION */}
-            <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-8 mb-10">
+            <div className="flex flex-col 2xl:flex-row 2xl:justify-between 2xl:items-center gap-8 mb-10">
                 <div>
                     <h2 className="text-4xl font-bold text-gray-800 flex items-center gap-4">
                         Territorio N° {id} - <Badge state={ territoryState } />
@@ -254,7 +257,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                     {hasAdminPriviliges( role ) && (
                         <div className="space-y-6">
                             <label className="font-bold text-gray-700 block mb-6">Asignación general:</label>
-                            <div className={`grid grid-cols-1 ${category === "Personal" ? 'md:grid-cols-4' : 'md:grid-cols-3'} gap-8`}>
+                            <div className={`grid grid-cols-1 ${category === "Personal" ? 'lg:grid-cols-2 xl:grid-cols-4' : 'md:grid-cols-3'} gap-8`}>
                                 <div className="flex flex-col space-y-2">
                                     <label className="font-bold text-sm text-gray-600">{ category === "Personal" ? "Publicador asignado *" : "Último conductor *" }</label>
                                     <input
@@ -273,7 +276,7 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                     <input
                                         type="date"
                                         name="started"
-                                        value={ started ? getCurrentDate(started) : new Date().toISOString().split('T')[0] }
+                                        value={ formatSafeDate(started) }
                                         onChange={handleInputChange}
                                         className={`w-full p-3 rounded-xl h-12 transition-all border ${ 
                                             territoryState === "Pendiente" && category !== "Personal"
