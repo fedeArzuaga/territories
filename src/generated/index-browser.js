@@ -152,6 +152,15 @@ exports.Prisma.SquareScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.Activity_RegisterScalarFieldEnum = {
+  id: 'id',
+  territoryId: 'territoryId',
+  lastLeaderName: 'lastLeaderName',
+  started: 'started',
+  finished: 'finished',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.AccountScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -190,6 +199,7 @@ exports.Prisma.ModelName = {
   User: 'User',
   Territory: 'Territory',
   Square: 'Square',
+  Activity_Register: 'Activity_Register',
   Account: 'Account',
   Session: 'Session'
 };

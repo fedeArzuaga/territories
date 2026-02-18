@@ -6,7 +6,7 @@ import { SidebarMenu } from "./SidebarMenu";
 import { MenuItems } from "./types/menuItems";
 import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
 import { permissionLevelsByRole } from "@/utils/permissionLevelsByRole";
-import { signOut } from "next-auth/react";
+import { BsClipboardDataFill } from "react-icons/bs";
 
 const menuItems: MenuItems[] = [
     {
@@ -21,6 +21,13 @@ const menuItems: MenuItems[] = [
         label: 'Territorios',
         icon: <FaListCheck size={ 25 } />,
         permissionLevel: 1,
+        role: "link"
+    },
+    {
+        path: '/dashboard/activity-register',
+        label: 'Registro de actividad',
+        icon: <BsClipboardDataFill size={ 25 } />,
+        permissionLevel: 3,
         role: "link"
     },
     {

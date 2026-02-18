@@ -22,7 +22,6 @@ export const UpcomingTerritoriesToExpire = async () => {
 
         const isTerritoryDateAfterCurrentDate = territory.finished!.getTime() > new Date().getTime()
         const daysDistance = Number(formatDistanceToNowStrict( territory.finished!, { unit: 'day' } ).split(' ')[0])
-        console.log(territory.id,isTerritoryDateAfterCurrentDate, daysDistance)
 
         if ( isTerritoryDateAfterCurrentDate && daysDistance <= 15 ) {
             return {

@@ -29,6 +29,11 @@ export type Territory = $Result.DefaultSelection<Prisma.$TerritoryPayload>
  */
 export type Square = $Result.DefaultSelection<Prisma.$SquarePayload>
 /**
+ * Model Activity_Register
+ * 
+ */
+export type Activity_Register = $Result.DefaultSelection<Prisma.$Activity_RegisterPayload>
+/**
  * Model Account
  * 
  */
@@ -185,6 +190,16 @@ export class PrismaClient<
     * ```
     */
   get square(): Prisma.SquareDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.activity_Register`: Exposes CRUD operations for the **Activity_Register** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Activity_Registers
+    * const activity_Registers = await prisma.activity_Register.findMany()
+    * ```
+    */
+  get activity_Register(): Prisma.Activity_RegisterDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.account`: Exposes CRUD operations for the **Account** model.
@@ -642,6 +657,7 @@ export namespace Prisma {
     User: 'User',
     Territory: 'Territory',
     Square: 'Square',
+    Activity_Register: 'Activity_Register',
     Account: 'Account',
     Session: 'Session'
   };
@@ -659,7 +675,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "territory" | "square" | "account" | "session"
+      modelProps: "user" | "territory" | "square" | "activity_Register" | "account" | "session"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -882,6 +898,80 @@ export namespace Prisma {
           count: {
             args: Prisma.SquareCountArgs<ExtArgs>
             result: $Utils.Optional<SquareCountAggregateOutputType> | number
+          }
+        }
+      }
+      Activity_Register: {
+        payload: Prisma.$Activity_RegisterPayload<ExtArgs>
+        fields: Prisma.Activity_RegisterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.Activity_RegisterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.Activity_RegisterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>
+          }
+          findFirst: {
+            args: Prisma.Activity_RegisterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.Activity_RegisterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>
+          }
+          findMany: {
+            args: Prisma.Activity_RegisterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>[]
+          }
+          create: {
+            args: Prisma.Activity_RegisterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>
+          }
+          createMany: {
+            args: Prisma.Activity_RegisterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.Activity_RegisterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>[]
+          }
+          delete: {
+            args: Prisma.Activity_RegisterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>
+          }
+          update: {
+            args: Prisma.Activity_RegisterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>
+          }
+          deleteMany: {
+            args: Prisma.Activity_RegisterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.Activity_RegisterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.Activity_RegisterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>[]
+          }
+          upsert: {
+            args: Prisma.Activity_RegisterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$Activity_RegisterPayload>
+          }
+          aggregate: {
+            args: Prisma.Activity_RegisterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateActivity_Register>
+          }
+          groupBy: {
+            args: Prisma.Activity_RegisterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Activity_RegisterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.Activity_RegisterCountArgs<ExtArgs>
+            result: $Utils.Optional<Activity_RegisterCountAggregateOutputType> | number
           }
         }
       }
@@ -1144,6 +1234,7 @@ export namespace Prisma {
     user?: UserOmit
     territory?: TerritoryOmit
     square?: SquareOmit
+    activity_Register?: Activity_RegisterOmit
     account?: AccountOmit
     session?: SessionOmit
   }
@@ -1276,10 +1367,12 @@ export namespace Prisma {
 
   export type TerritoryCountOutputType = {
     squares: number
+    activityRegister: number
   }
 
   export type TerritoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     squares?: boolean | TerritoryCountOutputTypeCountSquaresArgs
+    activityRegister?: boolean | TerritoryCountOutputTypeCountActivityRegisterArgs
   }
 
   // Custom InputTypes
@@ -1298,6 +1391,13 @@ export namespace Prisma {
    */
   export type TerritoryCountOutputTypeCountSquaresArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: SquareWhereInput
+  }
+
+  /**
+   * TerritoryCountOutputType without action
+   */
+  export type TerritoryCountOutputTypeCountActivityRegisterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Activity_RegisterWhereInput
   }
 
 
@@ -2715,6 +2815,7 @@ export namespace Prisma {
     updatedAt?: boolean
     squares?: boolean | Territory$squaresArgs<ExtArgs>
     manager?: boolean | Territory$managerArgs<ExtArgs>
+    activityRegister?: boolean | Territory$activityRegisterArgs<ExtArgs>
     _count?: boolean | TerritoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["territory"]>
 
@@ -2760,6 +2861,7 @@ export namespace Prisma {
   export type TerritoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     squares?: boolean | Territory$squaresArgs<ExtArgs>
     manager?: boolean | Territory$managerArgs<ExtArgs>
+    activityRegister?: boolean | Territory$activityRegisterArgs<ExtArgs>
     _count?: boolean | TerritoryCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type TerritoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2774,6 +2876,7 @@ export namespace Prisma {
     objects: {
       squares: Prisma.$SquarePayload<ExtArgs>[]
       manager: Prisma.$UserPayload<ExtArgs> | null
+      activityRegister: Prisma.$Activity_RegisterPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -3181,6 +3284,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     squares<T extends Territory$squaresArgs<ExtArgs> = {}>(args?: Subset<T, Territory$squaresArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SquarePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     manager<T extends Territory$managerArgs<ExtArgs> = {}>(args?: Subset<T, Territory$managerArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    activityRegister<T extends Territory$activityRegisterArgs<ExtArgs> = {}>(args?: Subset<T, Territory$activityRegisterArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3655,6 +3759,30 @@ export namespace Prisma {
      */
     include?: UserInclude<ExtArgs> | null
     where?: UserWhereInput
+  }
+
+  /**
+   * Territory.activityRegister
+   */
+  export type Territory$activityRegisterArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    where?: Activity_RegisterWhereInput
+    orderBy?: Activity_RegisterOrderByWithRelationInput | Activity_RegisterOrderByWithRelationInput[]
+    cursor?: Activity_RegisterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Activity_RegisterScalarFieldEnum | Activity_RegisterScalarFieldEnum[]
   }
 
   /**
@@ -4769,6 +4897,1111 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: SquareInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Activity_Register
+   */
+
+  export type AggregateActivity_Register = {
+    _count: Activity_RegisterCountAggregateOutputType | null
+    _avg: Activity_RegisterAvgAggregateOutputType | null
+    _sum: Activity_RegisterSumAggregateOutputType | null
+    _min: Activity_RegisterMinAggregateOutputType | null
+    _max: Activity_RegisterMaxAggregateOutputType | null
+  }
+
+  export type Activity_RegisterAvgAggregateOutputType = {
+    territoryId: number | null
+  }
+
+  export type Activity_RegisterSumAggregateOutputType = {
+    territoryId: number | null
+  }
+
+  export type Activity_RegisterMinAggregateOutputType = {
+    id: string | null
+    territoryId: number | null
+    lastLeaderName: string | null
+    started: Date | null
+    finished: Date | null
+    createdAt: Date | null
+  }
+
+  export type Activity_RegisterMaxAggregateOutputType = {
+    id: string | null
+    territoryId: number | null
+    lastLeaderName: string | null
+    started: Date | null
+    finished: Date | null
+    createdAt: Date | null
+  }
+
+  export type Activity_RegisterCountAggregateOutputType = {
+    id: number
+    territoryId: number
+    lastLeaderName: number
+    started: number
+    finished: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type Activity_RegisterAvgAggregateInputType = {
+    territoryId?: true
+  }
+
+  export type Activity_RegisterSumAggregateInputType = {
+    territoryId?: true
+  }
+
+  export type Activity_RegisterMinAggregateInputType = {
+    id?: true
+    territoryId?: true
+    lastLeaderName?: true
+    started?: true
+    finished?: true
+    createdAt?: true
+  }
+
+  export type Activity_RegisterMaxAggregateInputType = {
+    id?: true
+    territoryId?: true
+    lastLeaderName?: true
+    started?: true
+    finished?: true
+    createdAt?: true
+  }
+
+  export type Activity_RegisterCountAggregateInputType = {
+    id?: true
+    territoryId?: true
+    lastLeaderName?: true
+    started?: true
+    finished?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type Activity_RegisterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Activity_Register to aggregate.
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activity_Registers to fetch.
+     */
+    orderBy?: Activity_RegisterOrderByWithRelationInput | Activity_RegisterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: Activity_RegisterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activity_Registers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activity_Registers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Activity_Registers
+    **/
+    _count?: true | Activity_RegisterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Activity_RegisterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Activity_RegisterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Activity_RegisterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Activity_RegisterMaxAggregateInputType
+  }
+
+  export type GetActivity_RegisterAggregateType<T extends Activity_RegisterAggregateArgs> = {
+        [P in keyof T & keyof AggregateActivity_Register]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateActivity_Register[P]>
+      : GetScalarType<T[P], AggregateActivity_Register[P]>
+  }
+
+
+
+
+  export type Activity_RegisterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: Activity_RegisterWhereInput
+    orderBy?: Activity_RegisterOrderByWithAggregationInput | Activity_RegisterOrderByWithAggregationInput[]
+    by: Activity_RegisterScalarFieldEnum[] | Activity_RegisterScalarFieldEnum
+    having?: Activity_RegisterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Activity_RegisterCountAggregateInputType | true
+    _avg?: Activity_RegisterAvgAggregateInputType
+    _sum?: Activity_RegisterSumAggregateInputType
+    _min?: Activity_RegisterMinAggregateInputType
+    _max?: Activity_RegisterMaxAggregateInputType
+  }
+
+  export type Activity_RegisterGroupByOutputType = {
+    id: string
+    territoryId: number
+    lastLeaderName: string
+    started: Date
+    finished: Date | null
+    createdAt: Date
+    _count: Activity_RegisterCountAggregateOutputType | null
+    _avg: Activity_RegisterAvgAggregateOutputType | null
+    _sum: Activity_RegisterSumAggregateOutputType | null
+    _min: Activity_RegisterMinAggregateOutputType | null
+    _max: Activity_RegisterMaxAggregateOutputType | null
+  }
+
+  type GetActivity_RegisterGroupByPayload<T extends Activity_RegisterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Activity_RegisterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Activity_RegisterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Activity_RegisterGroupByOutputType[P]>
+            : GetScalarType<T[P], Activity_RegisterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type Activity_RegisterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    territoryId?: boolean
+    lastLeaderName?: boolean
+    started?: boolean
+    finished?: boolean
+    createdAt?: boolean
+    territory?: boolean | TerritoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity_Register"]>
+
+  export type Activity_RegisterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    territoryId?: boolean
+    lastLeaderName?: boolean
+    started?: boolean
+    finished?: boolean
+    createdAt?: boolean
+    territory?: boolean | TerritoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity_Register"]>
+
+  export type Activity_RegisterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    territoryId?: boolean
+    lastLeaderName?: boolean
+    started?: boolean
+    finished?: boolean
+    createdAt?: boolean
+    territory?: boolean | TerritoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["activity_Register"]>
+
+  export type Activity_RegisterSelectScalar = {
+    id?: boolean
+    territoryId?: boolean
+    lastLeaderName?: boolean
+    started?: boolean
+    finished?: boolean
+    createdAt?: boolean
+  }
+
+  export type Activity_RegisterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "territoryId" | "lastLeaderName" | "started" | "finished" | "createdAt", ExtArgs["result"]["activity_Register"]>
+  export type Activity_RegisterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    territory?: boolean | TerritoryDefaultArgs<ExtArgs>
+  }
+  export type Activity_RegisterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    territory?: boolean | TerritoryDefaultArgs<ExtArgs>
+  }
+  export type Activity_RegisterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    territory?: boolean | TerritoryDefaultArgs<ExtArgs>
+  }
+
+  export type $Activity_RegisterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Activity_Register"
+    objects: {
+      territory: Prisma.$TerritoryPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      territoryId: number
+      lastLeaderName: string
+      started: Date
+      finished: Date | null
+      createdAt: Date
+    }, ExtArgs["result"]["activity_Register"]>
+    composites: {}
+  }
+
+  type Activity_RegisterGetPayload<S extends boolean | null | undefined | Activity_RegisterDefaultArgs> = $Result.GetResult<Prisma.$Activity_RegisterPayload, S>
+
+  type Activity_RegisterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<Activity_RegisterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Activity_RegisterCountAggregateInputType | true
+    }
+
+  export interface Activity_RegisterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Activity_Register'], meta: { name: 'Activity_Register' } }
+    /**
+     * Find zero or one Activity_Register that matches the filter.
+     * @param {Activity_RegisterFindUniqueArgs} args - Arguments to find a Activity_Register
+     * @example
+     * // Get one Activity_Register
+     * const activity_Register = await prisma.activity_Register.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends Activity_RegisterFindUniqueArgs>(args: SelectSubset<T, Activity_RegisterFindUniqueArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Activity_Register that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {Activity_RegisterFindUniqueOrThrowArgs} args - Arguments to find a Activity_Register
+     * @example
+     * // Get one Activity_Register
+     * const activity_Register = await prisma.activity_Register.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends Activity_RegisterFindUniqueOrThrowArgs>(args: SelectSubset<T, Activity_RegisterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Activity_Register that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterFindFirstArgs} args - Arguments to find a Activity_Register
+     * @example
+     * // Get one Activity_Register
+     * const activity_Register = await prisma.activity_Register.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends Activity_RegisterFindFirstArgs>(args?: SelectSubset<T, Activity_RegisterFindFirstArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Activity_Register that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterFindFirstOrThrowArgs} args - Arguments to find a Activity_Register
+     * @example
+     * // Get one Activity_Register
+     * const activity_Register = await prisma.activity_Register.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends Activity_RegisterFindFirstOrThrowArgs>(args?: SelectSubset<T, Activity_RegisterFindFirstOrThrowArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Activity_Registers that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Activity_Registers
+     * const activity_Registers = await prisma.activity_Register.findMany()
+     * 
+     * // Get first 10 Activity_Registers
+     * const activity_Registers = await prisma.activity_Register.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const activity_RegisterWithIdOnly = await prisma.activity_Register.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends Activity_RegisterFindManyArgs>(args?: SelectSubset<T, Activity_RegisterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Activity_Register.
+     * @param {Activity_RegisterCreateArgs} args - Arguments to create a Activity_Register.
+     * @example
+     * // Create one Activity_Register
+     * const Activity_Register = await prisma.activity_Register.create({
+     *   data: {
+     *     // ... data to create a Activity_Register
+     *   }
+     * })
+     * 
+     */
+    create<T extends Activity_RegisterCreateArgs>(args: SelectSubset<T, Activity_RegisterCreateArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Activity_Registers.
+     * @param {Activity_RegisterCreateManyArgs} args - Arguments to create many Activity_Registers.
+     * @example
+     * // Create many Activity_Registers
+     * const activity_Register = await prisma.activity_Register.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends Activity_RegisterCreateManyArgs>(args?: SelectSubset<T, Activity_RegisterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Activity_Registers and returns the data saved in the database.
+     * @param {Activity_RegisterCreateManyAndReturnArgs} args - Arguments to create many Activity_Registers.
+     * @example
+     * // Create many Activity_Registers
+     * const activity_Register = await prisma.activity_Register.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Activity_Registers and only return the `id`
+     * const activity_RegisterWithIdOnly = await prisma.activity_Register.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends Activity_RegisterCreateManyAndReturnArgs>(args?: SelectSubset<T, Activity_RegisterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Activity_Register.
+     * @param {Activity_RegisterDeleteArgs} args - Arguments to delete one Activity_Register.
+     * @example
+     * // Delete one Activity_Register
+     * const Activity_Register = await prisma.activity_Register.delete({
+     *   where: {
+     *     // ... filter to delete one Activity_Register
+     *   }
+     * })
+     * 
+     */
+    delete<T extends Activity_RegisterDeleteArgs>(args: SelectSubset<T, Activity_RegisterDeleteArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Activity_Register.
+     * @param {Activity_RegisterUpdateArgs} args - Arguments to update one Activity_Register.
+     * @example
+     * // Update one Activity_Register
+     * const activity_Register = await prisma.activity_Register.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends Activity_RegisterUpdateArgs>(args: SelectSubset<T, Activity_RegisterUpdateArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Activity_Registers.
+     * @param {Activity_RegisterDeleteManyArgs} args - Arguments to filter Activity_Registers to delete.
+     * @example
+     * // Delete a few Activity_Registers
+     * const { count } = await prisma.activity_Register.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends Activity_RegisterDeleteManyArgs>(args?: SelectSubset<T, Activity_RegisterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Activity_Registers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Activity_Registers
+     * const activity_Register = await prisma.activity_Register.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends Activity_RegisterUpdateManyArgs>(args: SelectSubset<T, Activity_RegisterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Activity_Registers and returns the data updated in the database.
+     * @param {Activity_RegisterUpdateManyAndReturnArgs} args - Arguments to update many Activity_Registers.
+     * @example
+     * // Update many Activity_Registers
+     * const activity_Register = await prisma.activity_Register.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Activity_Registers and only return the `id`
+     * const activity_RegisterWithIdOnly = await prisma.activity_Register.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends Activity_RegisterUpdateManyAndReturnArgs>(args: SelectSubset<T, Activity_RegisterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Activity_Register.
+     * @param {Activity_RegisterUpsertArgs} args - Arguments to update or create a Activity_Register.
+     * @example
+     * // Update or create a Activity_Register
+     * const activity_Register = await prisma.activity_Register.upsert({
+     *   create: {
+     *     // ... data to create a Activity_Register
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Activity_Register we want to update
+     *   }
+     * })
+     */
+    upsert<T extends Activity_RegisterUpsertArgs>(args: SelectSubset<T, Activity_RegisterUpsertArgs<ExtArgs>>): Prisma__Activity_RegisterClient<$Result.GetResult<Prisma.$Activity_RegisterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Activity_Registers.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterCountArgs} args - Arguments to filter Activity_Registers to count.
+     * @example
+     * // Count the number of Activity_Registers
+     * const count = await prisma.activity_Register.count({
+     *   where: {
+     *     // ... the filter for the Activity_Registers we want to count
+     *   }
+     * })
+    **/
+    count<T extends Activity_RegisterCountArgs>(
+      args?: Subset<T, Activity_RegisterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Activity_RegisterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Activity_Register.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Activity_RegisterAggregateArgs>(args: Subset<T, Activity_RegisterAggregateArgs>): Prisma.PrismaPromise<GetActivity_RegisterAggregateType<T>>
+
+    /**
+     * Group by Activity_Register.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Activity_RegisterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends Activity_RegisterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: Activity_RegisterGroupByArgs['orderBy'] }
+        : { orderBy?: Activity_RegisterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, Activity_RegisterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActivity_RegisterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Activity_Register model
+   */
+  readonly fields: Activity_RegisterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Activity_Register.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__Activity_RegisterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    territory<T extends TerritoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TerritoryDefaultArgs<ExtArgs>>): Prisma__TerritoryClient<$Result.GetResult<Prisma.$TerritoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Activity_Register model
+   */
+  interface Activity_RegisterFieldRefs {
+    readonly id: FieldRef<"Activity_Register", 'String'>
+    readonly territoryId: FieldRef<"Activity_Register", 'Int'>
+    readonly lastLeaderName: FieldRef<"Activity_Register", 'String'>
+    readonly started: FieldRef<"Activity_Register", 'DateTime'>
+    readonly finished: FieldRef<"Activity_Register", 'DateTime'>
+    readonly createdAt: FieldRef<"Activity_Register", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Activity_Register findUnique
+   */
+  export type Activity_RegisterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity_Register to fetch.
+     */
+    where: Activity_RegisterWhereUniqueInput
+  }
+
+  /**
+   * Activity_Register findUniqueOrThrow
+   */
+  export type Activity_RegisterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity_Register to fetch.
+     */
+    where: Activity_RegisterWhereUniqueInput
+  }
+
+  /**
+   * Activity_Register findFirst
+   */
+  export type Activity_RegisterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity_Register to fetch.
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activity_Registers to fetch.
+     */
+    orderBy?: Activity_RegisterOrderByWithRelationInput | Activity_RegisterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Activity_Registers.
+     */
+    cursor?: Activity_RegisterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activity_Registers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activity_Registers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activity_Registers.
+     */
+    distinct?: Activity_RegisterScalarFieldEnum | Activity_RegisterScalarFieldEnum[]
+  }
+
+  /**
+   * Activity_Register findFirstOrThrow
+   */
+  export type Activity_RegisterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity_Register to fetch.
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activity_Registers to fetch.
+     */
+    orderBy?: Activity_RegisterOrderByWithRelationInput | Activity_RegisterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Activity_Registers.
+     */
+    cursor?: Activity_RegisterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activity_Registers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activity_Registers.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Activity_Registers.
+     */
+    distinct?: Activity_RegisterScalarFieldEnum | Activity_RegisterScalarFieldEnum[]
+  }
+
+  /**
+   * Activity_Register findMany
+   */
+  export type Activity_RegisterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * Filter, which Activity_Registers to fetch.
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Activity_Registers to fetch.
+     */
+    orderBy?: Activity_RegisterOrderByWithRelationInput | Activity_RegisterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Activity_Registers.
+     */
+    cursor?: Activity_RegisterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Activity_Registers from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Activity_Registers.
+     */
+    skip?: number
+    distinct?: Activity_RegisterScalarFieldEnum | Activity_RegisterScalarFieldEnum[]
+  }
+
+  /**
+   * Activity_Register create
+   */
+  export type Activity_RegisterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Activity_Register.
+     */
+    data: XOR<Activity_RegisterCreateInput, Activity_RegisterUncheckedCreateInput>
+  }
+
+  /**
+   * Activity_Register createMany
+   */
+  export type Activity_RegisterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Activity_Registers.
+     */
+    data: Activity_RegisterCreateManyInput | Activity_RegisterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Activity_Register createManyAndReturn
+   */
+  export type Activity_RegisterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * The data used to create many Activity_Registers.
+     */
+    data: Activity_RegisterCreateManyInput | Activity_RegisterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Activity_Register update
+   */
+  export type Activity_RegisterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Activity_Register.
+     */
+    data: XOR<Activity_RegisterUpdateInput, Activity_RegisterUncheckedUpdateInput>
+    /**
+     * Choose, which Activity_Register to update.
+     */
+    where: Activity_RegisterWhereUniqueInput
+  }
+
+  /**
+   * Activity_Register updateMany
+   */
+  export type Activity_RegisterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Activity_Registers.
+     */
+    data: XOR<Activity_RegisterUpdateManyMutationInput, Activity_RegisterUncheckedUpdateManyInput>
+    /**
+     * Filter which Activity_Registers to update
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * Limit how many Activity_Registers to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Activity_Register updateManyAndReturn
+   */
+  export type Activity_RegisterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * The data used to update Activity_Registers.
+     */
+    data: XOR<Activity_RegisterUpdateManyMutationInput, Activity_RegisterUncheckedUpdateManyInput>
+    /**
+     * Filter which Activity_Registers to update
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * Limit how many Activity_Registers to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Activity_Register upsert
+   */
+  export type Activity_RegisterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Activity_Register to update in case it exists.
+     */
+    where: Activity_RegisterWhereUniqueInput
+    /**
+     * In case the Activity_Register found by the `where` argument doesn't exist, create a new Activity_Register with this data.
+     */
+    create: XOR<Activity_RegisterCreateInput, Activity_RegisterUncheckedCreateInput>
+    /**
+     * In case the Activity_Register was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<Activity_RegisterUpdateInput, Activity_RegisterUncheckedUpdateInput>
+  }
+
+  /**
+   * Activity_Register delete
+   */
+  export type Activity_RegisterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
+    /**
+     * Filter which Activity_Register to delete.
+     */
+    where: Activity_RegisterWhereUniqueInput
+  }
+
+  /**
+   * Activity_Register deleteMany
+   */
+  export type Activity_RegisterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Activity_Registers to delete
+     */
+    where?: Activity_RegisterWhereInput
+    /**
+     * Limit how many Activity_Registers to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Activity_Register without action
+   */
+  export type Activity_RegisterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Activity_Register
+     */
+    select?: Activity_RegisterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Activity_Register
+     */
+    omit?: Activity_RegisterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: Activity_RegisterInclude<ExtArgs> | null
   }
 
 
@@ -7003,6 +8236,18 @@ export namespace Prisma {
   export type SquareScalarFieldEnum = (typeof SquareScalarFieldEnum)[keyof typeof SquareScalarFieldEnum]
 
 
+  export const Activity_RegisterScalarFieldEnum: {
+    id: 'id',
+    territoryId: 'territoryId',
+    lastLeaderName: 'lastLeaderName',
+    started: 'started',
+    finished: 'finished',
+    createdAt: 'createdAt'
+  };
+
+  export type Activity_RegisterScalarFieldEnum = (typeof Activity_RegisterScalarFieldEnum)[keyof typeof Activity_RegisterScalarFieldEnum]
+
+
   export const AccountScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -7211,6 +8456,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Territory"> | Date | string
     squares?: SquareListRelationFilter
     manager?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    activityRegister?: Activity_RegisterListRelationFilter
   }
 
   export type TerritoryOrderByWithRelationInput = {
@@ -7225,6 +8471,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     squares?: SquareOrderByRelationAggregateInput
     manager?: UserOrderByWithRelationInput
+    activityRegister?: Activity_RegisterOrderByRelationAggregateInput
   }
 
   export type TerritoryWhereUniqueInput = Prisma.AtLeast<{
@@ -7242,6 +8489,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Territory"> | Date | string
     squares?: SquareListRelationFilter
     manager?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+    activityRegister?: Activity_RegisterListRelationFilter
   }, "id">
 
   export type TerritoryOrderByWithAggregationInput = {
@@ -7331,6 +8579,68 @@ export namespace Prisma {
     state?: StringWithAggregatesFilter<"Square"> | string
     territoryId?: IntWithAggregatesFilter<"Square"> | number
     updatedAt?: DateTimeWithAggregatesFilter<"Square"> | Date | string
+  }
+
+  export type Activity_RegisterWhereInput = {
+    AND?: Activity_RegisterWhereInput | Activity_RegisterWhereInput[]
+    OR?: Activity_RegisterWhereInput[]
+    NOT?: Activity_RegisterWhereInput | Activity_RegisterWhereInput[]
+    id?: StringFilter<"Activity_Register"> | string
+    territoryId?: IntFilter<"Activity_Register"> | number
+    lastLeaderName?: StringFilter<"Activity_Register"> | string
+    started?: DateTimeFilter<"Activity_Register"> | Date | string
+    finished?: DateTimeNullableFilter<"Activity_Register"> | Date | string | null
+    createdAt?: DateTimeFilter<"Activity_Register"> | Date | string
+    territory?: XOR<TerritoryScalarRelationFilter, TerritoryWhereInput>
+  }
+
+  export type Activity_RegisterOrderByWithRelationInput = {
+    id?: SortOrder
+    territoryId?: SortOrder
+    lastLeaderName?: SortOrder
+    started?: SortOrder
+    finished?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    territory?: TerritoryOrderByWithRelationInput
+  }
+
+  export type Activity_RegisterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: Activity_RegisterWhereInput | Activity_RegisterWhereInput[]
+    OR?: Activity_RegisterWhereInput[]
+    NOT?: Activity_RegisterWhereInput | Activity_RegisterWhereInput[]
+    territoryId?: IntFilter<"Activity_Register"> | number
+    lastLeaderName?: StringFilter<"Activity_Register"> | string
+    started?: DateTimeFilter<"Activity_Register"> | Date | string
+    finished?: DateTimeNullableFilter<"Activity_Register"> | Date | string | null
+    createdAt?: DateTimeFilter<"Activity_Register"> | Date | string
+    territory?: XOR<TerritoryScalarRelationFilter, TerritoryWhereInput>
+  }, "id">
+
+  export type Activity_RegisterOrderByWithAggregationInput = {
+    id?: SortOrder
+    territoryId?: SortOrder
+    lastLeaderName?: SortOrder
+    started?: SortOrder
+    finished?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: Activity_RegisterCountOrderByAggregateInput
+    _avg?: Activity_RegisterAvgOrderByAggregateInput
+    _max?: Activity_RegisterMaxOrderByAggregateInput
+    _min?: Activity_RegisterMinOrderByAggregateInput
+    _sum?: Activity_RegisterSumOrderByAggregateInput
+  }
+
+  export type Activity_RegisterScalarWhereWithAggregatesInput = {
+    AND?: Activity_RegisterScalarWhereWithAggregatesInput | Activity_RegisterScalarWhereWithAggregatesInput[]
+    OR?: Activity_RegisterScalarWhereWithAggregatesInput[]
+    NOT?: Activity_RegisterScalarWhereWithAggregatesInput | Activity_RegisterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Activity_Register"> | string
+    territoryId?: IntWithAggregatesFilter<"Activity_Register"> | number
+    lastLeaderName?: StringWithAggregatesFilter<"Activity_Register"> | string
+    started?: DateTimeWithAggregatesFilter<"Activity_Register"> | Date | string
+    finished?: DateTimeNullableWithAggregatesFilter<"Activity_Register"> | Date | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"Activity_Register"> | Date | string
   }
 
   export type AccountWhereInput = {
@@ -7562,6 +8872,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     squares?: SquareCreateNestedManyWithoutTerritoryInput
     manager?: UserCreateNestedOneWithoutManagedTerritoriesInput
+    activityRegister?: Activity_RegisterCreateNestedManyWithoutTerritoryInput
   }
 
   export type TerritoryUncheckedCreateInput = {
@@ -7575,6 +8886,7 @@ export namespace Prisma {
     managerId?: string | null
     updatedAt?: Date | string
     squares?: SquareUncheckedCreateNestedManyWithoutTerritoryInput
+    activityRegister?: Activity_RegisterUncheckedCreateNestedManyWithoutTerritoryInput
   }
 
   export type TerritoryUpdateInput = {
@@ -7587,6 +8899,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     squares?: SquareUpdateManyWithoutTerritoryNestedInput
     manager?: UserUpdateOneWithoutManagedTerritoriesNestedInput
+    activityRegister?: Activity_RegisterUpdateManyWithoutTerritoryNestedInput
   }
 
   export type TerritoryUncheckedUpdateInput = {
@@ -7600,6 +8913,7 @@ export namespace Prisma {
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     squares?: SquareUncheckedUpdateManyWithoutTerritoryNestedInput
+    activityRegister?: Activity_RegisterUncheckedUpdateManyWithoutTerritoryNestedInput
   }
 
   export type TerritoryCreateManyInput = {
@@ -7689,6 +9003,68 @@ export namespace Prisma {
     state?: StringFieldUpdateOperationsInput | string
     territoryId?: IntFieldUpdateOperationsInput | number
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Activity_RegisterCreateInput = {
+    id?: string
+    lastLeaderName: string
+    started?: Date | string
+    finished?: Date | string | null
+    createdAt?: Date | string
+    territory: TerritoryCreateNestedOneWithoutActivityRegisterInput
+  }
+
+  export type Activity_RegisterUncheckedCreateInput = {
+    id?: string
+    territoryId: number
+    lastLeaderName: string
+    started?: Date | string
+    finished?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type Activity_RegisterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    territory?: TerritoryUpdateOneRequiredWithoutActivityRegisterNestedInput
+  }
+
+  export type Activity_RegisterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    territoryId?: IntFieldUpdateOperationsInput | number
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Activity_RegisterCreateManyInput = {
+    id?: string
+    territoryId: number
+    lastLeaderName: string
+    started?: Date | string
+    finished?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type Activity_RegisterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Activity_RegisterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    territoryId?: IntFieldUpdateOperationsInput | number
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AccountCreateInput = {
@@ -8010,7 +9386,17 @@ export namespace Prisma {
     isNot?: UserWhereInput | null
   }
 
+  export type Activity_RegisterListRelationFilter = {
+    every?: Activity_RegisterWhereInput
+    some?: Activity_RegisterWhereInput
+    none?: Activity_RegisterWhereInput
+  }
+
   export type SquareOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type Activity_RegisterOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -8124,6 +9510,41 @@ export namespace Prisma {
 
   export type SquareSumOrderByAggregateInput = {
     squareNumber?: SortOrder
+    territoryId?: SortOrder
+  }
+
+  export type Activity_RegisterCountOrderByAggregateInput = {
+    id?: SortOrder
+    territoryId?: SortOrder
+    lastLeaderName?: SortOrder
+    started?: SortOrder
+    finished?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Activity_RegisterAvgOrderByAggregateInput = {
+    territoryId?: SortOrder
+  }
+
+  export type Activity_RegisterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    territoryId?: SortOrder
+    lastLeaderName?: SortOrder
+    started?: SortOrder
+    finished?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Activity_RegisterMinOrderByAggregateInput = {
+    id?: SortOrder
+    territoryId?: SortOrder
+    lastLeaderName?: SortOrder
+    started?: SortOrder
+    finished?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type Activity_RegisterSumOrderByAggregateInput = {
     territoryId?: SortOrder
   }
 
@@ -8377,11 +9798,25 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput
   }
 
+  export type Activity_RegisterCreateNestedManyWithoutTerritoryInput = {
+    create?: XOR<Activity_RegisterCreateWithoutTerritoryInput, Activity_RegisterUncheckedCreateWithoutTerritoryInput> | Activity_RegisterCreateWithoutTerritoryInput[] | Activity_RegisterUncheckedCreateWithoutTerritoryInput[]
+    connectOrCreate?: Activity_RegisterCreateOrConnectWithoutTerritoryInput | Activity_RegisterCreateOrConnectWithoutTerritoryInput[]
+    createMany?: Activity_RegisterCreateManyTerritoryInputEnvelope
+    connect?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+  }
+
   export type SquareUncheckedCreateNestedManyWithoutTerritoryInput = {
     create?: XOR<SquareCreateWithoutTerritoryInput, SquareUncheckedCreateWithoutTerritoryInput> | SquareCreateWithoutTerritoryInput[] | SquareUncheckedCreateWithoutTerritoryInput[]
     connectOrCreate?: SquareCreateOrConnectWithoutTerritoryInput | SquareCreateOrConnectWithoutTerritoryInput[]
     createMany?: SquareCreateManyTerritoryInputEnvelope
     connect?: SquareWhereUniqueInput | SquareWhereUniqueInput[]
+  }
+
+  export type Activity_RegisterUncheckedCreateNestedManyWithoutTerritoryInput = {
+    create?: XOR<Activity_RegisterCreateWithoutTerritoryInput, Activity_RegisterUncheckedCreateWithoutTerritoryInput> | Activity_RegisterCreateWithoutTerritoryInput[] | Activity_RegisterUncheckedCreateWithoutTerritoryInput[]
+    connectOrCreate?: Activity_RegisterCreateOrConnectWithoutTerritoryInput | Activity_RegisterCreateOrConnectWithoutTerritoryInput[]
+    createMany?: Activity_RegisterCreateManyTerritoryInputEnvelope
+    connect?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -8412,6 +9847,20 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutManagedTerritoriesInput, UserUpdateWithoutManagedTerritoriesInput>, UserUncheckedUpdateWithoutManagedTerritoriesInput>
   }
 
+  export type Activity_RegisterUpdateManyWithoutTerritoryNestedInput = {
+    create?: XOR<Activity_RegisterCreateWithoutTerritoryInput, Activity_RegisterUncheckedCreateWithoutTerritoryInput> | Activity_RegisterCreateWithoutTerritoryInput[] | Activity_RegisterUncheckedCreateWithoutTerritoryInput[]
+    connectOrCreate?: Activity_RegisterCreateOrConnectWithoutTerritoryInput | Activity_RegisterCreateOrConnectWithoutTerritoryInput[]
+    upsert?: Activity_RegisterUpsertWithWhereUniqueWithoutTerritoryInput | Activity_RegisterUpsertWithWhereUniqueWithoutTerritoryInput[]
+    createMany?: Activity_RegisterCreateManyTerritoryInputEnvelope
+    set?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    disconnect?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    delete?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    connect?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    update?: Activity_RegisterUpdateWithWhereUniqueWithoutTerritoryInput | Activity_RegisterUpdateWithWhereUniqueWithoutTerritoryInput[]
+    updateMany?: Activity_RegisterUpdateManyWithWhereWithoutTerritoryInput | Activity_RegisterUpdateManyWithWhereWithoutTerritoryInput[]
+    deleteMany?: Activity_RegisterScalarWhereInput | Activity_RegisterScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
     increment?: number
@@ -8434,6 +9883,20 @@ export namespace Prisma {
     deleteMany?: SquareScalarWhereInput | SquareScalarWhereInput[]
   }
 
+  export type Activity_RegisterUncheckedUpdateManyWithoutTerritoryNestedInput = {
+    create?: XOR<Activity_RegisterCreateWithoutTerritoryInput, Activity_RegisterUncheckedCreateWithoutTerritoryInput> | Activity_RegisterCreateWithoutTerritoryInput[] | Activity_RegisterUncheckedCreateWithoutTerritoryInput[]
+    connectOrCreate?: Activity_RegisterCreateOrConnectWithoutTerritoryInput | Activity_RegisterCreateOrConnectWithoutTerritoryInput[]
+    upsert?: Activity_RegisterUpsertWithWhereUniqueWithoutTerritoryInput | Activity_RegisterUpsertWithWhereUniqueWithoutTerritoryInput[]
+    createMany?: Activity_RegisterCreateManyTerritoryInputEnvelope
+    set?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    disconnect?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    delete?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    connect?: Activity_RegisterWhereUniqueInput | Activity_RegisterWhereUniqueInput[]
+    update?: Activity_RegisterUpdateWithWhereUniqueWithoutTerritoryInput | Activity_RegisterUpdateWithWhereUniqueWithoutTerritoryInput[]
+    updateMany?: Activity_RegisterUpdateManyWithWhereWithoutTerritoryInput | Activity_RegisterUpdateManyWithWhereWithoutTerritoryInput[]
+    deleteMany?: Activity_RegisterScalarWhereInput | Activity_RegisterScalarWhereInput[]
+  }
+
   export type TerritoryCreateNestedOneWithoutSquaresInput = {
     create?: XOR<TerritoryCreateWithoutSquaresInput, TerritoryUncheckedCreateWithoutSquaresInput>
     connectOrCreate?: TerritoryCreateOrConnectWithoutSquaresInput
@@ -8446,6 +9909,20 @@ export namespace Prisma {
     upsert?: TerritoryUpsertWithoutSquaresInput
     connect?: TerritoryWhereUniqueInput
     update?: XOR<XOR<TerritoryUpdateToOneWithWhereWithoutSquaresInput, TerritoryUpdateWithoutSquaresInput>, TerritoryUncheckedUpdateWithoutSquaresInput>
+  }
+
+  export type TerritoryCreateNestedOneWithoutActivityRegisterInput = {
+    create?: XOR<TerritoryCreateWithoutActivityRegisterInput, TerritoryUncheckedCreateWithoutActivityRegisterInput>
+    connectOrCreate?: TerritoryCreateOrConnectWithoutActivityRegisterInput
+    connect?: TerritoryWhereUniqueInput
+  }
+
+  export type TerritoryUpdateOneRequiredWithoutActivityRegisterNestedInput = {
+    create?: XOR<TerritoryCreateWithoutActivityRegisterInput, TerritoryUncheckedCreateWithoutActivityRegisterInput>
+    connectOrCreate?: TerritoryCreateOrConnectWithoutActivityRegisterInput
+    upsert?: TerritoryUpsertWithoutActivityRegisterInput
+    connect?: TerritoryWhereUniqueInput
+    update?: XOR<XOR<TerritoryUpdateToOneWithWhereWithoutActivityRegisterInput, TerritoryUpdateWithoutActivityRegisterInput>, TerritoryUncheckedUpdateWithoutActivityRegisterInput>
   }
 
   export type UserCreateNestedOneWithoutAccountInput = {
@@ -8733,6 +10210,7 @@ export namespace Prisma {
     finished?: Date | string | null
     updatedAt?: Date | string
     squares?: SquareCreateNestedManyWithoutTerritoryInput
+    activityRegister?: Activity_RegisterCreateNestedManyWithoutTerritoryInput
   }
 
   export type TerritoryUncheckedCreateWithoutManagerInput = {
@@ -8745,6 +10223,7 @@ export namespace Prisma {
     finished?: Date | string | null
     updatedAt?: Date | string
     squares?: SquareUncheckedCreateNestedManyWithoutTerritoryInput
+    activityRegister?: Activity_RegisterUncheckedCreateNestedManyWithoutTerritoryInput
   }
 
   export type TerritoryCreateOrConnectWithoutManagerInput = {
@@ -8901,6 +10380,32 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutManagedTerritoriesInput, UserUncheckedCreateWithoutManagedTerritoriesInput>
   }
 
+  export type Activity_RegisterCreateWithoutTerritoryInput = {
+    id?: string
+    lastLeaderName: string
+    started?: Date | string
+    finished?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type Activity_RegisterUncheckedCreateWithoutTerritoryInput = {
+    id?: string
+    lastLeaderName: string
+    started?: Date | string
+    finished?: Date | string | null
+    createdAt?: Date | string
+  }
+
+  export type Activity_RegisterCreateOrConnectWithoutTerritoryInput = {
+    where: Activity_RegisterWhereUniqueInput
+    create: XOR<Activity_RegisterCreateWithoutTerritoryInput, Activity_RegisterUncheckedCreateWithoutTerritoryInput>
+  }
+
+  export type Activity_RegisterCreateManyTerritoryInputEnvelope = {
+    data: Activity_RegisterCreateManyTerritoryInput | Activity_RegisterCreateManyTerritoryInput[]
+    skipDuplicates?: boolean
+  }
+
   export type SquareUpsertWithWhereUniqueWithoutTerritoryInput = {
     where: SquareWhereUniqueInput
     update: XOR<SquareUpdateWithoutTerritoryInput, SquareUncheckedUpdateWithoutTerritoryInput>
@@ -8967,6 +10472,34 @@ export namespace Prisma {
     Session?: SessionUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type Activity_RegisterUpsertWithWhereUniqueWithoutTerritoryInput = {
+    where: Activity_RegisterWhereUniqueInput
+    update: XOR<Activity_RegisterUpdateWithoutTerritoryInput, Activity_RegisterUncheckedUpdateWithoutTerritoryInput>
+    create: XOR<Activity_RegisterCreateWithoutTerritoryInput, Activity_RegisterUncheckedCreateWithoutTerritoryInput>
+  }
+
+  export type Activity_RegisterUpdateWithWhereUniqueWithoutTerritoryInput = {
+    where: Activity_RegisterWhereUniqueInput
+    data: XOR<Activity_RegisterUpdateWithoutTerritoryInput, Activity_RegisterUncheckedUpdateWithoutTerritoryInput>
+  }
+
+  export type Activity_RegisterUpdateManyWithWhereWithoutTerritoryInput = {
+    where: Activity_RegisterScalarWhereInput
+    data: XOR<Activity_RegisterUpdateManyMutationInput, Activity_RegisterUncheckedUpdateManyWithoutTerritoryInput>
+  }
+
+  export type Activity_RegisterScalarWhereInput = {
+    AND?: Activity_RegisterScalarWhereInput | Activity_RegisterScalarWhereInput[]
+    OR?: Activity_RegisterScalarWhereInput[]
+    NOT?: Activity_RegisterScalarWhereInput | Activity_RegisterScalarWhereInput[]
+    id?: StringFilter<"Activity_Register"> | string
+    territoryId?: IntFilter<"Activity_Register"> | number
+    lastLeaderName?: StringFilter<"Activity_Register"> | string
+    started?: DateTimeFilter<"Activity_Register"> | Date | string
+    finished?: DateTimeNullableFilter<"Activity_Register"> | Date | string | null
+    createdAt?: DateTimeFilter<"Activity_Register"> | Date | string
+  }
+
   export type TerritoryCreateWithoutSquaresInput = {
     category?: string | null
     territoryState?: string
@@ -8976,6 +10509,7 @@ export namespace Prisma {
     finished?: Date | string | null
     updatedAt?: Date | string
     manager?: UserCreateNestedOneWithoutManagedTerritoriesInput
+    activityRegister?: Activity_RegisterCreateNestedManyWithoutTerritoryInput
   }
 
   export type TerritoryUncheckedCreateWithoutSquaresInput = {
@@ -8988,6 +10522,7 @@ export namespace Prisma {
     finished?: Date | string | null
     managerId?: string | null
     updatedAt?: Date | string
+    activityRegister?: Activity_RegisterUncheckedCreateNestedManyWithoutTerritoryInput
   }
 
   export type TerritoryCreateOrConnectWithoutSquaresInput = {
@@ -9015,6 +10550,7 @@ export namespace Prisma {
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     manager?: UserUpdateOneWithoutManagedTerritoriesNestedInput
+    activityRegister?: Activity_RegisterUpdateManyWithoutTerritoryNestedInput
   }
 
   export type TerritoryUncheckedUpdateWithoutSquaresInput = {
@@ -9027,6 +10563,73 @@ export namespace Prisma {
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     managerId?: NullableStringFieldUpdateOperationsInput | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    activityRegister?: Activity_RegisterUncheckedUpdateManyWithoutTerritoryNestedInput
+  }
+
+  export type TerritoryCreateWithoutActivityRegisterInput = {
+    category?: string | null
+    territoryState?: string
+    lastLeaderName?: string | null
+    notes?: string | null
+    started?: Date | string | null
+    finished?: Date | string | null
+    updatedAt?: Date | string
+    squares?: SquareCreateNestedManyWithoutTerritoryInput
+    manager?: UserCreateNestedOneWithoutManagedTerritoriesInput
+  }
+
+  export type TerritoryUncheckedCreateWithoutActivityRegisterInput = {
+    id?: number
+    category?: string | null
+    territoryState?: string
+    lastLeaderName?: string | null
+    notes?: string | null
+    started?: Date | string | null
+    finished?: Date | string | null
+    managerId?: string | null
+    updatedAt?: Date | string
+    squares?: SquareUncheckedCreateNestedManyWithoutTerritoryInput
+  }
+
+  export type TerritoryCreateOrConnectWithoutActivityRegisterInput = {
+    where: TerritoryWhereUniqueInput
+    create: XOR<TerritoryCreateWithoutActivityRegisterInput, TerritoryUncheckedCreateWithoutActivityRegisterInput>
+  }
+
+  export type TerritoryUpsertWithoutActivityRegisterInput = {
+    update: XOR<TerritoryUpdateWithoutActivityRegisterInput, TerritoryUncheckedUpdateWithoutActivityRegisterInput>
+    create: XOR<TerritoryCreateWithoutActivityRegisterInput, TerritoryUncheckedCreateWithoutActivityRegisterInput>
+    where?: TerritoryWhereInput
+  }
+
+  export type TerritoryUpdateToOneWithWhereWithoutActivityRegisterInput = {
+    where?: TerritoryWhereInput
+    data: XOR<TerritoryUpdateWithoutActivityRegisterInput, TerritoryUncheckedUpdateWithoutActivityRegisterInput>
+  }
+
+  export type TerritoryUpdateWithoutActivityRegisterInput = {
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    territoryState?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    started?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    squares?: SquareUpdateManyWithoutTerritoryNestedInput
+    manager?: UserUpdateOneWithoutManagedTerritoriesNestedInput
+  }
+
+  export type TerritoryUncheckedUpdateWithoutActivityRegisterInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    category?: NullableStringFieldUpdateOperationsInput | string | null
+    territoryState?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: NullableStringFieldUpdateOperationsInput | string | null
+    notes?: NullableStringFieldUpdateOperationsInput | string | null
+    started?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    managerId?: NullableStringFieldUpdateOperationsInput | string | null
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    squares?: SquareUncheckedUpdateManyWithoutTerritoryNestedInput
   }
 
   export type UserCreateWithoutAccountInput = {
@@ -9257,6 +10860,7 @@ export namespace Prisma {
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     squares?: SquareUpdateManyWithoutTerritoryNestedInput
+    activityRegister?: Activity_RegisterUpdateManyWithoutTerritoryNestedInput
   }
 
   export type TerritoryUncheckedUpdateWithoutManagerInput = {
@@ -9269,6 +10873,7 @@ export namespace Prisma {
     finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     squares?: SquareUncheckedUpdateManyWithoutTerritoryNestedInput
+    activityRegister?: Activity_RegisterUncheckedUpdateManyWithoutTerritoryNestedInput
   }
 
   export type TerritoryUncheckedUpdateManyWithoutManagerInput = {
@@ -9287,6 +10892,14 @@ export namespace Prisma {
     squareNumber: number
     state?: string
     updatedAt?: Date | string
+  }
+
+  export type Activity_RegisterCreateManyTerritoryInput = {
+    id?: string
+    lastLeaderName: string
+    started?: Date | string
+    finished?: Date | string | null
+    createdAt?: Date | string
   }
 
   export type SquareUpdateWithoutTerritoryInput = {
@@ -9308,6 +10921,30 @@ export namespace Prisma {
     squareNumber?: IntFieldUpdateOperationsInput | number
     state?: StringFieldUpdateOperationsInput | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Activity_RegisterUpdateWithoutTerritoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Activity_RegisterUncheckedUpdateWithoutTerritoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type Activity_RegisterUncheckedUpdateManyWithoutTerritoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    lastLeaderName?: StringFieldUpdateOperationsInput | string
+    started?: DateTimeFieldUpdateOperationsInput | Date | string
+    finished?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

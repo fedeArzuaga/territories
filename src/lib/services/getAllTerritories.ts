@@ -11,6 +11,7 @@ export const getAllTerritories = async ( {includeSquares, limit = 100, customOrd
         take: limit,
         include: {
             squares: includeSquares ? true : false,
+            activityRegister: true
         },
         orderBy: {
             updatedAt: customOrder
