@@ -1,8 +1,7 @@
 import { PrismaPg } from '@prisma/adapter-pg';
-import { PrismaClient, User } from './../../../../generated/client';
+import { PrismaClient } from './../../../../generated/client';
 import { NextResponse } from 'next/server'
 import { squaresData, territoriesData } from '@/data/polygons';
-import bcrypt from 'bcrypt';
 
 const connectionString = `${process.env.DATABASE_URL}`
 
