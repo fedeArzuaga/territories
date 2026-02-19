@@ -46,7 +46,7 @@ export default function LoginPage() {
             }
             
         } catch ( error ) {
-            console.log( error )
+            return error
         }
     };
 

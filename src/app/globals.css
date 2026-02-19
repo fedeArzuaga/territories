@@ -35,7 +35,7 @@ body {
     }
 
     .leaflet-popup-content-wrapper {
-        @apply w-[340px] md:w-[400px];
+        @apply w-85 md:w-100;
     }
 
     .leaflet-popup-content {
@@ -107,3 +107,15 @@ a.link {
 /* button {
   @apply px-5 py-3 rounded-lg font-bold text-white bg-teal-600 hover:bg-teal-700 cursor-pointer
 } */
+
+.activity-register-table {
+  table-layout: fixed;
+}
+
+.activity-register-table td .tm-edit-button {
+  display: none;
+}
+
+.activity-register-table td:hover .tm-edit-button {
+  display: block;
+}

@@ -19,6 +19,7 @@ export async function POST(request: Request) {
         const users: User[] = [
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Federico Arzuaga",
                 email: "fede.arzuaga.perdomo@gmail.com",
                 password: bcrypt.hashSync("Fran29092012!", 10),
@@ -30,6 +31,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Fernando Llambías",
                 email: "ferllambis@gmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -41,6 +43,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Héctor Rodríguez",
                 email: "hr0644@gmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -53,6 +56,7 @@ export async function POST(request: Request) {
             //! MARTIN BUFFA'S USER IS PENDING (ADMIN)
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Diego Demarco",
                 email: "demarcodiego@hotmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -64,6 +68,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Martín Otarola",
                 email: "martineotarola@gmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -75,6 +80,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Germán Demarco",
                 email: "german0508@outlook.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -86,6 +92,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Ángel García",
                 email: "angelgarciajw@gmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -97,6 +104,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Pablo Scigliano",
                 email: "pblscigliano77@gmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),
@@ -108,6 +116,7 @@ export async function POST(request: Request) {
             },
             {
                 id: crypto.randomUUID(),
+                hasSeenLatestUpdate: false,
                 name: "Juan Pérez",
                 email: "juanperez@gmail.com",
                 password: bcrypt.hashSync("salmo8318", 10),

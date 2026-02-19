@@ -17,8 +17,6 @@ export default async function TerritoriesPage() {
         includeSquares: true,
     })
 
-    console.log( territories )
-
     return (
         <div>
             <h1 className="text-5xl font-bold mb-8">

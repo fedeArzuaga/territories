@@ -41,3 +41,11 @@ export const getDaysDistanceFromTwoGivenDates = ( firstDate: Date, secondDate: D
 export const getFormattedDate = ( date: Date ): string => {
     return date.toLocaleDateString("es-ES", { day: "2-digit", month: "2-digit", year: "numeric" })
 }
+
+export const formatSafeDate = (dateValue: any) => {
+    const d = new Date(dateValue);
+    if (dateValue && !isNaN(d.getTime())) {
+        return d.toISOString().split('T')[0];
+    }
+    return new Date().toISOString().split('T')[0];
+};

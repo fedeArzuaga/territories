@@ -14,14 +14,14 @@ import { EditTerritoryReferenceImage } from "@/app/dashboard/components/EditTerr
 import { TerritoryData, TerritoryDataWithSquaresAndManager } from "@/types/territory";
 import { updateTerritory } from "@/lib/services/updateTerritory";
 import { Spinner } from "@/components/ui/Spinner/Spinner";
-import { getCurrentDate } from "@/helpers/getCurrentDate";
 import { hasAdminPriviliges } from "@/helpers/hasAdminPriviliges";
 import { LastEditedBy } from "@/app/dashboard/components/territoriyForm/LastEditedBy";
 import { TbMapX } from "react-icons/tb";
 import { Modal } from "@/components/ui/Modal/Modal";
 import { AnimatedCheckmark } from "@/components/ui/CheckMark/CheckMark";
 import { revalidateMyPath } from "@/lib/services/revalidateMyPath";
-import { getFormattedDate } from "@/helpers/datesFunctions";
+import { setActivityRegister } from "@/lib/services/setActivityRegister";
+import { formatSafeDate } from "@/helpers/datesFunctions";
 
 interface Props {
     territory: TerritoryDataWithSquaresAndManager,
@@ -71,14 +71,6 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
     const [form, setForm] = useState<TerritoryData>( initialFormState );
 
     const { id, territoryState, lastLeaderName, started, finished, notes } = form;
-
-    const formatSafeDate = (dateValue: any) => {
-        const d = new Date(dateValue);
-        if (dateValue && !isNaN(d.getTime())) {
-            return d.toISOString().split('T')[0];
-        }
-        return new Date().toISOString().split('T')[0];
-    };
 
     const setAllSquaresAsPending = () => {
         setSquareStates( prev => prev.map( square => ({ ...square, state: "Pendiente" })) )
@@ -156,6 +148,17 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
             setIsModalOpen(true)
             revalidateMyPath(`/dashboard/territories/${territoryId}`)
         })
+
+        if ( updatedData.territoryState !== "Pendiente" ) {
+            await setActivityRegister({
+                category: updatedData.category,
+                territoryId: updatedData.id,
+                lastLeaderName: updatedData.lastLeaderName!,
+                started: new Date(updatedData.started as string),
+                finished: (updatedData.territoryState === "Completado" && finished) ? new Date(finished) : null
+            })
+        }
+
     }
 
     const handleSquareStatusChange = ( square: number, newStatus: string ) => {
@@ -166,9 +169,9 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
         handleStatusChange( getCurrentTerritoryState( updatedSquareStates ) )
     }
     
-    const isDateError = started && finished && (new Date(started).getTime() > new Date(finished).getTime()) || false;
-
+    
     const areNotesRequired = territoryState === "En progreso" || territoryState === "Completado";
+    const isDateError = started && finished && (new Date(started).getTime() > new Date(finished).getTime()) && territoryState === "Completado" || false;
 
     // View for restricted access
     if ( category === "Personal" && role === "LEADER" ) {
@@ -238,14 +241,14 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                 <Button 
                                     type="button"
                                     onClickHandler={() => { handleChangeCategory("Congregación"); }}
-                                    cssClasses={`py-2 px-6 text-sm !rounded-full font-bold transition-all ${ category === "Congregación" ? "bg-teal-600 text-white shadow-md" : "text-gray-600" }`}
+                                    customClasses={`py-2 px-6 text-sm !rounded-full font-bold transition-all ${ category === "Congregación" ? "!bg-teal-600 text-white shadow-md" : "!bg-transparent text-gray-600" }`}
                                     label={"Congregación"}
                                     style={"default"}
                                 />
                                 <Button 
                                     type="button"
                                     onClickHandler={() => { handleChangeCategory("Personal"); }}
-                                    cssClasses={`py-2 px-6 text-sm !rounded-full font-bold transition-all ${ category === "Personal" ? "bg-blue-600 text-white shadow-md" : "text-gray-600" }`}
+                                    customClasses={`py-2 px-6 text-sm !rounded-full font-bold transition-all ${ category === "Personal" ? "!bg-blue-600 text-white shadow-md" : "!bg-transparent text-gray-600" }`}
                                     label={"Personal"}
                                     style={"default"}
                                 />
@@ -350,21 +353,21 @@ export const EditTerritoryForm = ({ territory, managerId, role }: Props) => {
                                             <Button
                                                 type="button"
                                                 onClickHandler={() => handleSquareStatusChange(square, "Pendiente")}
-                                                cssClasses={`py-2 px-4 text-xs !rounded-lg font-bold min-w-[100px] ${state === "Pendiente" ? 'bg-red-400 text-white' : 'bg-gray-100 text-gray-400 grayscale'}`}
+                                                customClasses={`py-2 px-4 text-xs !rounded-lg font-bold min-w-[100px] ${state === "Pendiente" ? '!bg-red-400 text-white' : '!bg-gray-100 !text-gray-400 grayscale'}`}
                                                 label="Pendiente"
                                                 style="danger"
                                             />
                                             <Button
                                                 type="button"
                                                 onClickHandler={() => handleSquareStatusChange(square, "En progreso")}
-                                                cssClasses={`py-2 px-4 text-xs !rounded-lg font-bold min-w-[100px] ${state === "En progreso" ? 'bg-orange-400 text-white' : 'bg-gray-100 text-gray-400 grayscale'}`}
+                                                customClasses={`py-2 px-4 text-xs !rounded-lg font-bold min-w-[100px] ${state === "En progreso" ? '!bg-orange-400 text-white' : '!bg-gray-100 !text-gray-400 grayscale'}`}
                                                 label="En progreso"
                                                 style="warning"
                                             />
                                             <Button
                                                 type="button"
                                                 onClickHandler={() => handleSquareStatusChange(square, "Completado")}
-                                                cssClasses={`py-2 px-4 text-xs !rounded-lg font-bold min-w-[100px] ${state === "Completado" ? 'bg-green-600 text-white' : 'bg-gray-100 text-gray-400 grayscale'}`}
+                                                customClasses={`py-2 px-4 text-xs !rounded-lg font-bold min-w-[100px] ${state === "Completado" ? '!bg-green-600 text-white' : '!bg-gray-100 !text-gray-400 grayscale'}`}
                                                 label="Completado"
                                                 style="success"
                                             />

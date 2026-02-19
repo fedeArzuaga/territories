@@ -10,10 +10,11 @@ interface Props {
     cssClasses?: string,
     action?: "link" | "button",
     href?: string,
+    customClasses?: string,
     onClickHandler?: ( event:MouseEvent<HTMLButtonElement> ) => void,
 }
 
-export const Button = ({ label, type = "button", icon, disabled, style, action = "button", href, cssClasses = "", onClickHandler }: Props) => {
+export const Button = ({ label, type = "button", icon, disabled, style, action = "button", href, cssClasses = "", customClasses, onClickHandler }: Props) => {
     return (
         <>
             {
@@ -30,11 +31,13 @@ export const Button = ({ label, type = "button", icon, disabled, style, action =
                             ${ (!cssClasses && style === "warning") ? 'text-white bg-amber-500 hover:bg-amber-600' : '' }
                             ${ (!cssClasses && style === "success") ? 'text-white bg-green-600 hover:bg-green-700' : '' }
                             ${ (!cssClasses && style === "default") ? 'text-gray-700 bg-white hover:bg-teal-600' : '' }
-                            ${ cssClasses }   
+                            ${ customClasses }  
                         `}
                     >
                         <div className="flex items-center justify-center">
-                            { icon && icon } { label }
+                            { icon && label && <>{ icon }&nbsp;&nbsp;</> } 
+                            { icon && !label && icon }
+                            { label }
                         </div>
                     </button>
                 )
