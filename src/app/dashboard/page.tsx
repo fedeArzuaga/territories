@@ -7,6 +7,12 @@ import { UserGreeting } from "./components/UserGreeting";
 import { UpcomingTerritoriesToExpire } from "./components/dashboard/UpcomingTerritoriesToExpire";
 import { LastEditedTerritory } from "./components/dashboard/LastEditedTerritory";
 import Link from "next/link";
+import { User } from "@/types/user";
+import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
+import { BsInfoCircle } from "react-icons/bs";
+import { IoClose } from "react-icons/io5";
+import { Alert } from "./components/alert/Alert";
+import { updateUserLatestUpdate } from "@/lib/services/updateUserLatestUpdate";
 
 
 export const metadata = {
@@ -17,6 +23,7 @@ export const metadata = {
 export default async function DashboardPage() {
 
     const territories = await getAllTerritories({ limit: 6, customOrder: 'desc' });
+    const user: User = await getUserByActiveSession()
 
     return (
         <div>
@@ -24,6 +31,27 @@ export default async function DashboardPage() {
             <UserGreeting />
 
             <div className="grid grid-cols-1 xl:grid-cols-4 gap-8">
+
+                {
+                    ( !user.hasSeenLatestUpdate ) && (
+                        <Alert
+                            user={ user }
+                            hasSeenLatestUpdate={ true }
+                        >
+                            <p className="font-bold text-md">
+                                ¡Actualización disponible! (Registro de actividad de los territorios)
+                            </p>
+                            <p className="mt-1 text-sm">
+                                Registro de actividades implementado en el menú lateral izquierdo. Características principales:
+                            </p>
+                            <ul className="list-disc ml-4 mt-2 text-sm">
+                                <li>Registro dinámico basado en la gestión de los territorios</li>
+                                <li>Funciones implementadas para editar y/o borrar registros existentes</li>
+                                <li>Apariencia similar al formulario S-13</li>
+                            </ul>
+                        </Alert>
+                    )
+                }
 
                 <div className="md:col-span-1">
                     <Widget

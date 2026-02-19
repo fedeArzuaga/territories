@@ -9,18 +9,19 @@ datasource db {
 }
 
 model User {
-  id                 String      @id @default(uuid())
-  name               String
-  email              String      @unique
-  password           String
-  phone              String?
-  createdAt          DateTime    @default(now())
-  updatedAt          DateTime    @updatedAt
-  image              String?
-  role               String      @default("USER")
-  Account            Account[]
-  Session            Session[]
-  managedTerritories Territory[] @relation("TerritoryManager")
+  id                  String      @id @default(uuid())
+  hasSeenLatestUpdate Boolean     @default(false)
+  name                String
+  email               String      @unique
+  password            String
+  phone               String?
+  createdAt           DateTime    @default(now())
+  updatedAt           DateTime    @updatedAt
+  image               String?
+  role                String      @default("USER")
+  Account             Account[]
+  Session             Session[]
+  managedTerritories  Territory[] @relation("TerritoryManager")
 }
 
 model Territory {

@@ -1,4 +1,5 @@
 export interface User {
+    hasSeenLatestUpdate: boolean,
     id: string,       
     name: string,     
     email: string,     
