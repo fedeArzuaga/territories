@@ -4,6 +4,7 @@ import { getAllActivityRegister } from "@/lib/services/getAllActivityRegister";
 import { ActivityRegisterRow } from "../components/activityRegister/ActivityRegisterRow";
 import { ActivityRegisterDisclaimer } from "../components/activityRegister/ActivityRegisterDisclaimer";
 import { mapActivityRegisterData } from "@/helpers/mapActivityRegisterData";
+import { AddActivityRegisterButton } from "../components/activityRegister/AddActivityRegisterButton";
 
 const TerritoryRegistryTable = async () => {
 
@@ -22,39 +23,39 @@ const TerritoryRegistryTable = async () => {
                 <div className="overflow-x-auto mt-8">
                     {
                         activityRegistersGroupedByTerritories && (
+                            <>
+                                <table className="min-w-400 border-collapse table-fixed activity-register-table">
+                                    <thead>
+                                        <tr className="bg-gray-50 text-[10px] font-black uppercase tracking-wider text-gray-500">
+                                            <th className="border border-gray-300 p-2 w-20">Núm. de terr.</th>
+                                            <th className="border border-gray-300 p-2 w-35">Última fecha en que se completó*</th>
 
-                            <table className="min-w-400 border-collapse table-fixed activity-register-table">
-                                <thead>
-                                    <tr className="bg-gray-50 text-[10px] font-black uppercase tracking-wider text-gray-500">
-                                        <th className="border border-gray-300 p-2 w-20">Núm. de terr.</th>
-                                        <th className="border border-gray-300 p-2 w-35">Última fecha en que se completó*</th>
+                                            {/* Header for the paired columns */}
+                                            {[...Array( maxAmountOfColumns )].map((_, i) => (
+                                                <th key={i} className="border border-gray-300 p-2">Asignado a</th>
+                                            ))}
 
-                                        {/* Header for the paired columns */}
-                                        {[...Array( maxAmountOfColumns )].map((_, i) => (
-                                            <th key={i} className="border border-gray-300 p-2">Asignado a</th>
-                                        ))}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {
+                                            territoriesNumbers.map( territoryId => {
+                                                const currentTerritoryGroup = activityRegistersGroupedByTerritories[territoryId]
 
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {
-                                        territoriesNumbers.map( territoryId => {
-                                            const currentTerritoryGroup = activityRegistersGroupedByTerritories[territoryId]
-
-                                            return (
-                                                <ActivityRegisterRow 
-                                                    key={ territoryId }
-                                                    territoryInformation={{
-                                                        territoryGroup: currentTerritoryGroup,
-                                                        maxLength: maxAmountOfColumns
-                                                    }}
-                                                />
-                                            )
-                                        })
-                                    }
-                                </tbody>
-                            </table>
-
+                                                return (
+                                                    <ActivityRegisterRow 
+                                                        key={ territoryId }
+                                                        territoryInformation={{
+                                                            territoryGroup: currentTerritoryGroup,
+                                                            maxLength: maxAmountOfColumns
+                                                        }}
+                                                    />
+                                                )
+                                            })
+                                        }
+                                    </tbody>
+                                </table>
+                            </>
                         )
                     }
                 </div>

@@ -9,10 +9,7 @@ import { LastEditedTerritory } from "./components/dashboard/LastEditedTerritory"
 import Link from "next/link";
 import { User } from "@/types/user";
 import { getUserByActiveSession } from "@/lib/services/getUserByActiveSession";
-import { BsInfoCircle } from "react-icons/bs";
-import { IoClose } from "react-icons/io5";
 import { Alert } from "./components/alert/Alert";
-import { updateUserLatestUpdate } from "@/lib/services/updateUserLatestUpdate";
 
 
 export const metadata = {
