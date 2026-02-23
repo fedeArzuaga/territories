@@ -23,13 +23,14 @@ const menuItems: MenuItems[] = [
         permissionLevel: 1,
         role: "link"
     },
-    {
-        path: '/dashboard/activity-register',
-        label: 'Registro de actividad',
-        icon: <BsClipboardDataFill size={ 25 } />,
-        permissionLevel: 3,
-        role: "link"
-    },
+    //? Removing the activity register for now, as it was asked by the product owner.
+    // {
+    //     path: '/dashboard/activity-register',
+    //     label: 'Registro de actividad',
+    //     icon: <BsClipboardDataFill size={ 25 } />,
+    //     permissionLevel: 3,
+    //     role: "link"
+    // },
     {
         path: '/dashboard/user-profile',
         label: 'Mi usuario',
